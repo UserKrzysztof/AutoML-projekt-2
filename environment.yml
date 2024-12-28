@@ -1,4 +1,4 @@
-name: C:\Semestr_5\Automatyczne_uczenie_maszynowe\Projekt2\automl2-env
+name: amlpro2
 channels:
   - conda-forge
   - bioconda
@@ -169,4 +169,3 @@ dependencies:
       - requests==2.32.3
       - urllib3==2.3.0
       - xmltodict==0.14.2
-prefix: C:\Semestr_5\Automatyczne_uczenie_maszynowe\Projekt2\automl2-env
