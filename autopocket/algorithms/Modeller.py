@@ -14,7 +14,6 @@ class Modeller():
         """
         Porządny model.
         """
-        best_model = None
         if ml_type == "BINARY_CLASSIFICATION":
             m = DecisionTreeClassifier()
 
