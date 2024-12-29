@@ -1,8 +1,9 @@
 import pandas as pd
 
-from preprocessing.Preprocessor import  Preprocessor
-from algorithms.Modeller import Modeller
-from postprocessing.Postprocessor import Postprocessor
+from autopocket.preprocessing.Preprocessor import  Preprocessor
+from autopocket.algorithms.Modeller import Modeller
+from autopocket.postprocessing.Postprocessor import Postprocessor
+from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
 
 
 
@@ -17,17 +18,16 @@ class AutoPocketor():
         """
         pass
 
-    def doJob(self, *args):
+    def doJob(self, path, target):
         """
         Porządny doJob.
         Bardzo krótki.
         """
-        X, y, ml_type = Preprocessor().preprocess(path="../example/data/car_insurance.csv", target="is_claim")
+        X, y, ml_type = Preprocessor().preprocess(path=path, target=target)
         print("Preprocessing done")
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
         print(best_model.__class__.__name__)
-        X = pd.DataFrame(X)
         Postprocessor().postprocess(best_model, X, y, ml_type)
 
 if __name__ == "__main__":
