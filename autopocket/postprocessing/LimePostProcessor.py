@@ -4,8 +4,42 @@ import matplotlib.pyplot as plt
 from lime.lime_tabular import LimeTabularExplainer
 import warnings 
 from matplotlib.backends.backend_pdf import PdfPages
+import re
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="lime")
+
+def normalize_feature_name(feature_name):
+    """
+    Normalize feature names based on the total count of operators found.
+    If two operators (e.g., '<' and '>') are found, take the string between them.
+    If one operator is found, take the string to the left of it.
+    Additionally, count occurrences of '<' and '>'.
+
+    Parameters:
+        feature_name: str, original feature name from LIME.
+
+    Returns:
+        tuple: (normalized_feature_name, total_operator_count)
+    """
+    operators = ["<", ">"]
+
+    operator_counts = {op: feature_name.count(op) for op in operators}
+    total_operator_count = sum(operator_counts.values())
+
+    if total_operator_count >= 2:  
+        start_op = operators[0] if operator_counts[operators[0]] > 0 else operators[1]
+        end_op = operators[1] if operator_counts[operators[1]] > 0 else operators[0]
+
+        pattern = rf"{re.escape(start_op)}(.*?) {re.escape(end_op)}"
+        match = re.search(pattern, feature_name)
+        if match:
+            return match.group(1).strip()
+
+    elif total_operator_count == 1:
+        single_op = operators[0] if operator_counts[operators[0]] > 0 else operators[1]
+        return feature_name.split(single_op)[0].strip()
+
+    return feature_name.strip()
 
 class LimePostprocessor():
     
@@ -173,3 +207,63 @@ class LimePostprocessor():
         plt.show()
 
         plt.close(fig)
+    
+
+    def top_features_by_lime_importance(self, explanations, X, top_n_non_binary=3, top_m_all=8, correlation_threshold=0.4):
+        """
+        Find the top N non-binary features (to display plots) and top M non-binary features (to save plots to pdf)
+        based on LIME Feature Importance, ensuring that selected features are not highly correlated with any other.
+
+        Parameters:
+            explanations: list, LIME explanation objects.
+            X: pd.DataFrame, input features (used to compute correlations).
+            top_n_non_binary: int, number of top non-binary features to select.
+            top_m_all: int, number of top non-binary features (binary features excluded) to select.
+            correlation_threshold: float, maximum allowed correlation between selected features.
+
+        Returns:
+            tuple: (top_n_non_binary_features, top_m_all_features)
+        """
+        binary_features = [col for col in X.columns if X[col].nunique() == 2]
+
+        feature_importances = {}
+        for exp in explanations:
+            for feature, weight in exp.as_list():
+                normalized_feature = normalize_feature_name(feature)
+                feature_importances[normalized_feature] = feature_importances.get(normalized_feature, 0) + abs(weight)
+
+        sorted_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)
+        print("LIME Feature Importances:\n", sorted_features)
+
+        selected_non_binary = []
+        selected_all_non_binary = []
+
+        correlation_matrix = X.corr()
+
+        def is_uncorrelated(feature, selected_features):
+            """
+            Sprawdza, czy cecha jest nieskorelowana z już wybranymi cechami.
+            """
+            for selected_feature in selected_features:
+                if abs(correlation_matrix.loc[feature, selected_feature]) > correlation_threshold:
+                    return False
+            return True
+
+        for feature, _ in sorted_features:
+            if feature not in binary_features and feature in correlation_matrix.columns:
+                if is_uncorrelated(feature, selected_non_binary):
+                    selected_non_binary.append(feature)
+                    if len(selected_non_binary) >= top_n_non_binary:
+                        break
+
+        for feature, _ in sorted_features:
+            if feature not in binary_features and feature in correlation_matrix.columns:
+                if is_uncorrelated(feature, selected_all_non_binary):
+                    selected_all_non_binary.append(feature)
+                    if len(selected_all_non_binary) >= top_m_all:
+                        break
+
+        print(f"Top {top_n_non_binary} non-binary features (uncorrelated):", selected_non_binary)
+        print(f"Top {top_m_all} non-binary features overall (uncorrelated):", selected_all_non_binary)
+
+        return selected_non_binary, selected_all_non_binary
