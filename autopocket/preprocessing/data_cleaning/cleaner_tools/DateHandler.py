@@ -7,6 +7,10 @@ class DateHandler:
     Class responsible for handling and formatting dates.
     """
     def __init__(self):
+        """
+        Initialize the DateHandler class.
+        """
+
         # Define date patterns as an instance attribute
         self.date_patterns = [
             (r"(\d{2})-(\d{2})-(\d{2})", "%d-%m-%y"),  # 07-05-20
@@ -39,7 +43,7 @@ class DateHandler:
                     try:
                         # Try to parse the matched date using the appropriate format
                         parsed_date = pd.to_datetime(match.group(0), format=date_format)
-                        return parsed_date.strftime('%d-%m-%Y')  # Return in the format dd-MM-yyyy
+                        return int(parsed_date.strftime('%Y%m%d'))  # Return in the format yyyy-MM-dd
                     except Exception:
                         continue
         return value  # Return original if no match was found
@@ -50,12 +54,16 @@ class DateHandler:
         We handle custom date formats using regex and pd.to_datetime.
         """
         try:
-            sample_value = column.dropna().iloc[0]  # Take the first non-null value to check the format
-            if isinstance(sample_value, str):
-                # Check against each of the stored date patterns
-                for pattern, _ in self.date_patterns:
-                    if re.match(pattern, sample_value):
-                        return True  # Recognize date column by regex pattern
-            return False  # Return false if it doesn't match any known format
+            sample_values = column.dropna().sample(n=min(3, len(column.dropna())), random_state=42)
+
+            for value in sample_values:
+                if isinstance(value, str):
+                    if not any(re.match(pattern, value) for pattern, _ in self.date_patterns):
+                        return False
+                else:
+                    return False
+
+            return True
         except Exception:
             return False
+
