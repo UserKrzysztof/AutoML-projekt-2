@@ -1,6 +1,6 @@
 import warnings
 import matplotlib.pyplot as plt
-
+from matplotlib.backends.backend_pdf import PdfPages
 import shap
 from sklearn.model_selection import train_test_split
 from autopocket.postprocessing.shap import ShapPLOT
@@ -11,30 +11,22 @@ class Postprocessor():
         Porządny init.
         """
         pass
-
     
-
-    def postprocess(self, best_model, X, y, ml_task, results=None):
+    def postprocess(self, best_model, X, y, ml_task, model_file_path, results=None):
+        
         """
         Porządny postprocess.
         """
+        
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
-        
-        explainer = ShapPLOT.get_explainer(best_model, X_test)
+        with PdfPages("shap_explanations_combined.pdf") as pdf:
+            try:
+                ShapPLOT.explain_with_shap(best_model, X_train, y_train, X_test, y_test, ml_task, model_file_path, pdf=pdf)
+            except ValueError as e:
+                print(f"ValueError in postprocess: {e}")
 
-        shap_values = explainer.shap_values(X_test)
+        print("PDF saved successfully.")
 
-        fig = plt.figure(figsize=(12, 6))  # Ustaw rozmiar figury
-
-        shap.dependence_plot(
-            "age_of_policyholder", shap_values[:, :, 1], X_test,
-            interaction_index="population_density"
-        )
-
-        shap.dependence_plot(
-            "age_of_policyholder", shap_values[:, :, 0], X_test,
-            interaction_index="population_density"
-        )
 
 
