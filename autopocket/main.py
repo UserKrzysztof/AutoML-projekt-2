@@ -4,6 +4,9 @@ from autopocket.preprocessing.Preprocessor import  Preprocessor
 from autopocket.algorithms.Modeller import Modeller
 from autopocket.postprocessing.Postprocessor import Postprocessor
 
+from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
+
+
 
 
 class AutoPocketor():
@@ -17,12 +20,14 @@ class AutoPocketor():
         """
         pass
 
+
     def doJob(self, path, target, model_file_path=None):
+
         """
         Porządny doJob.
         Bardzo krótki.
         """
-        X, y, ml_type = Preprocessor().preprocess(path, target="is_claim")
+        X, y, ml_type = Preprocessor().preprocess(path, target=target)
         print("Preprocessing done")
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
@@ -30,6 +35,7 @@ class AutoPocketor():
         X = pd.DataFrame(X)
         Postprocessor().postprocess(best_model, X, y, ml_type, model_file_path)
         print("Postprocessing done")
+
 
 if __name__ == "__main__":
     pass
