@@ -26,9 +26,10 @@ class AutoPocketor():
         print("Preprocessing done")
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
-        print(best_model.__class__.__name__)
+        print(f"Chosen model: {best_model.__class__.__name__}")
         X = pd.DataFrame(X)
         Postprocessor().postprocess(best_model, X, y, ml_type, model_file_path)
+        print("Postprocessing done")
 
 if __name__ == "__main__":
     pass

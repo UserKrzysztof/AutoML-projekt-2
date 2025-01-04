@@ -66,17 +66,10 @@ class ShapPLOT:
     
     @staticmethod
     def shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path=None, pdf=None):
-        try: 
-            #do usuniecia
-            print(f"shap_values type: {type(shap_values)}")
-            
-            if isinstance(shap_values, np.ndarray):
-                print(f"shap_values shape: {shap_values.shape}")
-            
-            assert not np.isnan(shap_values).any(), "shap_values contains NaN values"
+        try:
             
             shap.summary_plot(
-                shap_values, X_test_lim, plot_type="bar", show=False
+                shap_values, X_test_lim, show=False
             )
             fig = plt.gcf()
             fig.tight_layout()  
@@ -93,12 +86,8 @@ class ShapPLOT:
                         vals = v
                     else:
                         vals += v
-            elif isinstance(shap_values, np.ndarray):
-                if shap_values.ndim == 3 and shap_values.shape[2] == 2:
-                    shap_values = shap_values[:, :, 1]
+            else:    
                 vals = np.abs(shap_values).mean(0)
-            else:
-                raise ValueError(f"Unexpected type for shap_values: {type(shap_values)}")
 
             feature_importance = pd.DataFrame(
                 list(zip(X_test_lim.columns, vals)), columns=["feature", "shap_importance"]
@@ -106,7 +95,7 @@ class ShapPLOT:
             feature_importance.sort_values(
                 by=["shap_importance"], ascending=False, inplace=True
             )
-            print(type(best_model.__class__.__name__))
+
             if model_file_path:
                 feature_importance.to_csv(
                     os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_importance.csv"),
@@ -114,6 +103,38 @@ class ShapPLOT:
                 )
         except Exception as e:
             print(f"Error in shap_summary_plot: {e}")
+            
+    @staticmethod
+    def shap_dependence(shap_values, X_test_lim, best_model, model_file_path = None, pdf=None):
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            fig = plt.figure(figsize=(14, 7))
+            plots_counter = np.min([9, X_test_lim.shape[1]])
+            cols_cnt = 3
+            rows_cnt = 3
+            if plots_counter < 4:
+                rows_cnt = 1
+            elif plots_counter < 7:
+                rows_cnt = 2
+                    
+            for i in range(plots_counter):
+                ax = fig.add_subplot(rows_cnt, cols_cnt, i + 1)
+                shap.dependence_plot(
+                    f"rank({i})",
+                    shap_values,
+                    X_test_lim,
+                    show=False,
+                    title=f"Importance #{i+1}",
+                    ax=ax,
+                )
+
+            fig.tight_layout(pad=2.0)
+            fig.savefig(
+                os.path.join(
+                    model_file_path, f"{best_model.__class__.__name__}_shap_dependence.png"
+                )
+            )
+            plt.close("all")
     
     @staticmethod    
     def explain_with_shap(best_model, X_train, y_train, X_test, y_test, ml_task, model_file_path=None, pdf=None):
@@ -122,25 +143,105 @@ class ShapPLOT:
             return
         
         explainer = ShapPLOT.get_explainer(best_model, X_train)
+        
         X_test_lim, y_test_lim = ShapPLOT.limit_df(X_test, y_test)
-        
-        #do usuniecia
-        print(f"X_test_lim: {X_test_lim.shape}")
-        
-        # Dodaj sprawdzenie dla X_test_lim
-        assert not X_test_lim.isnull().values.any(), "X_test_lim contains NaN values"
 
         shap_values = explainer.shap_values(X_test_lim)
         
-        #do usuniecia
-        print(f"shap_values: {np.array(shap_values).shape}")
-        
-        # Dodaj sprawdzenie dla shap_values
-        assert not pd.isnull(shap_values).any(), "shap_values contains NaN values"
-        
         expected_value = explainer.expected_value
-        if ml_task == "BINARY_CLASSIFICATION" and isinstance(shap_values, list):
-            shap_values = shap_values[1]
-            expected_value = explainer.expected_value[1]
+        
+        if ml_task == "BINARY_CLASSIFICATION" and isinstance(shap_values, list) or isinstance(shap_values, np.ndarray):
+            shap_values = shap_values[:,:,1]
+            expected_value = expected_value[1]
         
         ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path, pdf)
+        
+        ShapPLOT.shap_dependence(shap_values, X_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+        
+        df_preds = ShapPLOT.get_predictions(best_model, X_test_lim, y_test_lim)
+        
+        if ml_task == "BINARY_CLASSIFICATION":
+            ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+        else:
+            ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+
+
+
+    @staticmethod
+    def decisions_binary(
+        df_preds,
+        shap_values,
+        expected_value,
+        x_test_lim,
+        y_test_lim,
+        best_model,
+        model_file_path,
+        pdf,
+    ):
+        for t in np.unique(y_test_lim):
+            fig = plt.gcf()
+            shap.decision_plot(
+                expected_value,
+                shap_values[df_preds[df_preds.target == t].lp[:10], :],
+                x_test_lim.loc[df_preds[df_preds.target == t].index[:10]],
+                show=False,
+            )
+            fig.tight_layout(pad=2.0)
+            fig.savefig(
+                os.path.join(
+                    model_file_path,
+                    f"{best_model.__class__.__name__}_shap_class_{t}_worst_decisions.png",
+                )
+            )
+            plt.close("all")
+
+            fig = plt.gcf()
+            shap.decision_plot(
+                expected_value,
+                shap_values[df_preds[df_preds.target == t].lp[-10:], :],
+                x_test_lim.loc[df_preds[df_preds.target == t].index[-10:]],
+                show=False,
+            )
+            fig.tight_layout(pad=2.0)
+            fig.savefig(
+                os.path.join(
+                    model_file_path, f"{best_model.__class__.__name__}_shap_class_{t}_best_decisions.png"
+                )
+            )
+            plt.close("all")
+    
+    @staticmethod
+    def decisions_regression(
+        df_preds,
+        shap_values,
+        expected_value,
+        x_test_lim,
+        best_model,
+        model_file_path,
+        pdf,
+    ):
+        fig = plt.gcf()
+        shap.decision_plot(
+            expected_value,
+            shap_values[df_preds.lp[:10], :],
+            x_test_lim.loc[df_preds.index[:10]],
+            show=False,
+        )
+        fig.tight_layout(pad=2.0)
+        fig.savefig(
+            os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_worst_decisions.png")
+        )
+        plt.close("all")
+
+        fig = plt.gcf()
+        shap.decision_plot(
+            expected_value,
+            shap_values[df_preds.lp[-10:], :],
+            x_test_lim.loc[df_preds.index[-10:]],
+            show=False,
+        )
+        fig.tight_layout(pad=2.0)
+        fig.savefig(
+            os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_best_decisions.png")
+        )
+        plt.close("all")
