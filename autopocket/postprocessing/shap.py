@@ -16,7 +16,7 @@ class ShapPLOT:
             warnings.warn(
                 "Too many columns for SHAP explanations"
             )
-            return False
+        #     return False
         
         if X_train.shape[0] < 30:
             warnings.warn(
@@ -31,7 +31,8 @@ class ShapPLOT:
         shap_explainer = None
         if model_name in [
             "DecisionTreeClassifier", #do dodania potencjalnie inne modele
-            "RandomForestClassifier"
+            "RandomForestClassifier",
+            "DecisionTreeRegressor"
         ]:
             shap_explainer = shap.TreeExplainer(best_model)
         else:

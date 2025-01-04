@@ -29,6 +29,7 @@ class AutoPocketor():
         """
         X, y, ml_type = Preprocessor().preprocess(path, target=target)
         print("Preprocessing done")
+        print(X.shape)
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
         print(f"Chosen model: {best_model.__class__.__name__}")

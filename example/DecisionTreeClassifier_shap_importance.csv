@@ -1,27 +1,26 @@
 feature,shap_importance
-age_of_car_0.0,0.00754062251818958
-area_cluster_C5,0.004320617637865472
-population_density,0.003115273192569022
-length,0.0022364838961125505
-age_of_policyholder,0.001785173257151646
-is_speed_alert_YES,0.000586738198097002
-model_M3,0.0004528498227449897
-area_cluster_C20,0.00017190835564091656
-age_of_car_ 0.0 ,0.0001598515918160792
-is_speed_alert_TRUE,0.00015982151908205153
-engine_type_ F8D Petrol Engine,0.0001597914576610142
-max_power_118.36bhp@5500rpm,0.0
-max_power_97.89bhp@3600rpm,0.0
-max_power_40.36bhp@6000rpm,0.0
-max_power_55.92bhp@5300rpm,0.0
-max_power_61.68bhp@6000rpm,0.0
-max_power_67.06bhp@5500rpm,0.0
-max_power_88.50bhp@6000rpm,0.0
+age_of_car_0.0,0.00792096391519052
+area_cluster_C5,0.004605891766472407
+population_density,0.0027282309040565595
+age_of_policyholder,0.0027194880141146235
+length,0.001975076572585716
+"age_of_car_0,18 ",0.001057892813496968
+is_parking_sensors_Yes,0.0004679892821118997
+area_cluster_C20,0.00019301202825265307
+age_of_car_ 0.0 ,0.0001604151299082158
+is_speed_alert_YES,0.00016032462771406358
 max_power_88.77bhp@4000rpm,0.0
-engine_type_ K10C,0.0
+max_power_88.50bhp@6000rpm,0.0
+max_power_55.92bhp@5300rpm,0.0
+max_power_67.06bhp@5500rpm,0.0
+max_power_61.68bhp@6000rpm,0.0
 engine_type_ 1.5 L U2 CRDi,0.0
+max_power_40.36bhp@6000rpm,0.0
+max_power_97.89bhp@3600rpm,0.0
+engine_type_ K10C,0.0
+engine_type_ F8D Petrol Engine,0.0
 engine_type_ K Series Dual jet ,0.0
-max_torque_91Nm@4250rpm,0.0
+max_power_113.45bhp@4000rpm,0.0
 engine_type_1.0 SCe,0.0
 engine_type_1.2 L K Series Engine,0.0
 engine_type_1.2 L K12N Dualjet,0.0
@@ -30,10 +29,11 @@ engine_type_1.5 L U2 CRDi,0.0
 engine_type_1.5 Turbocharged Revotorq,0.0
 engine_type_1.5 Turbocharged Revotron,0.0
 engine_type_F8D Petrol Engine,0.0
-max_power_113.45bhp@4000rpm,0.0
-max_torque_60Nm@3500rpm,0.0
+engine_type_G12B,0.0
+max_power_118.36bhp@5500rpm,0.0
+max_torque_82.1Nm@3400rpm,0.0
+max_torque_91Nm@4250rpm,0.0
 max_torque_85Nm@3000rpm,0.0
-fuel_type_Petrol,0.0
 fuel_type_ petrol,0.0
 fuel_type_CNG,0.0
 fuel_type_CNG ,0.0
@@ -43,8 +43,8 @@ fuel_type_Diesel,0.0
 fuel_type_Diesel ,0.0
 fuel_type_PETROL,0.0
 fuel_type_PETROL ,0.0
+fuel_type_Petrol,0.0
 fuel_type_Petrol ,0.0
-max_torque_82.1Nm@3400rpm,0.0
 fuel_type_cng,0.0
 fuel_type_diesel,0.0
 fuel_type_petrol,0.0
@@ -53,12 +53,12 @@ max_torque_170Nm@4000rpm,0.0
 max_torque_200Nm@1750rpm,0.0
 max_torque_200Nm@3000rpm,0.0
 max_torque_250Nm@2750rpm,0.0
-engine_type_K Series Dual jet,0.0
-engine_type_G12B,0.0
-engine_type_K10C ,0.0
+max_torque_60Nm@3500rpm,0.0
 engine_type_K Series Dual jet ,0.0
-is_driver_seat_height_adjustable_Yes,0.0
-is_rear_window_defogger_Yes,0.0
+engine_type_K Series Dual jet,0.0
+engine_type_i-DTEC,0.0
+engine_type_K10C,0.0
+is_day_night_rear_view_mirror_No,0.0
 is_brake_assist_No,0.0
 is_brake_assist_Yes,0.0
 is_power_door_locks_No,0.0
@@ -68,24 +68,24 @@ is_central_locking_Yes,0.0
 is_power_steering_No,0.0
 is_power_steering_Yes,0.0
 is_driver_seat_height_adjustable_No,0.0
-is_day_night_rear_view_mirror_No,0.0
-is_rear_window_washer_Yes,0.0
+is_driver_seat_height_adjustable_Yes,0.0
 is_day_night_rear_view_mirror_Yes,0.0
+engine_type_K10C ,0.0
 is_ecw_No,0.0
 is_ecw_Yes,0.0
 is_speed_alert_FALSE,0.0
 is_speed_alert_N0,0.0
 is_speed_alert_No,0.0
+is_speed_alert_TRUE,0.0
 is_speed_alert_True,0.0
 is_speed_alert_Yes,0.0
 is_speed_alert_no,0.0
 is_speed_alert_true,0.0
+is_rear_window_defogger_Yes,0.0
 is_rear_window_defogger_No,0.0
+is_rear_window_washer_Yes,0.0
 is_rear_window_washer_No,0.0
-engine_type_K10C,0.0
-is_parking_camera_No,0.0
 fuel_type_ Diesel,0.0
-engine_type_i-DTEC,0.0
 is_esc_No,0.0
 is_esc_Yes,0.0
 is_adjustable_steering_No,0.0
@@ -93,9 +93,8 @@ is_adjustable_steering_Yes,0.0
 is_tpms_No,0.0
 is_tpms_Yes,0.0
 is_parking_sensors_No,0.0
-is_parking_sensors_Yes,0.0
+is_parking_camera_No,0.0
 is_parking_camera_Yes,0.0
-is_rear_window_wiper_Yes,0.0
 rear_brakes_type_Disc,0.0
 rear_brakes_type_Drum,0.0
 transmission_type_Automatic,0.0
@@ -106,11 +105,11 @@ steering_type_Power,0.0
 is_front_fog_lights_No,0.0
 is_front_fog_lights_Yes,0.0
 is_rear_window_wiper_No,0.0
+is_rear_window_wiper_Yes,0.0
 fuel_type_ Diesel ,0.0
 model_M8,0.0
 fuel_type_ CNG ,0.0
-age_of_car_0.13,0.0
-age_of_car_0.03,0.0
+age_of_car_0.13 ,0.0
 age_of_car_0.04,0.0
 age_of_car_0.05,0.0
 age_of_car_0.06,0.0
@@ -120,9 +119,9 @@ age_of_car_0.09,0.0
 age_of_car_0.1,0.0
 age_of_car_0.11,0.0
 age_of_car_0.12,0.0
-age_of_car_0.13 ,0.0
-fuel_type_ CNG,0.0
+age_of_car_0.13,0.0
 age_of_car_0.14,0.0
+fuel_type_ CNG,0.0
 age_of_car_0.15,0.0
 age_of_car_0.16,0.0
 age_of_car_0.17,0.0
@@ -132,10 +131,11 @@ age_of_car_0.2,0.0
 age_of_car_0.21,0.0
 age_of_car_0.22,0.0
 age_of_car_0.23,0.0
+age_of_car_0.24,0.0
+age_of_car_0.03,0.0
 age_of_car_0.02,0.0
 age_of_car_0.01,0.0
 "age_of_car_0,21",0.0
-"age_of_car_0,18 ",0.0
 make,0.0
 airbags,0.0
 displacement,0.0
@@ -157,11 +157,10 @@ age_of_car_ 0.19,0.0
 "age_of_car_0,07",0.0
 "age_of_car_0,08 ",0.0
 "age_of_car_0,09",0.0
-age_of_car_0.24,0.0
 age_of_car_0.25,0.0
 age_of_car_0.26,0.0
-area_cluster_C21,0.0
-area_cluster_C3,0.0
+age_of_car_0.27,0.0
+area_cluster_C22,0.0
 area_cluster_C4,0.0
 area_cluster_C6,0.0
 area_cluster_C7,0.0
@@ -177,16 +176,16 @@ model_M1,0.0
 model_M10,0.0
 model_M11,0.0
 model_M2,0.0
+model_M3,0.0
 model_M4,0.0
 model_M5,0.0
 model_M6,0.0
 model_M7,0.0
 model_M9,0.0
-area_cluster_C22,0.0
-area_cluster_C2,0.0
-age_of_car_0.27,0.0
-area_cluster_C19,0.0
+area_cluster_C3,0.0
+area_cluster_C21,0.0
 age_of_car_0.28,0.0
+area_cluster_C2,0.0
 age_of_car_0.29,0.0
 age_of_car_0.3,0.0
 age_of_car_0.31,0.0
@@ -207,4 +206,5 @@ area_cluster_C15,0.0
 area_cluster_C16,0.0
 area_cluster_C17,0.0
 area_cluster_C18,0.0
+area_cluster_C19,0.0
 is_speed_alert_yes,0.0

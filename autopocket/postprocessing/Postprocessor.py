@@ -28,10 +28,12 @@ class Postprocessor():
         Postprocessing logic, including LIME integration.
         """
 
-        
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+        if ml_task == "BINARY_CLASSIFICATION":
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+        else:
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
         model_name = best_model.__class__.__name__
-        output_file = f"lime_explanations_{model_name}.pdf"
+        output_file = f"explanations_{model_name}.pdf"
 
         with PdfPages(output_file) as pdf:
             try:
@@ -42,7 +44,7 @@ class Postprocessor():
                     model=best_model,  
                     X_train=X_train,
                     X_test=X_test,
-                    ml_type=ml_type,  
+                    ml_type=ml_task,  
                     num_features=10,
                     pdf=pdf
                 )
