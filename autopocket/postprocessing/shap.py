@@ -42,10 +42,13 @@ class ShapPLOT:
     
     @staticmethod
     def limit_df(X_test, y_test):
+        print(y_test.shape, type(y_test))
+        if isinstance(y_test, np.ndarray):
+            y_test = pd.Series(y_test, name="target")
         ROW_LIMIT = 1000
         if X_test.shape[0] > ROW_LIMIT:
             X_test.reset_index(inplace=True, drop=True)
-            X_test.reset_index(inplace=True, drop=True)
+            y_test.reset_index(inplace=True, drop=True)
             X_test_lim = X_test.sample(ROW_LIMIT)
             y_test_lim = y_test[X_test_lim.index]
         else:
@@ -74,6 +77,7 @@ class ShapPLOT:
             )
             fig = plt.gcf()
             fig.tight_layout()  
+            plt.title(f"{best_model.__class__.__name__} SHAP summary plot")
             if pdf:
                 pdf.savefig(fig)  
             plt.close(fig)
@@ -151,7 +155,7 @@ class ShapPLOT:
         
         expected_value = explainer.expected_value
         
-        if ml_task == "BINARY_CLASSIFICATION" and isinstance(shap_values, list) or isinstance(shap_values, np.ndarray):
+        if ml_task == "BINARY_CLASSIFICATION" and isinstance(shap_values, np.ndarray):
             shap_values = shap_values[:,:,1]
             expected_value = expected_value[1]
         
