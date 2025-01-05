@@ -22,7 +22,7 @@ class DataImputer:
         - cat_strategy: Strategy to use for imputing categorical columns. Default is 'most_frequent'.
                         Available strategies: 'most_frequent', 'constant'.
 
-        Available strategies for `SimpleImputer`:
+        Available strategies for SimpleImputer:
         - 'mean': Replaces missing values with the mean of the column (for numerical data).
         - 'median': Replaces missing values with the median of the column (for numerical data).
         - 'most_frequent': Replaces missing values with the most frequent value (mode) of the column (for categorical data).
@@ -42,11 +42,19 @@ class DataImputer:
         if cat_strategy not in cat_valid_strategies:
             raise ValueError(f"Invalid strategy for categorical columns. Valid options: {cat_valid_strategies}")
 
-
         # Impute numerical columns
         if len(num_cols) > 0:
-            num_imputer = SimpleImputer(strategy=num_strategy, fill_value=fill_value)
-            X[num_cols] = num_imputer.fit_transform(X[num_cols])
+            for col in num_cols:
+                # Check if the column has exactly two unique values
+                if X[col].nunique() == 2:
+                    # Use the most frequent value for imputation
+                    most_frequent_value = X[col].mode()[0]
+                    X[col] = X[col].fillna(most_frequent_value)
+                else:
+                    # Use SimpleImputer for other cases (mean, median, etc.)
+                    num_imputer = SimpleImputer(strategy=num_strategy, fill_value=fill_value)
+                    X[col] = num_imputer.fit_transform(X[[col]])
+
 
         # Impute categorical columns
         if len(cat_cols) > 0:

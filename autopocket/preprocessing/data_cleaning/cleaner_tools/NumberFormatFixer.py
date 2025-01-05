@@ -9,11 +9,22 @@ class NumberFormatFixer:
 
     def fix_column_format(self, column):
         """
-        Check the first 3 values of a column to determine if it's numeric,
-        then replace commas with dots and leave the column as a string to be handled later.
+        Fix the format of a column by replacing commas with dots in numeric values.
 
-        :param column: pandas Series - the column to be processed
-        :return: pandas Series - the column with the fixed number format
+        Parameters:
+        - column: pandas Series, the column to be processed.
+
+        Returns:
+        - pandas Series: The column with fixed number format.
+
+        Steps:
+        - The method checks the first 3 non-null values of the column to determine if they are valid numbers.
+        - If the sampled values are valid numbers, it replaces commas with dots and converts the values to floats.
+        - Non-string values are returned unchanged.
+
+        Notes:
+        - This function does not guarantee conversion of the entire column to a numeric type.
+        - It assumes that if the first 3 sampled values are numeric, the entire column can be processed similarly.
         """
         # Check if three random values are valid numbers
         values_to_check = column.dropna().sample(n=min(3, len(column.dropna())), random_state=34)
@@ -24,13 +35,23 @@ class NumberFormatFixer:
 
     def is_number(self, value):
         """
-        Helper function to check if a value is a valid number (either integer or float),
-        allowing for commas in the decimal part.
+        Check if a value is a valid number (integer or float), allowing commas as decimal separators.
 
-        :param value: any type - value to check
-        :return: bool - True if the value is a valid number, False otherwise
+        Parameters:
+        - value: any type, the value to be checked.
+
+        Returns:
+        - bool: True if the value is a valid number, False otherwise.
+
+        Details:
+        - The function uses regular expressions to validate strings as numbers.
+        - It allows optional commas or dots as decimal points.
+        - Non-string values are checked for being numeric without transformation.
+
+        Regex patterns:
+        - `^-?\\d+(\\.|,)\\d+$`: Matches decimal numbers with optional negative sign.
+        - `^\\d+$`: Matches whole numbers.
         """
-        # Check if value is a number using regular expressions
         if isinstance(value, str):
             # Allow for an optional comma or dot for decimal point
             return bool(re.match(r'^-?\d+(\.|,)\d+$', value.strip())) or bool(re.match(r'^\d+$', value.strip()))

@@ -1,3 +1,5 @@
+
+
 class StringStripper:
     """
     Class responsible for stripping spaces from the beginning and end of strings in a DataFrame column.
@@ -7,9 +9,20 @@ class StringStripper:
         """
         Initialize the StringStripper class.
         """
+        pass
 
     def strip_strings(self, column):
         """
-        Strip spaces from strings in the provided column.
+        Perform string stripping on a DataFrame column.
+
+        Parameters:
+        - column: pandas Series, the column to be processed.
+
+        Returns:
+        - pandas Series: The processed column.
         """
-        return column.str.strip() if column.dtype == 'object' else column
+
+        column = column.str.strip() if column.dtype == 'object' else column
+
+        return column
+

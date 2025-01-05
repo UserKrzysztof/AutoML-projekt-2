@@ -24,17 +24,17 @@ class Modeller():
 
         else:
             m = DecisionTreeRegressor()
-            param_grid = { 'criterion': ['friedman_mse'],
+            param_grid = { 'criterion': ['mse', 'friedman_mse', 'mae'],
                            'max_depth': [20, 30, 40, 50],
                            'min_samples_split': [2, 5],
                            'min_samples_leaf': [1, 2, 5, 10, 15],
-
+                           'max_features': ['auto', 'sqrt']
                            }
 
-        gs = GridSearchCV(estimator=m, param_grid=param_grid, cv=3, scoring="neg_mean_squared_error")
+        gs = GridSearchCV(estimator=m, param_grid=param_grid, cv=3, scoring="roc_auc")
         gs.fit(X, y)
         best_model = gs.best_estimator_
 
-        print("Best score (MSE):", -gs.best_score_)
+        print("Best score (GINI):", 2 * gs.best_score_ - 1)
 
         return best_model
