@@ -1,3 +1,4 @@
+import pandas as pd
 from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression
@@ -25,6 +26,16 @@ class Regressor(BaseSearcher):
             ]
         )
 
+    @staticmethod
+    def measure_importances(X, y):
+        X = X.copy()
+        X["really_random_variable"] = pd.Series(range(X.shape[0]))
+        feature_names = X.columns
+        forest = RandomForestRegressor()
+        forest.fit(X, y)
+        importances = forest.feature_importances_
+        return pd.Series(importances, index=feature_names)
+
 class DecisionTreeWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
@@ -33,7 +44,7 @@ class DecisionTreeWrapper(EstimatorWrapper):
             "criterion": ["gini", "entropy"],
             "min_samples_leaf": randint(1, 61),
         }
-        super().__init__(DecisionTreeRegressor(), param_distributions, "DecisionTreeRegressor", 10)
+        super().__init__(DecisionTreeRegressor(), param_distributions, "DecisionTreeRegressor", 100)
 
 class RandomForestWrapper(EstimatorWrapper):
     def __init__(self):
@@ -43,34 +54,31 @@ class RandomForestWrapper(EstimatorWrapper):
             "max_samples": uniform(0.5, 0.5),        
             "max_features": uniform(1e-6, 1 - 1e-6),
         }
-        super().__init__(RandomForestRegressor(), param_distributions, "RandomForestRegressor", 10)
+        super().__init__(RandomForestRegressor(), param_distributions, "RandomForestRegressor", 50)
 
 class LinearRegressionWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
             "fit_intercept": [True, False],
-            "normalize": [True, False],
             "copy_X": [True]
         }
-        super().__init__(LinearRegression(), param_distributions, "LinearRegression", 10)
+        super().__init__(LinearRegression(), param_distributions, "LinearRegression", None) # None means GridSearchCV
 
 class LassoWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
-            "alpha": uniform(0.1, 1.0),
+            "alpha": uniform(0.1, 10),
             "fit_intercept": [True, False],
-            "normalize": [True, False],
             "copy_X": [True]
         }
-        super().__init__(Lasso(), param_distributions, "Lasso", 10)
+        super().__init__(Lasso(), param_distributions, "Lasso", 100)
 
 class ElasticNetWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
-            "alpha": uniform(0.1, 1.0),
+            "alpha": uniform(0.1, 10),
             "l1_ratio": uniform(0.1, 1.0),
             "fit_intercept": [True, False],
-            "normalize": [True, False],
             "copy_X": [True]
         }
-        super().__init__(ElasticNet(), param_distributions, "ElasticNet", 10)
+        super().__init__(ElasticNet(), param_distributions, "ElasticNet", 100)

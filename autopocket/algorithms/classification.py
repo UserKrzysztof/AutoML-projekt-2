@@ -1,3 +1,5 @@
+import numpy as np
+import pandas as pd
 from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -23,6 +25,16 @@ class Classifier(BaseSearcher):
                 DecisionTreeWrpaper()
             ]
         )
+
+    @staticmethod
+    def measure_importances(X, y):
+        X = X.copy()
+        X["really_random_variable"] = np.random.rand(X.shape[0])
+        feature_names = X.columns
+        forest = RandomForestClassifier()
+        forest.fit(X, y)
+        importances = forest.feature_importances_
+        return pd.Series(importances, index=feature_names)
     
 class RandomForestWrapper(EstimatorWrapper):
     def __init__(self):
@@ -47,6 +59,9 @@ class LogisticRegressionWrapper(EstimatorWrapper):
                 "C": [0.001,0.01,0.1,1,10,100,1000],
                 "solver": ['lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag', 'saga'],
                 "fit_intercept": [True, False],
+                "class_weight": ["balanced", None],
+                "l1_ratio": uniform(0.1,1),
+                "dual": [True, False],
             },
             "LogisticRegression",
             10

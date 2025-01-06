@@ -1,8 +1,11 @@
+from abc import abstractmethod
 from sklearn.base import BaseEstimator
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 from sklearn.utils.multiclass import unique_labels
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
+import json
+import os
 
 class BaseSearcher(BaseEstimator):
     """
@@ -19,19 +22,38 @@ class BaseSearcher(BaseEstimator):
     
     def fit(self,X,y):
         check_X_y(X,y)
+        X = X.copy()
+        y = y.copy()
 
+        print("Measuring importances")
+        importances = self.__class__.measure_importances(X,y)
+        top_3_features = importances.nlargest(3)
+        print("Top 3 features by importance:")
+        print(top_3_features)
+        
+        print("Dropping unimportant features")
+        X = self.__class__.drop_unimportant_features(X, importances)
+        
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")
 
         for i,wrapper in enumerate(self.estimators_):
             print(i+1,"/",self.n_estimators_," | Fitting:", wrapper.name_, end=". ")
-            rs = RandomizedSearchCV(wrapper.estimator_, 
-                                      wrapper.param_distributions_,
-                                      cv=5,
-                                      scoring=self.metric_,
-                                      random_state=420,
-                                      n_iter=wrapper.n_iter_
+
+            if wrapper.n_iter_ is None:
+                rs = GridSearchCV(wrapper.estimator_,
+                                    wrapper.param_distributions_,
+                                    cv=5,
+                                    scoring=self.metric_
                                     )
+            else:
+                rs = RandomizedSearchCV(wrapper.estimator_, 
+                                        wrapper.param_distributions_,
+                                        cv=5,
+                                        scoring=self.metric_,
+                                        random_state=420,
+                                        n_iter=wrapper.n_iter_
+                                        )
             rs.fit(X,y)
             print("Best score:", rs.best_score_, self.metric_)
 
@@ -51,6 +73,37 @@ class BaseSearcher(BaseEstimator):
     def predict(self, X):
         check_is_fitted(self)
         return self.best_model_.predict(X)
+    
+    @staticmethod
+    @abstractmethod
+    def measure_importances(X,y):
+        """
+            Abstract method for measuring importances
+            Should return a pandas Series with feature importances
+            Should add a really_random_variable to the dataset
+            Should be implemented in the child class
+        """
+        pass
+
+    @staticmethod
+    def drop_unimportant_features(X, importances):
+        really_random_importance = importances.get('really_random_variable', None)
+        if really_random_importance is not None:
+            columns_to_drop = importances[importances < really_random_importance].index.tolist()
+            X.drop(columns=columns_to_drop, inplace=True)
+            if len(columns_to_drop) > 5:
+                print(f"Dropped columns: {columns_to_drop[:5]} ...")
+            else:
+                print(f"Dropped columns: {columns_to_drop}")
+        important_features = [col for col in X.columns if col not in columns_to_drop]
+
+        print("Saving important features to algorithms_results/important_features.json")
+
+        results_dir = os.path.join(os.path.dirname(__file__), 'algorithms_results')
+        os.makedirs(results_dir, exist_ok=True)
+        with open(os.path.join(results_dir, 'important_features.json'), 'w') as f:
+            json.dump(important_features, f)
+        return X
 
 
 class EstimatorWrapper(BaseEstimator):
