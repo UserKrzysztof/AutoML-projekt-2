@@ -1,11 +1,10 @@
-import os
+
 import pandas as pd
 
-from autopocket.preprocessing.Preprocessor import  Preprocessor
-from autopocket.algorithms.Modeller import Modeller
-from autopocket.postprocessing.Postprocessor import Postprocessor
+from preprocessing.Preprocessor import  Preprocessor
+from algorithms.Modeller import Modeller
+from postprocessing.Postprocessor import Postprocessor
 
-from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
 
 
 
@@ -41,5 +40,5 @@ class AutoPocketor():
 
 
 if __name__ == "__main__":
-    AutoPocketor().doJob()
+    AutoPocketor().doJob('example/data/car_insurance.csv', 'is_claim', ".")
 

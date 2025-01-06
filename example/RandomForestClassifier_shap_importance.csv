@@ -1,0 +1,60 @@
+feature,shap_importance
+policy_tenure,0.017829348491419324
+age_of_car,0.0074921735104561266
+age_of_policyholder,0.0035676460686999392
+area_cluster,0.002608605177234839
+population_density,0.0017922338442471577
+height,0.0007731824910459904
+is_ecw,0.000571701495633978
+width,0.0005269194059358404
+turning_radius,0.0005040417626471321
+model,0.0004354268685767117
+transmission_type_manual,0.0003955471447075891
+gross_weight,0.0003776173927432562
+segment_b1,0.00034474677170414454
+is_power_door_locks,0.0002962112010870425
+engine_type_k10c,0.00028086657038603463
+max_power_right,0.0002657024476675361
+fuel_type_petrol,0.0002450938466895722
+displacement,0.00023789281524771937
+is_driver_seat_height_adjustable,0.0002320624078021201
+max_torque_right,0.00022567633919759613
+is_central_locking,0.000224998284128867
+max_power_left,0.00020105840851273297
+ncap_rating,0.00018301530815460716
+length,0.00018135608980755284
+segment_b2,0.00014766782242881554
+is_rear_window_washer,0.00013869124452082305
+steering_type_power,0.00012709703086181205
+is_rear_window_wiper,0.00012013430416416231
+airbags,0.00011890289652822643
+max_torque_left,0.00011557877098978328
+make,0.00011401615810883162
+fuel_type_diesel,0.0001106255522113122
+is_parking_camera,0.00010410591594420593
+engine_type_1.2 l k series engine,9.482111391756423e-05
+is_day_night_rear_view_mirror,9.123490995473067e-05
+engine_type_f8d petrol engine,8.739740450180902e-05
+is_front_fog_lights,7.800632181777703e-05
+cylinder,7.353965732716773e-05
+engine_type_k series dual jet,7.040134346420339e-05
+is_esc,6.61019274330636e-05
+is_rear_window_defogger,6.015563341868915e-05
+is_adjustable_steering,5.658214185930094e-05
+is_brake_assist,4.7895788839916966e-05
+gear_box,4.462738446447538e-05
+segment_c2,1.8120245187766743e-05
+is_parking_sensors,1.6274998656619077e-05
+engine_type_1.5 l u2 crdi,1.5745221960348287e-05
+is_tpms,1.122233452443592e-05
+segment_c1,9.756339464162754e-06
+engine_type_1.2 l k12n dualjet,0.0
+engine_type_1.5 turbocharged revotorq,0.0
+engine_type_1.5 turbocharged revotron,0.0
+engine_type_g12b,0.0
+engine_type_i-dtec,0.0
+is_speed_alert,0.0
+rear_brakes_type_rum,0.0
+is_power_steering,0.0
+steering_type_manual,0.0
+segment_utility,0.0

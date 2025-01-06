@@ -1,0 +1,42 @@
+feature,shap_importance
+policy_tenure,0.018107989227016605
+is_power_door_locks,0.0
+is_day_night_rear_view_mirror,0.0
+is_speed_alert,0.0
+ncap_rating,0.0
+max_torque_right,0.0
+max_power_right,0.0
+segment_b1,0.0
+segment_b2,0.0
+segment_c1,0.0
+fuel_type_diesel,0.0
+fuel_type_petrol,0.0
+engine_type_1.2 l k series engine,0.0
+engine_type_1.2 l k12n dualjet,0.0
+engine_type_1.5 turbocharged revotorq,0.0
+engine_type_f8d petrol engine,0.0
+engine_type_i-dtec,0.0
+engine_type_k series dual jet,0.0
+transmission_type_manual,0.0
+is_power_steering,0.0
+is_brake_assist,0.0
+age_of_car,0.0
+is_rear_window_defogger,0.0
+age_of_policyholder,0.0
+area_cluster,0.0
+population_density,0.0
+make,0.0
+model,0.0
+airbags,0.0
+is_esc,0.0
+is_adjustable_steering,0.0
+is_tpms,0.0
+is_parking_sensors,0.0
+is_parking_camera,0.0
+displacement,0.0
+turning_radius,0.0
+width,0.0
+height,0.0
+gross_weight,0.0
+is_front_fog_lights,0.0
+steering_type_power,0.0

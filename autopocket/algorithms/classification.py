@@ -22,7 +22,7 @@ class Classifier(BaseSearcher):
             [
                 RandomForestWrapper(),
                 LogisticRegressionWrapper(),
-                DecisionTreeWrpaper()
+                DecisionTreeWrapper()
             ]
         )
 
@@ -67,7 +67,7 @@ class LogisticRegressionWrapper(EstimatorWrapper):
             10
         )
 
-class DecisionTreeWrpaper(EstimatorWrapper):
+class DecisionTreeWrapper(EstimatorWrapper):
     def __init__(self):
         super().__init__(
             DecisionTreeClassifier(),
