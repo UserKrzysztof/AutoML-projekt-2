@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 from preprocessing.Preprocessor import  Preprocessor
@@ -22,7 +23,7 @@ class AutoPocketor():
         Porządny doJob.
         Bardzo krótki.
         """
-        X, y, ml_type = Preprocessor().preprocess(path="../example/data/car_insurance.csv", target="is_claim")
+        X, y, ml_type = Preprocessor().preprocess(path=os.path.join(".","example","data","car_insurance.csv"), target="is_claim")
         print("Preprocessing done")
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
