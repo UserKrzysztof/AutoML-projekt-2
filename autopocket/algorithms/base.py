@@ -1,7 +1,6 @@
 from abc import abstractmethod
 from sklearn.base import BaseEstimator
-from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
-from sklearn.utils.multiclass import unique_labels
+from sklearn.utils.validation import check_X_y, check_is_fitted
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
 import json
@@ -11,6 +10,8 @@ class BaseSearcher(BaseEstimator):
     """
         Abstract class for model selection
     """
+    results_dir = os.path.join(os.getcwd(), 'algorithms_results')
+
     def __init__(self, metric, estimators):
         self.best_model_ = None
         self.best_score_ = None
@@ -34,6 +35,8 @@ class BaseSearcher(BaseEstimator):
         print("Dropping unimportant features")
         X = self.__class__.drop_unimportant_features(X, importances)
         
+        assert X.shape[1] > 0, "No features left after dropping unimportant features. Please check your data"
+
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")
 
@@ -68,11 +71,53 @@ class BaseSearcher(BaseEstimator):
                 self.best_model_ = rs.best_estimator_
                 self.best_params_ = rs.best_params_
 
+        self.save_results()
         return self
 
     def predict(self, X):
         check_is_fitted(self)
         return self.best_model_.predict(X)
+    
+    def save_results(self):
+        """
+            Save the results to json files
+        """
+        results_dir = self.results_dir
+        os.makedirs(results_dir, exist_ok=True)
+        
+        for wrapper_name, result in self.results_.items():
+            print(f"Saving results for {wrapper_name} to algorithms_results/{wrapper_name}_results.json")
+            result_to_save = {
+                "score": result["score"],
+                "params": result["params"]
+            }
+            with open(os.path.join(results_dir, f'{wrapper_name}_results.json'), 'w') as f:
+                json.dump(result_to_save, f)
+    
+    def read_results(self):
+        results_dir = self.__class__.results_dir
+        results = {}
+        for wrapper_name in self.estimators_:
+            with open(os.path.join(results_dir, f'{wrapper_name}_results.json'), 'r') as f:
+                results[wrapper_name] = json.load(f)
+        return results
+    
+    def create_model_from_json(self, wrapper_name):
+        """
+            Create a model from the best parameters found in the search
+            Not in use yet, but leaved an option for future improvements
+        """
+        results = self.read_results()
+        best_params = results[wrapper_name]["params"]
+        estimator = None
+        for wrapper in self.estimators_:
+            if wrapper.name_ == wrapper_name:
+                estimator = wrapper.estimator_
+            break
+        if estimator is None:
+            raise ValueError(f"No estimator found with name {wrapper_name}")
+        model = estimator.set_params(**best_params)
+        return model
     
     @staticmethod
     @abstractmethod
@@ -99,12 +144,11 @@ class BaseSearcher(BaseEstimator):
 
         print("Saving important features to algorithms_results/important_features.json")
 
-        results_dir = os.path.join(os.path.dirname(__file__), 'algorithms_results')
+        results_dir = BaseSearcher.results_dir
         os.makedirs(results_dir, exist_ok=True)
         with open(os.path.join(results_dir, 'important_features.json'), 'w') as f:
             json.dump(important_features, f)
         return X
-
 
 class EstimatorWrapper(BaseEstimator):
     """
