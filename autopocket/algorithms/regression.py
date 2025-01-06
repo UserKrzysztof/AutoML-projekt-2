@@ -41,7 +41,7 @@ class DecisionTreeWrapper(EstimatorWrapper):
         param_distributions = {
             "max_depth": randint(1, 31),
             "min_samples_split": randint(2, 61),
-            "criterion": ["gini", "entropy"],
+            "criterion": ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
             "min_samples_leaf": randint(1, 61),
         }
         super().__init__(DecisionTreeRegressor(), param_distributions, "DecisionTreeRegressor", 100)
