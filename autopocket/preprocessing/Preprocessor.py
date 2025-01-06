@@ -18,7 +18,7 @@ class Preprocessor():
         Porządny preprocess.
         """
 
-        data = pd.read_csv(path, sep=',')
+        data = pd.read_csv(path, sep=None, engine="python")
         X = data.drop(columns=[target])
         y = data[target]
 

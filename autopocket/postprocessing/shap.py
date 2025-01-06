@@ -14,15 +14,13 @@ class ShapPLOT:
             return False
         if X_train.shape[1] > 400:
             warnings.warn(
-                "Too many columns for SHAP explanations"
+                "Too many columns for SHAP explanations - be aware of the performance impact"
             )
-        #     return False
         
         if X_train.shape[0] < 30:
             warnings.warn(
-                "Not enough records for SHAP explanations"
+                "Not enough records for SHAP explanations - be aware of the performance impact"
             )
-            return False
         return True
     
     @staticmethod
@@ -71,13 +69,14 @@ class ShapPLOT:
     @staticmethod
     def shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path=None, pdf=None):
         try:
-            
+            fig = plt.gcf()
             shap.summary_plot(
                 shap_values, X_test_lim, show=False
             )
-            fig = plt.gcf()
-            fig.tight_layout()  
             plt.title(f"{best_model.__class__.__name__} SHAP summary plot")
+            plt.show()
+            fig.tight_layout()  
+            
             if pdf:
                 pdf.savefig(fig)  
             plt.close(fig)
@@ -129,16 +128,16 @@ class ShapPLOT:
                     shap_values,
                     X_test_lim,
                     show=False,
-                    title=f"Importance #{i+1}",
+                    title=f"Dependence plot - Importance #{i+1}",
                     ax=ax,
                 )
 
             fig.tight_layout(pad=2.0)
-            fig.savefig(
-                os.path.join(
-                    model_file_path, f"{best_model.__class__.__name__}_shap_dependence.png"
+            plt.show()
+            if pdf:
+                pdf.savefig(
+                    fig
                 )
-            )
             plt.close("all")
     
     @staticmethod    
@@ -152,7 +151,7 @@ class ShapPLOT:
         X_test_lim, y_test_lim = ShapPLOT.limit_df(X_test, y_test)
 
         shap_values = explainer.shap_values(X_test_lim)
-        
+
         expected_value = explainer.expected_value
         
         if ml_task == "BINARY_CLASSIFICATION" and isinstance(shap_values, np.ndarray):
@@ -161,14 +160,15 @@ class ShapPLOT:
         
         ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path, pdf)
         
-        ShapPLOT.shap_dependence(shap_values, X_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+        ShapPLOT.shap_dependence(shap_values, X_test_lim, best_model, model_file_path, pdf) 
         
         df_preds = ShapPLOT.get_predictions(best_model, X_test_lim, y_test_lim)
         
         if ml_task == "BINARY_CLASSIFICATION":
-            ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+            ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, best_model, model_file_path, pdf) 
+            ShapPLOT.forceplot_binary(shap_values, expected_value, X_test_lim)
         else:
-            ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, best_model, model_file_path, pdf) #bez pdfa poki co
+            ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, best_model, model_file_path, pdf)
 
 
 
@@ -191,13 +191,11 @@ class ShapPLOT:
                 x_test_lim.loc[df_preds[df_preds.target == t].index[:10]],
                 show=False,
             )
+            plt.title(f"SHAP decision plot for class {t} - worst decisions")
+            plt.show()
             fig.tight_layout(pad=2.0)
-            fig.savefig(
-                os.path.join(
-                    model_file_path,
-                    f"{best_model.__class__.__name__}_shap_class_{t}_worst_decisions.png",
-                )
-            )
+            if pdf:
+                pdf.savefig(fig)
             plt.close("all")
 
             fig = plt.gcf()
@@ -207,12 +205,11 @@ class ShapPLOT:
                 x_test_lim.loc[df_preds[df_preds.target == t].index[-10:]],
                 show=False,
             )
+            plt.title(f"SHAP decision plot for class {t} - best decisions")
+            plt.show()
             fig.tight_layout(pad=2.0)
-            fig.savefig(
-                os.path.join(
-                    model_file_path, f"{best_model.__class__.__name__}_shap_class_{t}_best_decisions.png"
-                )
-            )
+            if pdf:
+                pdf.savefig(fig)
             plt.close("all")
     
     @staticmethod
@@ -232,10 +229,12 @@ class ShapPLOT:
             x_test_lim.loc[df_preds.index[:10]],
             show=False,
         )
+        plt.title("Decision plot - worst decisions")
+        plt.show()
         fig.tight_layout(pad=2.0)
-        fig.savefig(
-            os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_worst_decisions.png")
-        )
+        
+        if pdf:
+            pdf.savefig(fig)
         plt.close("all")
 
         fig = plt.gcf()
@@ -245,8 +244,23 @@ class ShapPLOT:
             x_test_lim.loc[df_preds.index[-10:]],
             show=False,
         )
+        plt.title("Decision plot - best decisions")
+        plt.show()
         fig.tight_layout(pad=2.0)
-        fig.savefig(
-            os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_best_decisions.png")
-        )
+        if pdf:
+            pdf.savefig(fig)
         plt.close("all")
+        
+    @staticmethod
+    def forceplot_binary(
+        shap_values,
+        expected_value,
+        x_test_lim,
+    ):
+        fig = plt.gcf()
+        shap.plots.force(expected_value, shap_values[6, :], x_test_lim.iloc[6, :], matplotlib=True, show=False)
+        plt.title("Force plot")
+        plt.show()
+        fig.tight_layout(pad=2.0)
+        
+        
