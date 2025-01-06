@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestRegressor
@@ -29,7 +30,7 @@ class Regressor(BaseSearcher):
     @staticmethod
     def measure_importances(X, y):
         X = X.copy()
-        X["really_random_variable"] = pd.Series(range(X.shape[0]))
+        X["really_random_variable"] = np.random.rand(X.shape[0])
         feature_names = X.columns
         forest = RandomForestRegressor()
         forest.fit(X, y)
