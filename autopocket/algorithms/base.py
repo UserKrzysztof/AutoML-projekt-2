@@ -20,7 +20,6 @@ class BaseSearcher(BaseEstimator):
     def fit(self,X,y):
         check_X_y(X,y)
 
-        self.classes_ = unique_labels(y)
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")
 
