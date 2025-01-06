@@ -1,67 +1,65 @@
 import pandas as pd
-import numpy as np
-from sklearn.compose import ColumnTransformer, make_column_selector
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, LabelEncoder
+
+from .data_cleaning.DataCleaner import DataCleaner
+from .task_analysing.ColumnTypeAnalyzer import ColumnTypeAnalyzer
+from .feature_processing.FeatureProcessor import FeatureProcessor
 
 
 class Preprocessor():
+    """
+    Class for preprocessing the input data, including cleaning, analyzing target column type,
+    and feature processing.
+    """
+
     def __init__(self):
         """
-        Porządny init.
-        """
-        pass
+        Initialize the Preprocessor class.
 
-    def preprocess(self, path, target):
+        This class uses:
+        - DataCleaner to clean the input data.
+        - ColumnTypeAnalyzer to analyze the target column type.
+        - FeatureProcessor to encode features, handle outliers, and select relevant features.
         """
-        Porządny preprocess.
-        """
+        self.dataCleaner = DataCleaner()
+        self.columnTypeAnalyzer = ColumnTypeAnalyzer()
+        self.featureProcessor = FeatureProcessor()
 
+    def preprocess(self, path, target, num_strategy='mean', cat_strategy='most_frequent', fill_value=None):
+        """
+        Perform full preprocessing on the dataset.
+
+        Parameters:
+        - path: string - The path to the CSV file to be loaded.
+        - target: string - The name of the target column in the dataset.
+        - num_strategy: string - The imputation strategy for numerical columns ('mean', 'median', 'most_frequent', 'constant').
+        - cat_strategy: string - The imputation strategy for categorical columns ('most_frequent', 'constant').
+        - fill_value: Any - The value to use when filling missing values, if 'constant' strategy is used.
+
+        Returns:
+        - X: pandas DataFrame - The processed feature set.
+        - y: pandas Series - The target variable.
+        - ml_task: string - The type of machine learning task ("BINARY_CLASSIFICATION" or "LINEAR_REGRESSION").
+
+        Processing steps:
+        1. Load the dataset and split it into features (X) and target (y).
+        2. Analyze the type of the target column to determine the appropriate ML task.
+        3. Clean the feature set using the DataCleaner class.
+        4. Process the features (encode, handle outliers, and select features) using the FeatureProcessor class.
+        """
+        # Load dataset
         data = pd.read_csv(path, sep=None, engine="python")
+
+        # Split data into features (X) and target (y)
         X = data.drop(columns=[target])
         y = data[target]
 
-        unique_counts = X.nunique()
-        cols_to_drop = unique_counts[unique_counts == len(X)].index
-        X = X.drop(columns=cols_to_drop)
-        num_cols = X.select_dtypes(include=np.number).columns
-        cat_cols = X.select_dtypes(exclude=np.number).columns
+        # Analyze the target column to determine the ML task type
+        ml_task, y = self.columnTypeAnalyzer.analyze_column_type(y)
 
-        if len(num_cols) > 0:
-            X[num_cols] = X[num_cols].fillna(X[num_cols].mean())
+        # Clean the feature set (X)
+        X = self.dataCleaner.clean(X, num_strategy, cat_strategy, fill_value)
 
-        if len(cat_cols) > 0:
-            X[cat_cols] = X[cat_cols].fillna(X[cat_cols].mode().iloc[0])
-            X = pd.get_dummies(X, columns=cat_cols, drop_first=False, dummy_na=False)
+        # Process features (encode, handle outliers, and select features)
+        X = self.featureProcessor.feature_process(X, ml_task)
 
-        X = pd.DataFrame(X)
-
-        if self.analyze_column_type(y) == "BINARY_CLASSIFICATION":
-            y = LabelEncoder().fit_transform(y)
-
-        return X, y, self.analyze_column_type(y)
-
-
-    def analyze_column_type(self, column):
-        """
-        Analyzes a column from a DataFrame and returns the data type:
-        - BINARY_CLASSIFICATION if the column contains only 2 unique values.
-        - LINEAR_REGRESSION if the column contains numeric data and more than 2 unique values.
-
-        Parameters:
-            column (pd.Series): Column from a DataFrame.
-
-        Returns:
-            str: Data type (BINARY_CLASSIFICATION or LINEAR_REGRESSION).
-        """
-
-        unique_values = np.unique(column).size
-
-        if unique_values == 2:
-            return "BINARY_CLASSIFICATION"
-        elif np.issubdtype(column.dtype, np.number):
-            return "LINEAR_REGRESSION"
-        else:
-            raise ValueError("The column is neither binary nor numeric for regression.")
-
+        return X, y, ml_task

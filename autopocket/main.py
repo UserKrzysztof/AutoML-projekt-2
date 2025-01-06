@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 from autopocket.preprocessing.Preprocessor import  Preprocessor
@@ -27,6 +28,7 @@ class AutoPocketor():
         Porządny doJob.
         Bardzo krótki.
         """
+
         X, y, ml_type = Preprocessor().preprocess(path, target=target)
         print("Preprocessing done")
         print(X.shape)
@@ -39,13 +41,5 @@ class AutoPocketor():
 
 
 if __name__ == "__main__":
-    pass
-
-
-
-
-
-
-
-
+    AutoPocketor().doJob()
 
