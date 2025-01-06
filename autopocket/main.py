@@ -33,12 +33,3 @@ class AutoPocketor():
 
 if __name__ == "__main__":
     AutoPocketor().doJob()
-
-
-
-
-
-
-
-
-
