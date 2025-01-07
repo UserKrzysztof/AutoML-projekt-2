@@ -4,7 +4,7 @@ from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression
 from sklearn.tree import DecisionTreeRegressor
-from algorithms.base import BaseSearcher, EstimatorWrapper
+from .base import BaseSearcher, EstimatorWrapper
 
 class Regressor(BaseSearcher):
     """
@@ -17,7 +17,7 @@ class Regressor(BaseSearcher):
     """
     def __init__(self):
         super().__init__(
-            "neg_mean_squared_error",
+            "neg_mean_squared_log_error",
             [
                 DecisionTreeWrapper(),
                 RandomForestWrapper(),
@@ -68,7 +68,7 @@ class LinearRegressionWrapper(EstimatorWrapper):
 class LassoWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
-            "alpha": uniform(0.1, 10),
+            "alpha": uniform(0.1, 100),
             "fit_intercept": [True, False],
             "copy_X": [True]
         }
@@ -77,8 +77,8 @@ class LassoWrapper(EstimatorWrapper):
 class ElasticNetWrapper(EstimatorWrapper):
     def __init__(self):
         param_distributions = {
-            "alpha": uniform(0.1, 10),
-            "l1_ratio": uniform(0.1, 1.0),
+            "alpha": uniform(0.1, 100),
+            "l1_ratio": uniform(0.1, 0.9),
             "fit_intercept": [True, False],
             "copy_X": [True]
         }

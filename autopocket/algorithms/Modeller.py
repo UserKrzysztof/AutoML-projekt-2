@@ -21,7 +21,7 @@ class Modeller():
             print("Performing regression")
 
         with warnings.catch_warnings():
-            warnings.filterwarnings("ignore")
+            #warnings.filterwarnings("ignore")
             m.fit(X,y)
             
         return m.best_model_

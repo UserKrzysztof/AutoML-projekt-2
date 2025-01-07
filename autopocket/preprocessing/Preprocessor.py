@@ -1,4 +1,5 @@
 import pandas as pd
+from matplotlib import pyplot as plt
 
 from .data_cleaning.DataCleaner import DataCleaner
 from .task_analysing.ColumnTypeAnalyzer import ColumnTypeAnalyzer
@@ -52,6 +53,8 @@ class Preprocessor():
         # Split data into features (X) and target (y)
         X = data.drop(columns=[target])
         y = data[target]
+        plt.hist(y)
+        plt.show()
 
         # Analyze the target column to determine the ML task type
         ml_task, y = self.columnTypeAnalyzer.analyze_column_type(y)

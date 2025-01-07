@@ -1,5 +1,6 @@
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, PowerTransformer
+from sklearn.preprocessing import power_transform
 
 
 class ColumnTypeAnalyzer:
@@ -36,9 +37,41 @@ class ColumnTypeAnalyzer:
         if unique_values == 2:
             return "BINARY_CLASSIFICATION", LabelEncoder().fit_transform(column)
 
+        # # Check for linear regression
+        # elif np.issubdtype(column.dtype, np.number):
+        #     if np.any((column < 0) | (column == 0)):
+        #         transformer = PowerTransformer(method='yeo-johnson')
+        #         transformed_column = transformer.fit_transform(column.values.reshape(-1, 1)).flatten()
+        #         return "LINEAR_REGRESSION", transformed_column
+        #     else:
+        #         transformer = PowerTransformer(method='box-cox')
+        #         transformed_column = transformer.fit_transform(column.values.reshape(-1, 1)).flatten()
+        #         return "LINEAR_REGRESSION", transformed_column
+
+        # Check for linear regression
+        # elif np.issubdtype(column.dtype, np.number):
+        #     if np.any((column < 0) | (column == 0)):
+        #         power_transform(column, method='yeo-johnson')
+        #         return "LINEAR_REGRESSION", transformed_column
+        #     else:
+        #         power_transform(column, method='box-cox')
+        #         return "LINEAR_REGRESSION", transformed_column
+
         # Check for linear regression
         elif np.issubdtype(column.dtype, np.number):
-            return "LINEAR_REGRESSION", column
+            if np.any((column <= 0) | (column == 0)):
+                # Apply Yeo-Johnson transformation
+                print("Performing YEO_JOHNSON")
+                transformed_column = power_transform(column.values.reshape(-1, 1), method='yeo-johnson', standardize=False).flatten()
+                return "LINEAR_REGRESSION", transformed_column
+            else:
+                # Apply Box-Cox transformation
+                print("Performing BOX-COX")
+                transformed_column = power_transform(column.values.reshape(-1, 1), method='box-cox', standardize=False).flatten()
+                return "LINEAR_REGRESSION", transformed_column
+
+
+
 
         # Raise an error if the column type doesn't match expected formats
         else:

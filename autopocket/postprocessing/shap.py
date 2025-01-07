@@ -28,9 +28,10 @@ class ShapPLOT:
         model_name = best_model.__class__.__name__
         shap_explainer = None
         if model_name in [
-            "DecisionTreeClassifier", #do dodania potencjalnie inne modele
+            "DecisionTreeClassifier",
             "RandomForestClassifier",
-            "DecisionTreeRegressor"
+            "DecisionTreeRegressor",
+            "RandomForestRegressor"
         ]:
             shap_explainer = shap.TreeExplainer(best_model)
         else:
@@ -166,7 +167,7 @@ class ShapPLOT:
         
         if ml_task == "BINARY_CLASSIFICATION":
             ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, best_model, model_file_path, pdf) 
-            ShapPLOT.forceplot_binary(shap_values, expected_value, X_test_lim)
+            ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, model_file_path)
         else:
             ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, best_model, model_file_path, pdf)
 
@@ -253,14 +254,41 @@ class ShapPLOT:
         
     @staticmethod
     def forceplot_binary(
+        best_model,
         shap_values,
         expected_value,
         x_test_lim,
+        model_file_path,
     ):
+        prob_class_1 = best_model.predict_proba(x_test_lim)[:, 1]
+        prob_class_0 = best_model.predict_proba(x_test_lim)[:, 0]
+
+        top_indices_class_1 = prob_class_1.argsort()[-1:]
+        top_observations_class_1 = x_test_lim.iloc[top_indices_class_1]
+        top_indices_class_0 = prob_class_0.argsort()[-1:]
+        top_observations_class_0 = x_test_lim.iloc[top_indices_class_0]
         fig = plt.gcf()
-        shap.plots.force(expected_value, shap_values[6, :], x_test_lim.iloc[6, :], matplotlib=True, show=False)
-        plt.title("Force plot")
+        shap.plots.force(expected_value, shap_values[top_indices_class_1, :], x_test_lim.iloc[top_indices_class_1, :], matplotlib=True, show=False)
+        plt.title("Force plot for class 1 - observation with biggest prediction probability")
         plt.show()
-        fig.tight_layout(pad=2.0)
+        fig.tight_layout()
+        fig.savefig(
+            os.path.join(
+                model_file_path, f"force_plot_class_1.png"
+            )
+        )
+        plt.close("all")
+
+        fig = plt.gcf()
+        shap.plots.force(expected_value, shap_values[top_indices_class_0, :], x_test_lim.iloc[top_indices_class_0, :], matplotlib=True, show=False)
+        plt.title("Force plot for class 0 - observation with biggest prediction probability")
+        plt.show()
+        fig.tight_layout()
+        fig.savefig(
+            os.path.join(
+                model_file_path, f"force_plot_class_0.png"
+            )
+        )
+        plt.close("all")
         
         

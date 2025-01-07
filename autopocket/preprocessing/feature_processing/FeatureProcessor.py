@@ -44,6 +44,6 @@ class FeatureProcessor():
         X = self.outlierHandler.handle_outliers(X)
 
         # 3. Select relevant features based on correlation
-        #X = self.featureSelector.select_features(X)
+        X = self.featureSelector.select_features(X)
 
         return X

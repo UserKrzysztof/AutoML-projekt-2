@@ -40,8 +40,8 @@ class FeatureSelector:
         # Get the upper triangle of the correlation matrix to avoid redundant checks
         upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.bool_))
 
-        # Identify columns with high correlation (above 0.95)
-        to_drop = [column for column in upper.columns if any(upper[column] > 0.95)]
+        # Identify columns with high correlation (above 0.85)
+        to_drop = [column for column in upper.columns if any(upper[column] > 0.85)]
 
         # Drop the highly correlated columns
         X = X.drop(columns=to_drop)

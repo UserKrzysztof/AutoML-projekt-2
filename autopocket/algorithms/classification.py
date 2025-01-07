@@ -60,8 +60,7 @@ class LogisticRegressionWrapper(EstimatorWrapper):
                 "solver": ['lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag', 'saga'],
                 "fit_intercept": [True, False],
                 "class_weight": ["balanced", None],
-                "l1_ratio": uniform(0.1,1),
-                "dual": [True, False],
+                "l1_ratio": uniform(0.1,0.9)
             },
             "LogisticRegression",
             10

@@ -32,10 +32,10 @@ class BaseSearcher(BaseEstimator):
         print("Top 3 features by importance:")
         print(top_3_features)
         
-        #print("Dropping unimportant features")
-        #X = self.__class__.drop_unimportant_features(X, importances)
+        # print("Dropping unimportant features")
+        # X = self.__class__.drop_unimportant_features(X, importances)
         
-        #assert X.shape[1] > 0, "No features left after dropping unimportant features. Please check your data"
+        # assert X.shape[1] > 0, "No features left after dropping unimportant features. Please check your data"
 
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")

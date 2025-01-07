@@ -30,6 +30,12 @@ class AutoPocketor():
 
         X, y, ml_type = Preprocessor().preprocess(path, target=target)
         print("Preprocessing done")
+
+        import matplotlib.pyplot as plt
+        plt.hist(y)
+        plt.show()
+
+
         print(X.shape)
         best_model = Modeller().model(X, y, ml_type)
         print("Modelling done")
@@ -40,5 +46,5 @@ class AutoPocketor():
 
 
 if __name__ == "__main__":
-    AutoPocketor().doJob('example/data/car_insurance.csv', 'is_claim', ".")
+    AutoPocketor().doJob('../../walmart.csv', 'Weekly_Sales', ".")
 

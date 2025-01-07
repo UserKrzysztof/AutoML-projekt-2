@@ -1,0 +1,1 @@
+{"score": 0.8064688034134407, "params": {"C": 0.01, "class_weight": null, "dual": false, "fit_intercept": true, "l1_ratio": 0.9635166378141324, "penalty": "l2", "solver": "liblinear"}}
