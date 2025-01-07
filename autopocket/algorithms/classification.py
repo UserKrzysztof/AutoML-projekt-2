@@ -20,7 +20,7 @@ class Classifier(BaseSearcher):
         super().__init__(
             "roc_auc",
             [
-               # RandomForestWrapper(),
+                RandomForestWrapper(),
                 LogisticRegressionWrapper(),
                 DecisionTreeWrapper()
             ]
@@ -47,7 +47,7 @@ class RandomForestWrapper(EstimatorWrapper):
                 "max_features": uniform(1e-6, 1 - 1e-6),
             },
             "RandomForestClassifier",
-            50
+            10
         )
 
 class LogisticRegressionWrapper(EstimatorWrapper):
@@ -57,7 +57,7 @@ class LogisticRegressionWrapper(EstimatorWrapper):
             LogisticRegression(),
             None,
             "LogisticRegression",
-            100
+            10
         )
 
     @property
@@ -94,5 +94,5 @@ class DecisionTreeWrapper(EstimatorWrapper):
                 "min_samples_leaf": randint(1, 61),
             },
             "DecisionTreeClassifier",
-            100
+            10
         )

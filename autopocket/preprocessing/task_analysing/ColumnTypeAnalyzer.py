@@ -37,26 +37,6 @@ class ColumnTypeAnalyzer:
         if unique_values == 2:
             return "BINARY_CLASSIFICATION", LabelEncoder().fit_transform(column)
 
-        # # Check for linear regression
-        # elif np.issubdtype(column.dtype, np.number):
-        #     if np.any((column < 0) | (column == 0)):
-        #         transformer = PowerTransformer(method='yeo-johnson')
-        #         transformed_column = transformer.fit_transform(column.values.reshape(-1, 1)).flatten()
-        #         return "LINEAR_REGRESSION", transformed_column
-        #     else:
-        #         transformer = PowerTransformer(method='box-cox')
-        #         transformed_column = transformer.fit_transform(column.values.reshape(-1, 1)).flatten()
-        #         return "LINEAR_REGRESSION", transformed_column
-
-        # Check for linear regression
-        # elif np.issubdtype(column.dtype, np.number):
-        #     if np.any((column < 0) | (column == 0)):
-        #         power_transform(column, method='yeo-johnson')
-        #         return "LINEAR_REGRESSION", transformed_column
-        #     else:
-        #         power_transform(column, method='box-cox')
-        #         return "LINEAR_REGRESSION", transformed_column
-
         # Check for linear regression
         elif np.issubdtype(column.dtype, np.number):
             if np.any((column <= 0) | (column == 0)):

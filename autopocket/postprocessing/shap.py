@@ -7,9 +7,24 @@ from sklearn.model_selection import train_test_split
 import os
 
 class ShapPLOT:
-
+    """
+    A class for generating SHAP (SHapley Additive exPlanations) visualizations
+    and analyses for machine learning models. This includes support for summary
+    plots, dependence plots, decision plots, and force plots, specifically
+    tailored for binary classification and regression tasks.
+    """
     @staticmethod
     def is_available(best_model, X_train):
+        """
+        Checks if SHAP is suitable for the given model and dataset.
+
+        Parameters:
+        - best_model: The trained machine learning model.
+        - X_train: pandas DataFrame - The training dataset.
+
+        Returns:
+        - bool: True if SHAP can be used; False otherwise.
+        """
         if best_model.__class__.__name__ in ["CatBoost","Neural Network", "Baseline"]:
             return False
         if X_train.shape[1] > 400:
@@ -25,6 +40,16 @@ class ShapPLOT:
     
     @staticmethod
     def get_explainer(best_model, X_train):
+        """
+        Creates a SHAP explainer instance based on the model type.
+
+        Parameters:
+        - best_model: The trained machine learning model.
+        - X_train: pandas DataFrame - The training dataset.
+
+        Returns:
+        - shap.Explainer: The appropriate SHAP explainer for the model.
+        """
         model_name = best_model.__class__.__name__
         shap_explainer = None
         if model_name in [
@@ -41,6 +66,17 @@ class ShapPLOT:
     
     @staticmethod
     def limit_df(X_test, y_test):
+        """
+        Limits the size of the test dataset to improve SHAP performance on large datasets.
+
+        Parameters:
+        - X_test: pandas DataFrame - The test dataset features.
+        - y_test: pandas Series or numpy array - The test dataset target variable.
+
+        Returns:
+        - X_test_lim: pandas DataFrame - Limited test dataset features.
+        - y_test_lim: pandas Series - Limited test dataset target variable.
+        """
         print(y_test.shape, type(y_test))
         if isinstance(y_test, np.ndarray):
             y_test = pd.Series(y_test, name="target")
@@ -57,7 +93,18 @@ class ShapPLOT:
     
     
     def get_predictions(best_model, X_test_lim, y_test_lim):
-        
+        """
+        Generates predictions and calculates residuals for regression tasks.
+
+        Parameters:
+        - best_model: The trained machine learning model.
+        - X_test_lim: pandas DataFrame - Limited test dataset features.
+        - y_test_lim: pandas Series - Limited test dataset target variable.
+
+        Returns:
+        - pandas DataFrame: A DataFrame containing residuals, prediction indices,
+          and target values, sorted by residuals.
+        """
         predictions = best_model.predict(X_test_lim)
         residuals = np.abs(np.array(y_test_lim) - predictions)
         pred_dataframe = pd.DataFrame(
@@ -69,6 +116,16 @@ class ShapPLOT:
     
     @staticmethod
     def shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path=None, pdf=None):
+        """
+        Generates a SHAP summary plot to visualize feature importance.
+
+        Parameters:
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - X_test_lim: pandas DataFrame - Limited test dataset features.
+        - best_model: The trained machine learning model.
+        - model_file_path: string - Path to save the feature importance info based on shap summary plot as a CSV file.
+        - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
+        """
         try:
             fig = plt.gcf()
             shap.summary_plot(
@@ -110,7 +167,15 @@ class ShapPLOT:
             print(f"Error in shap_summary_plot: {e}")
             
     @staticmethod
-    def shap_dependence(shap_values, X_test_lim, best_model, model_file_path = None, pdf=None):
+    def shap_dependence(shap_values, X_test_lim, pdf=None):
+        """
+        Creates SHAP dependence plots for the most important features.
+
+        Parameters:
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - X_test_lim: pandas DataFrame - Limited test dataset features.
+        - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
+        """
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             fig = plt.figure(figsize=(14, 7))
@@ -142,8 +207,19 @@ class ShapPLOT:
             plt.close("all")
     
     @staticmethod    
-    def explain_with_shap(best_model, X_train, y_train, X_test, y_test, ml_task, model_file_path=None, pdf=None):
-        
+    def explain_with_shap(best_model, X_train, X_test, y_test, ml_task, model_file_path=None, pdf=None):
+        """
+        Main function to generate SHAP explanations for a given model and dataset.
+
+        Parameters:
+        - best_model: The trained machine learning model.
+        - X_train: pandas DataFrame - The training dataset.
+        - X_test: pandas DataFrame - The test dataset features.
+        - y_test: pandas Series or numpy array - The test dataset target variable.
+        - ml_task: string - Task type ('BINARY_CLASSIFICATION' or 'REGRESSION').
+        - model_file_path: string - Path to save SHAP outputs.
+        - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
+        """
         if not ShapPLOT.is_available(best_model, X_train):
             return
         
@@ -161,15 +237,15 @@ class ShapPLOT:
         
         ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, model_file_path, pdf)
         
-        ShapPLOT.shap_dependence(shap_values, X_test_lim, best_model, model_file_path, pdf) 
+        ShapPLOT.shap_dependence(shap_values, X_test_lim, pdf) 
         
         df_preds = ShapPLOT.get_predictions(best_model, X_test_lim, y_test_lim)
         
         if ml_task == "BINARY_CLASSIFICATION":
-            ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, best_model, model_file_path, pdf) 
+            ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, pdf) 
             ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, model_file_path)
         else:
-            ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, best_model, model_file_path, pdf)
+            ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, pdf)
 
 
 
@@ -180,10 +256,19 @@ class ShapPLOT:
         expected_value,
         x_test_lim,
         y_test_lim,
-        best_model,
-        model_file_path,
         pdf,
     ):
+        """
+        Creates SHAP decision plots for binary classification.
+
+        Parameters:
+        - df_preds: pandas DataFrame - Predictions DataFrame with residuals and target.
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - expected_value: float - SHAP baseline value.
+        - x_test_lim: pandas DataFrame - Limited test dataset features.
+        - y_test_lim: pandas Series - Limited test dataset target variable.
+        - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
+        """
         for t in np.unique(y_test_lim):
             fig = plt.gcf()
             shap.decision_plot(
@@ -219,10 +304,18 @@ class ShapPLOT:
         shap_values,
         expected_value,
         x_test_lim,
-        best_model,
-        model_file_path,
         pdf,
     ):
+        """
+        Creates SHAP decision plots for regression tasks.
+
+        Parameters:
+        - df_preds: pandas DataFrame - Predictions DataFrame with residuals and target.
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - expected_value: float - SHAP baseline value.
+        - x_test_lim: pandas DataFrame - Limited test dataset features.
+        - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
+        """
         fig = plt.gcf()
         shap.decision_plot(
             expected_value,
@@ -260,6 +353,16 @@ class ShapPLOT:
         x_test_lim,
         model_file_path,
     ):
+        """
+        Creates force plots for binary classification to explain predictions.
+
+        Parameters:
+        - best_model: The trained machine learning model.
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - expected_value: float - SHAP baseline value.
+        - x_test_lim: pandas DataFrame - Limited test dataset features.
+        - model_file_path: string - Path to save the plots.
+        """
         prob_class_1 = best_model.predict_proba(x_test_lim)[:, 1]
         prob_class_0 = best_model.predict_proba(x_test_lim)[:, 0]
 

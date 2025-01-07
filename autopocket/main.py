@@ -3,7 +3,7 @@ import pandas as pd
 
 from preprocessing.Preprocessor import  Preprocessor
 from algorithms.Modeller import Modeller
-#from postprocessing.Postprocessor import Postprocessor
+from postprocessing.Postprocessor import Postprocessor
 
 
 
@@ -41,7 +41,7 @@ class AutoPocketor():
         print("Modelling done")
         print(f"Chosen model: {best_model.__class__.__name__}")
         X = pd.DataFrame(X)
-        #Postprocessor().postprocess(best_model, X, y, ml_type, model_file_path)
+        Postprocessor().postprocess(best_model, X, y, ml_type, model_file_path)
         print("Postprocessing done")
 
 

@@ -45,7 +45,7 @@ class DecisionTreeWrapper(EstimatorWrapper):
             "criterion": ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
             "min_samples_leaf": randint(1, 61),
         }
-        super().__init__(DecisionTreeRegressor(), param_distributions, "DecisionTreeRegressor", 100)
+        super().__init__(DecisionTreeRegressor(), param_distributions, "DecisionTreeRegressor", 10)
 
 class RandomForestWrapper(EstimatorWrapper):
     def __init__(self):
@@ -55,7 +55,7 @@ class RandomForestWrapper(EstimatorWrapper):
             "max_samples": uniform(0.5, 0.5),        
             "max_features": uniform(1e-6, 1 - 1e-6),
         }
-        super().__init__(RandomForestRegressor(), param_distributions, "RandomForestRegressor", 50)
+        super().__init__(RandomForestRegressor(), param_distributions, "RandomForestRegressor", 10)
 
 class LinearRegressionWrapper(EstimatorWrapper):
     def __init__(self):
@@ -72,7 +72,7 @@ class LassoWrapper(EstimatorWrapper):
             "fit_intercept": [True, False],
             "copy_X": [True]
         }
-        super().__init__(Lasso(), param_distributions, "Lasso", 100)
+        super().__init__(Lasso(), param_distributions, "Lasso", 10)
 
 class ElasticNetWrapper(EstimatorWrapper):
     def __init__(self):
@@ -82,4 +82,4 @@ class ElasticNetWrapper(EstimatorWrapper):
             "fit_intercept": [True, False],
             "copy_X": [True]
         }
-        super().__init__(ElasticNet(), param_distributions, "ElasticNet", 100)
+        super().__init__(ElasticNet(), param_distributions, "ElasticNet", 10)

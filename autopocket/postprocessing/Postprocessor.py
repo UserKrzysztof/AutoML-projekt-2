@@ -37,7 +37,7 @@ class Postprocessor():
 
         with PdfPages(output_file) as pdf:
             try:
-                ShapPLOT.explain_with_shap(best_model, X_train, y_train, X_test, y_test, ml_task, model_file_path, pdf=pdf)
+                ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, model_file_path, pdf=pdf)
                 if not isinstance(y, pd.Series):
                     y = pd.Series(y, name="target")
                 explanations = self.lime_processor.explain_top_observations_with_lime(
