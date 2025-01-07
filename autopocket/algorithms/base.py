@@ -44,8 +44,7 @@ class BaseSearcher(BaseEstimator):
             print(i+1,"/",self.n_estimators_," | Fitting:", wrapper.name_, end=". ")
 
             if hasattr(wrapper, "big_data"):
-                print("Big data model", end=". ")
-                wrapper.big_data = X.shape[0] > 5000 and False #TODO discuss scalling
+                wrapper.big_data = X.shape[0] > 6000
 
             if wrapper.n_iter_ is None:
                 rs = GridSearchCV(wrapper.estimator_,

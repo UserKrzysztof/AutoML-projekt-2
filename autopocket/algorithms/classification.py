@@ -2,7 +2,9 @@ import numpy as np
 import pandas as pd
 from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, RidgeClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from autopocket.algorithms.base import BaseSearcher, EstimatorWrapper
 
@@ -22,7 +24,8 @@ class Classifier(BaseSearcher):
             [
                 RandomForestWrapper(),
                 LogisticRegressionWrapper(),
-                DecisionTreeWrapper()
+                DecisionTreeWrapper(),
+                RidgeClassifierWrapper()
             ]
         )
 
@@ -47,39 +50,44 @@ class RandomForestWrapper(EstimatorWrapper):
                 "max_features": uniform(1e-6, 1 - 1e-6),
             },
             "RandomForestClassifier",
-            10
+            50
         )
 
 class LogisticRegressionWrapper(EstimatorWrapper):
     def __init__(self, big_data=False):
         self.big_data = big_data
         super().__init__(
-            LogisticRegression(),
+            Pipeline(
+                [
+                    ("scaler",StandardScaler()),
+                    ("model",LogisticRegression())
+                ]
+            ),
             None,
             "LogisticRegression",
-            10
+            20
         )
 
     @property
     def param_distributions_(self):
         params = {
-                "penalty": ["l2"],
-                "C": uniform(0.01, 1000),
-                "solver": ['saga'] if self.big_data else ['liblinear'],
-                "fit_intercept": [True, False],
-                "class_weight": ["balanced", None],
-                "l1_ratio": [None],
-                "max_iter": [5000] if self.big_data else [1000],
+                "model__penalty": ["l2"],
+                "model__C": [1e-8,1e-6,1e-4,1e-3,0.01,0.1, 1,10,100,500,1000,5000,10000],
+                "model__solver": ['saga'] if self.big_data else ['lbfgs'],
+                "model__fit_intercept": [True, False],
+                "model__class_weight": ["balanced", None],
+                "model__l1_ratio": [None],
+                "model__max_iter": [800],
             }
-        if "saga" in params["solver"]:
-            params["penalty"] = ["elasticnet", "l1", "l2" ,"none"] 
-        elif "liblinear" in params["solver"]:
-            params["penalty"] = ["l1", "l2"]
+        if "saga" in params["model__solver"]:
+            params["model__penalty"] = ["elasticnet", "l1", "l2" ,None] 
+        elif "lbfgs" in params["model__solver"]:
+            params["model__penalty"] = ["l2", None]
 
-        if "elasticnet" in params["penalty"]:
-            params["l1_ratio"] = uniform(0.1,0.9)
+        if "elasticnet" in params["model__penalty"]:
+            params["model__l1_ratio"] = uniform(0.1,0.9)
 
-        print("Using", params["solver"], "solver", end=".")    
+        print("Using", params["model__solver"], "solver", end=".")    
         return params
 
 
@@ -94,5 +102,20 @@ class DecisionTreeWrapper(EstimatorWrapper):
                 "min_samples_leaf": randint(1, 61),
             },
             "DecisionTreeClassifier",
-            10
+            100
+        )
+
+class RidgeClassifierWrapper(EstimatorWrapper):
+    def __init__(self):
+        super().__init__(
+            RidgeClassifier(),
+            {
+                "alpha": uniform(0, 1),
+                "fit_intercept": [True, False],
+                "solver": ["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga"],
+                "max_iter": [800],
+                "class_weight": ["balanced", None]
+            },
+            "RidgeClassifier",
+            100
         )
