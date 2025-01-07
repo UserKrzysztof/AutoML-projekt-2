@@ -1,6 +1,6 @@
 import warnings
-from algorithms.classification import Classifier
-from algorithms.regression import Regressor
+from autopocket.algorithms.classification import Classifier
+from autopocket.algorithms.regression import Regressor
 
 class Modeller():
     def __init__(self):

@@ -1,9 +1,9 @@
 
 import pandas as pd
 
-from preprocessing.Preprocessor import  Preprocessor
-from algorithms.Modeller import Modeller
-from postprocessing.Postprocessor import Postprocessor
+from autopocket.preprocessing.Preprocessor import  Preprocessor
+from autopocket.algorithms.Modeller import Modeller
+from autopocket.postprocessing.Postprocessor import Postprocessor
 
 
 

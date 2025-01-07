@@ -1,9 +1,9 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from .data_cleaning.DataCleaner import DataCleaner
-from .task_analysing.ColumnTypeAnalyzer import ColumnTypeAnalyzer
-from .feature_processing.FeatureProcessor import FeatureProcessor
+from autopocket.preprocessing.data_cleaning.DataCleaner import DataCleaner
+from autopocket.preprocessing.task_analysing.ColumnTypeAnalyzer import ColumnTypeAnalyzer
+from autopocket.preprocessing.feature_processing.FeatureProcessor import FeatureProcessor
 
 
 class Preprocessor():

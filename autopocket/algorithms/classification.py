@@ -4,7 +4,7 @@ from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from algorithms.base import BaseSearcher, EstimatorWrapper
+from autopocket.algorithms.base import BaseSearcher, EstimatorWrapper
 
 
 class Classifier(BaseSearcher):

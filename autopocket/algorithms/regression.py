@@ -4,7 +4,7 @@ from scipy.stats import randint, uniform
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression
 from sklearn.tree import DecisionTreeRegressor
-from .base import BaseSearcher, EstimatorWrapper
+from autopocket.algorithms.base import BaseSearcher, EstimatorWrapper
 
 class Regressor(BaseSearcher):
     """

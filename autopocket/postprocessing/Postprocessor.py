@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import shap
 from sklearn.model_selection import train_test_split
-from postprocessing.shap import ShapPLOT
-from postprocessing.LimePostProcessor import LimePostprocessor
+from autopocket.postprocessing.shap import ShapPLOT
+from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
 
-from postprocessing.PartialDependencePlotter import PartialDependencePlotter
-from postprocessing.ICEPlotter import IndividualConditionalExpectationPlotter
+from autopocket.postprocessing.PartialDependencePlotter import PartialDependencePlotter
+from autopocket.postprocessing.ICEPlotter import IndividualConditionalExpectationPlotter
 import pandas as pd
 
 class Postprocessor():

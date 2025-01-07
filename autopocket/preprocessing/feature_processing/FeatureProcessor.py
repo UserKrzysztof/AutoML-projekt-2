@@ -1,6 +1,6 @@
-from .processing_tools.OutlierHandler import OutlierHandler
-from .processing_tools.FeatureEncoder import FeatureEncoder
-from .processing_tools.FeatureSelector import FeatureSelector
+from autopocket.preprocessing.feature_processing.processing_tools.OutlierHandler import OutlierHandler
+from autopocket.preprocessing.feature_processing.processing_tools.FeatureEncoder import FeatureEncoder
+from autopocket.preprocessing.feature_processing.processing_tools.FeatureSelector import FeatureSelector
 
 
 class FeatureProcessor():

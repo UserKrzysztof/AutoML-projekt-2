@@ -1,11 +1,11 @@
-from .cleaner_tools.DateHandler import DateHandler
-from .cleaner_tools.StringStripper import StringStripper
-from .cleaner_tools.StringToLowerConverter import StringToLowerConverter
-from .cleaner_tools.BinaryColumnHandler import BinaryColumnHandler
-from .cleaner_tools.RedundantColumnRemover import RedundantColumnRemover
-from .cleaner_tools.DataImputer import DataImputer
-from .cleaner_tools.NumberFormatFixer import NumberFormatFixer
-from .cleaner_tools.PatternRemover import PatternRemover
+from autopocket.preprocessing.data_cleaning.cleaner_tools.DateHandler import DateHandler
+from autopocket.preprocessing.data_cleaning.cleaner_tools.StringStripper import StringStripper
+from autopocket.preprocessing.data_cleaning.cleaner_tools.StringToLowerConverter import StringToLowerConverter
+from autopocket.preprocessing.data_cleaning.cleaner_tools.BinaryColumnHandler import BinaryColumnHandler
+from autopocket.preprocessing.data_cleaning.cleaner_tools.RedundantColumnRemover import RedundantColumnRemover
+from autopocket.preprocessing.data_cleaning.cleaner_tools.DataImputer import DataImputer
+from autopocket.preprocessing.data_cleaning.cleaner_tools.NumberFormatFixer import NumberFormatFixer
+from autopocket.preprocessing.data_cleaning.cleaner_tools.PatternRemover import PatternRemover
 
 
 class DataCleaner:
