@@ -20,7 +20,7 @@ class Classifier(BaseSearcher):
         super().__init__(
             "roc_auc",
             [
-                RandomForestWrapper(),
+               # RandomForestWrapper(),
                 LogisticRegressionWrapper(),
                 DecisionTreeWrapper()
             ]
@@ -47,24 +47,41 @@ class RandomForestWrapper(EstimatorWrapper):
                 "max_features": uniform(1e-6, 1 - 1e-6),
             },
             "RandomForestClassifier",
-            10
+            50
         )
 
 class LogisticRegressionWrapper(EstimatorWrapper):
-    def __init__(self):
+    def __init__(self, big_data=False):
+        self.big_data = big_data
         super().__init__(
             LogisticRegression(),
-            {
-                "penalty": ["l1","l2", "elasticnet"],
-                "C": [0.001,0.01,0.1,1,10,100,1000],
-                "solver": ['lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag', 'saga'],
+            None,
+            "LogisticRegression",
+            100
+        )
+
+    @property
+    def param_distributions_(self):
+        params = {
+                "penalty": ["l2"],
+                "C": uniform(0.01, 1000),
+                "solver": ['saga'] if self.big_data else ['liblinear'],
                 "fit_intercept": [True, False],
                 "class_weight": ["balanced", None],
-                "l1_ratio": uniform(0.1,0.9)
-            },
-            "LogisticRegression",
-            10
-        )
+                "l1_ratio": [None],
+                "max_iter": [5000] if self.big_data else [1000],
+            }
+        if "saga" in params["solver"]:
+            params["penalty"] = ["elasticnet", "l1", "l2" ,"none"] 
+        elif "liblinear" in params["solver"]:
+            params["penalty"] = ["l1", "l2"]
+
+        if "elasticnet" in params["penalty"]:
+            params["l1_ratio"] = uniform(0.1,0.9)
+
+        print("Using", params["solver"], "solver", end=".")    
+        return params
+
 
 class DecisionTreeWrapper(EstimatorWrapper):
     def __init__(self):
@@ -77,5 +94,5 @@ class DecisionTreeWrapper(EstimatorWrapper):
                 "min_samples_leaf": randint(1, 61),
             },
             "DecisionTreeClassifier",
-            10
+            100
         )

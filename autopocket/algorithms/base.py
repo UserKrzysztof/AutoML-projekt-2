@@ -43,6 +43,10 @@ class BaseSearcher(BaseEstimator):
         for i,wrapper in enumerate(self.estimators_):
             print(i+1,"/",self.n_estimators_," | Fitting:", wrapper.name_, end=". ")
 
+            if hasattr(wrapper, "big_data"):
+                print("Big data model", end=". ")
+                wrapper.big_data = X.shape[0] > 5000 and False #TODO discuss scalling
+
             if wrapper.n_iter_ is None:
                 rs = GridSearchCV(wrapper.estimator_,
                                     wrapper.param_distributions_,
@@ -157,10 +161,14 @@ class EstimatorWrapper(BaseEstimator):
     def __init__(self, estimator, param_distributions, name, n_iter):
         super().__init__()
         self.estimator_ = estimator
-        self.param_distributions_ = param_distributions
+        self.param_distributions = param_distributions
         self.name_ = name
         self.n_iter_ = n_iter
 
+    @property
+    def param_distributions_(self):
+        return self.param_distributions
+    
     def fit(self, X,y):
         return self.estimator_.fit(X,y)
     

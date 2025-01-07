@@ -1,1 +1,0 @@
-{"score": 0.5299010173731944, "params": {"C": 1, "class_weight": "balanced", "dual": false, "fit_intercept": false, "l1_ratio": 0.7055503737854549, "penalty": "l1", "solver": "saga"}}
