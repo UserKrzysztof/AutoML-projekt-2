@@ -1,6 +1,7 @@
 import numpy as np
-from sklearn.preprocessing import LabelEncoder, PowerTransformer
+from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import power_transform
+import matplotlib.pyplot as plt
 
 
 class ColumnTypeAnalyzer:
@@ -39,19 +40,25 @@ class ColumnTypeAnalyzer:
 
         # Check for linear regression
         elif np.issubdtype(column.dtype, np.number):
+
+            print("Target distribution:")
+            plt.hist(column)
+            plt.show()
+
             if np.any((column <= 0) | (column == 0)):
                 # Apply Yeo-Johnson transformation
                 print("Performing YEO_JOHNSON")
                 transformed_column = power_transform(column.values.reshape(-1, 1), method='yeo-johnson', standardize=False).flatten()
-                return "LINEAR_REGRESSION", transformed_column
             else:
                 # Apply Box-Cox transformation
                 print("Performing BOX-COX")
                 transformed_column = power_transform(column.values.reshape(-1, 1), method='box-cox', standardize=False).flatten()
-                return "LINEAR_REGRESSION", transformed_column
 
+            print("Target distribution after transformation:")
+            plt.hist(transformed_column)
+            plt.show()
 
-
+            return "LINEAR_REGRESSION", transformed_column
 
         # Raise an error if the column type doesn't match expected formats
         else:
