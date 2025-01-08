@@ -160,7 +160,7 @@ class ShapPLOT:
 
             if model_file_path:
                 feature_importance.to_csv(
-                    os.path.join(model_file_path, f"{best_model.__class__.__name__}_shap_importance.csv"),
+                    os.path.join(os.getcwd(), 'results', 'explanations', f"{best_model.__class__.__name__}_shap_importance.csv"),
                     index=False,
                 )
         except Exception as e:
@@ -377,7 +377,7 @@ class ShapPLOT:
         fig.tight_layout()
         fig.savefig(
             os.path.join(
-                model_file_path, f"force_plot_class_1.png"
+                os.getcwd(), 'results', 'explanations', f"force_plot_class_1.png"
             )
         )
         plt.close("all")
@@ -389,7 +389,7 @@ class ShapPLOT:
         fig.tight_layout()
         fig.savefig(
             os.path.join(
-                model_file_path, f"force_plot_class_0.png"
+                os.getcwd(), 'results', 'explanations', f"force_plot_class_0.png"
             )
         )
         plt.close("all")

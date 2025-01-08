@@ -10,7 +10,7 @@ class BaseSearcher(BaseEstimator):
     """
         Abstract class for model selection
     """
-    results_dir = os.path.join(os.getcwd(), 'algorithms_results')
+    results_dir = os.path.join(os.getcwd(), 'results', 'algorithms_results')
 
     def __init__(self, metric, estimators):
         self.best_model_ = None
@@ -85,11 +85,12 @@ class BaseSearcher(BaseEstimator):
         """
             Save the results to json files
         """
-        results_dir = self.results_dir
-        os.makedirs(results_dir, exist_ok=True)
-        
+
+        os.makedirs(os.path.join(os.getcwd(), 'results', 'algorithms_results'), exist_ok=True)
+        results_dir = os.path.join(os.getcwd(), 'results', 'algorithms_results')
+
         for wrapper_name, result in self.results_.items():
-            print(f"Saving results for {wrapper_name} to algorithms_results/{wrapper_name}_results.json")
+            print(f"Saving results for {wrapper_name} to results/algorithms_results/{wrapper_name}_results.json")
             result_to_save = {
                 "score": result["score"],
                 "params": result["params"]
@@ -176,4 +177,4 @@ class EstimatorWrapper(BaseEstimator):
     
     def predict_proba(self,X,y):
         assert hasattr(self.estimator_, "predict_proba")
-        return self.estimator_.predic_proba(X)
+        return self.estimator_.predict_proba(X)

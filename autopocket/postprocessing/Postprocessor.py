@@ -1,4 +1,4 @@
-
+import os
 import warnings
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
@@ -33,7 +33,8 @@ class Postprocessor():
         else:
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
         model_name = best_model.__class__.__name__
-        output_file = f"explanations_{model_name}.pdf"
+        os.makedirs(os.path.join(os.getcwd(), 'results', 'explanations'), exist_ok=True)
+        output_file = os.path.join(os.getcwd(), 'results', 'explanations', f"explanations_{model_name}.pdf")
 
         with PdfPages(output_file) as pdf:
             try:
