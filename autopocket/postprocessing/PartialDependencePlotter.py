@@ -20,7 +20,7 @@ class PartialDependencePlotter:
             features_top: list, top features (binary and non-binary) for saving to the PDF.
             pdf: PdfPages object to save plots. If None, no plots are saved.
         """
-        print("Displaying PDP plots for non-binary features...")
+        print("Displaying Partial Dependence Plots for non-binary features...")
         for feature in features_non_binary:
             fig, ax = plt.subplots(figsize=(8, 6))
             PartialDependenceDisplay.from_estimator(
@@ -35,7 +35,6 @@ class PartialDependencePlotter:
             plt.close(fig)
 
         if pdf:
-            print("Saving PDP plots to PDF...")
             for i in range(0, len(features_top), 4):
                 n_features = len(features_top[i:i + 4]) 
 
