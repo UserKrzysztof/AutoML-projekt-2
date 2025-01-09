@@ -50,7 +50,8 @@ class RandomForestWrapper(EstimatorWrapper):
                 "max_features": uniform(1e-6, 1 - 1e-6),
             },
             "RandomForestClassifier",
-            50
+            #50
+            5
         )
 
 class LogisticRegressionWrapper(EstimatorWrapper):
@@ -65,7 +66,8 @@ class LogisticRegressionWrapper(EstimatorWrapper):
             ),
             None,
             "LogisticRegression",
-            20
+            #20
+            5
         )
 
     @property
@@ -102,7 +104,8 @@ class DecisionTreeWrapper(EstimatorWrapper):
                 "min_samples_leaf": randint(1, 61),
             },
             "DecisionTreeClassifier",
-            100
+            #100
+            5
         )
 
 class RidgeClassifierWrapper(EstimatorWrapper):
@@ -117,5 +120,6 @@ class RidgeClassifierWrapper(EstimatorWrapper):
                 "class_weight": ["balanced", None]
             },
             "RidgeClassifier",
-            100
+            #100
+            5
         )

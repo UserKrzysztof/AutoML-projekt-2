@@ -44,7 +44,6 @@ class IndividualConditionalExpectationPlotter:
             plt.close(fig)
 
         if pdf:
-            print("Saving ICE plots to PDF...")
             for i in range(0, len(features_top), 4):
                 n_features = len(features_top[i:i + 4])  
                 if n_features == 1:

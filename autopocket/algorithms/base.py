@@ -26,17 +26,6 @@ class BaseSearcher(BaseEstimator):
         X = X.copy()
         y = y.copy()
 
-        print("Measuring importances")
-        importances = self.__class__.measure_importances(X,y)
-        top_3_features = importances.nlargest(3)
-        print("Top 3 features by importance:")
-        print(top_3_features)
-        
-        # print("Dropping unimportant features")
-        # X = self.__class__.drop_unimportant_features(X, importances)
-        
-        # assert X.shape[1] > 0, "No features left after dropping unimportant features. Please check your data"
-
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")
 
@@ -90,13 +79,13 @@ class BaseSearcher(BaseEstimator):
         results_dir = os.path.join(os.getcwd(), 'results', 'algorithms_results')
 
         for wrapper_name, result in self.results_.items():
-            print(f"Saving results for {wrapper_name} to results/algorithms_results/{wrapper_name}_results.json")
             result_to_save = {
                 "score": result["score"],
                 "params": result["params"]
             }
             with open(os.path.join(results_dir, f'{wrapper_name}_results.json'), 'w') as f:
                 json.dump(result_to_save, f)
+        print(f"Saving results to results/algorithms_results")
     
     def read_results(self):
         results_dir = self.__class__.results_dir

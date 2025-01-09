@@ -35,14 +35,16 @@ class Modeller():
 shown_warnings = set()
 
 def custom_warning_handler(message, category, filename, lineno, file=None, line=None):
-    if category in shown_warnings and category != UserWarning:
+    if category == UserWarning:
+        return
+    if category in shown_warnings:
         return
     shown_warnings.add(category)
     if category == LinAlgWarning:
-        print("Your data may contain colinear features")
+        print("Your data may contain colinear features", end=". ")
         return
     if category == ConvergenceWarning:
-        print("Some models did not converge")
+        print("Some models did not converge", end=". ")
         return
-    print(f"{category.__name__}: {message}")
+    print(f"{category.__name__}: {message}", end=". ")
     return

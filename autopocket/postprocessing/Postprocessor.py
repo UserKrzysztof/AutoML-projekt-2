@@ -22,7 +22,7 @@ class Postprocessor():
         pass
 
     
-    def postprocess(self, best_model, X, y, ml_task, model_file_path, results=None):
+    def postprocess(self, best_model, X, y, ml_task, display_plots=True):
 
         """
         Postprocessing logic, including LIME integration.
@@ -38,7 +38,7 @@ class Postprocessor():
 
         with PdfPages(output_file) as pdf:
             try:
-                ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, model_file_path, pdf=pdf)
+                ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=pdf)
                 if not isinstance(y, pd.Series):
                     y = pd.Series(y, name="target")
                 explanations = self.lime_processor.explain_top_observations_with_lime(
@@ -62,10 +62,9 @@ class Postprocessor():
                     top_m_all=8
                 )
 
-                print("Generating Partial Dependence Plots...")
+
                 self.pdp_plotter.generate_pdp(best_model, X, top_non_binary_features, top_all_features, pdf=pdf)
 
-                print("Generating Individual Conditional Expectation (ICE) Plots...")
                 self.ice_plotter.generate_ice(best_model, X, top_non_binary_features, top_all_features, pdf=pdf)
 
             except ValueError as e:
@@ -75,5 +74,4 @@ class Postprocessor():
 
 
         print(f"All plots have been saved to {output_file}")
-        print("Postprocessing completed.")
         

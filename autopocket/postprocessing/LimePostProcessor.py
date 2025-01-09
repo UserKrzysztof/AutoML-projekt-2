@@ -78,7 +78,7 @@ class LimePostprocessor():
             top_indices_class_1 = prob_class_1.argsort()[-2:]
             top_observations_class_1 = X_test.iloc[top_indices_class_1]
 
-            print("LIME explanations for the top 2 observations most likely to be class 1 (Positive):")
+            print("LIME explanations for the top 2 observations most likely to be class 1:")
             for i, index in enumerate(top_indices_class_1):
                 exp = explainer.explain_instance(
                     data_row=top_observations_class_1.iloc[i],
@@ -100,7 +100,7 @@ class LimePostprocessor():
             top_indices_class_0 = prob_class_0.argsort()[-2:]
             top_observations_class_0 = X_test.iloc[top_indices_class_0]
 
-            print("LIME explanations for the top 2 observations most likely to be class 0 (Negative):")
+            print("LIME explanations for the top 2 observations most likely to be class 0:")
             for i, index in enumerate(top_indices_class_0):
                 exp = explainer.explain_instance(
                     data_row=top_observations_class_0.iloc[i],
@@ -233,7 +233,6 @@ class LimePostprocessor():
                 feature_importances[normalized_feature] = feature_importances.get(normalized_feature, 0) + abs(weight)
 
         sorted_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)
-        print("LIME Feature Importances:\n", sorted_features)
 
         selected_non_binary = []
         selected_all_non_binary = []
@@ -263,7 +262,6 @@ class LimePostprocessor():
                     if len(selected_all_non_binary) >= top_m_all:
                         break
 
-        print(f"Top {top_n_non_binary} non-binary features (uncorrelated):", selected_non_binary)
-        print(f"Top {top_m_all} non-binary features overall (uncorrelated):", selected_all_non_binary)
+        print(f"Top {len(selected_all_non_binary)} non-binary features overall (uncorrelated):", selected_all_non_binary)
 
         return selected_non_binary, selected_all_non_binary
