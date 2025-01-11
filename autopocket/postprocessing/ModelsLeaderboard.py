@@ -1,22 +1,23 @@
 import json
 import pandas as pd
-from autopocket.algorithms.base import BaseSearcher
 import os
+
+from autopocket.algorithms.utils import ResultsReader
 
 class ModelsLeaderboard:
     
-    def __init__(self, base_searcher: BaseSearcher):
+    def __init__(self, results_reader: ResultsReader): ####
         """
         Class for creating a leaderboard of models.
         """
-        self.base_searcher = base_searcher
+        self.reader = results_reader ####
 
-    def create_leaderboard(self):
+    def create_leaderboard(self): ####
         """
         Generates leaderboard based on the results of the best model searching process.
         """
         try:
-            res = self.base_searcher.read_results()
+            res = self.reader.results ####
 
             leaderboard_data = []
             for model_name, model_data in res.items():
@@ -24,7 +25,7 @@ class ModelsLeaderboard:
                 params = model_data['params']
                 
                 model_row = { 
-                    'model_name': model_name.name_,
+                    'model_name': model_name,
                     'score': score,
                     'params': params
                 }

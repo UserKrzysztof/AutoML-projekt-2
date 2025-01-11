@@ -57,9 +57,8 @@ class AutoPocketor():
         print("X shape:", X.shape)
         print("Preprocessing done.")
 
-
         print("\nPerforming modelling...")
-        best_model, metric, estimators = Modeller().model(X, y, ml_type) ####
+        best_model, results_dir = Modeller(additional_estimators=additional_estimators).model(X, y, ml_type) ####
         print(f"Chosen model: {best_model.__class__.__name__}")
         print("Modelling done.")
 

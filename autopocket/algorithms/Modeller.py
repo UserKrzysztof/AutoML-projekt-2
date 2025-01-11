@@ -6,32 +6,31 @@ from autopocket.algorithms.regression import Regressor
 from scipy.linalg import LinAlgWarning
 
 class Modeller():
-    def __init__(self):
+    def __init__(self, additional_estimators=None):
         """
         Porządny init.
         """
+        self.additional_estimators = additional_estimators
         pass
 
     def model(self, X, y, ml_type):
         """
         Porządny model.
         """
-        if ml_type == "BINARY_CLASSIFICATION":
-            m = Classifier()
+        if ml_type == "BINARY_CLASSIFICATION":  
+            m = Classifier(additional_estimators=self.additional_estimators)
             print("Performing binary classification")
         else:
-            m = Regressor()
+            m = Regressor(additional_estimators=self.additional_estimators)
             print("Performing regression")
-        metric = m.get_metric() ####
-        estimators = m.get_estimators() ####
+
         with warnings.catch_warnings():
             warnings.simplefilter('always', LinAlgWarning)
             warnings.simplefilter('always', ConvergenceWarning)
             warnings.showwarning = custom_warning_handler
-
             m.fit(X, y)
             
-        return m.best_model_, metric, estimators ####
+        return m.best_model_, m.results_dir ####
 
 shown_warnings = set()
 
@@ -42,7 +41,7 @@ def custom_warning_handler(message, category, filename, lineno, file=None, line=
         return
     shown_warnings.add(category)
     if category == LinAlgWarning:
-        print("Your data may contain colinear features", end=". ")
+        print(message, end=". ")
         return
     if category == ConvergenceWarning:
         print("Some models did not converge", end=". ")
