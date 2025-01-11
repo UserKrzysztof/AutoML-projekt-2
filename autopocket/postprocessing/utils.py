@@ -57,29 +57,27 @@ def plot_features_with_explanations(best_model, X, explanations, lime_processor,
     """
     if features_for_displaying_plots is None:
         print("Selecting top features based on LIME Feature Importance...")
-        top_non_binary_features, top_all_features = lime_processor.top_features_by_lime_importance(
+        top_non_binary_features, all_non_binary_features = lime_processor.top_features_by_lime_importance(
             explanations=explanations,
             X=X,
-            top_n_non_binary=3,
-            top_m_all=8
+            top_n_non_binary=3
         )
         print(f"Displaying Partial Dependence Plots for top {len(top_non_binary_features)} non-binary features...")
-        pdp_plotter.generate_pdp(best_model, X, top_non_binary_features, top_all_features, pdf=pdf)
+        pdp_plotter.generate_pdp(best_model, X, top_non_binary_features, all_non_binary_features, pdf=pdf)
 
         print(f"Displaying ICE plots for top {len(top_non_binary_features)} non-binary features...")
-        ice_plotter.generate_ice(best_model, X, top_non_binary_features, top_all_features, pdf=pdf, subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot)
+        ice_plotter.generate_ice(best_model, X, top_non_binary_features, all_non_binary_features, pdf=pdf, subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot)
     else:
-        _, top_all_features = lime_processor.top_features_by_lime_importance(
+        _, all_non_binary_features = lime_processor.top_features_by_lime_importance(
             explanations=explanations,
             X=X,
-            top_n_non_binary=3,
-            top_m_all=8
+            top_n_non_binary=3
         )
         print(f"Displaying Partial Dependence Plots for {len(features_for_displaying_plots)} selected non-binary features...")
-        pdp_plotter.generate_pdp(best_model, X, features_for_displaying_plots, top_all_features, pdf=pdf)
+        pdp_plotter.generate_pdp(best_model, X, features_for_displaying_plots, all_non_binary_features, pdf=pdf)
 
         print(f"Displaying ICE plots for {len(features_for_displaying_plots)} selected non-binary features...")
-        ice_plotter.generate_ice(best_model, X, features_for_displaying_plots, top_all_features, pdf=pdf, subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot)
+        ice_plotter.generate_ice(best_model, X, features_for_displaying_plots, all_non_binary_features, pdf=pdf, subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot)
 
 
 def is_uncorrelated(feature, selected_features, correlation_matrix, correlation_threshold=0.4):
@@ -124,3 +122,4 @@ def normalize_feature_name(feature_name):
         return feature_name.split(single_op)[0].strip()
 
     return feature_name.strip()
+

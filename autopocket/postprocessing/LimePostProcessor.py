@@ -38,6 +38,16 @@ class LimePostprocessor():
 
         explanations = []
 
+        print("\n LIME explanations:")
+        print("- Each bar in the LIME plot represents the contribution of a specific feature to the prediction.")
+        print("- Feature labels, such as 'feature_name < threshold' or 'feature_name > threshold', describe the range of values.")
+        print("- These ranges are created by LIME's binning process, which discretizes continuous features into intervals.")
+        print("- For example, 'age < 30' means that for this observation, the age being less than 30 contributes as shown.")
+        print("- Bars pointing to the right (positive contributions) indicate that the feature pushes the prediction towards a positive outcome or higher value.")
+        print("- Bars pointing to the left (negative contributions) indicate that the feature pulls the prediction towards a negative outcome or lower value.")
+        print("- The length of the bar reflects the magnitude of the feature's influence on the model's prediction.")
+
+
         if ml_type == "BINARY_CLASSIFICATION":
             prob_class_1 = model.predict_proba(X_test)[:, 1]
             prob_class_0 = model.predict_proba(X_test)[:, 0]
@@ -158,8 +168,12 @@ class LimePostprocessor():
         sorted_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)
         sorted_features = sorted_features[:max_features]
         features, importances = zip(*sorted_features)
+        print(f"\nGlobal explanations - LIME Feature Importance of Top {max_features} Features:")
+        print("- This plot aggregates feature importance scores across multiple observations.")
+        print("- Higher bars indicate features with a stronger average influence on predictions.")
+        print("- The plot helps identify which features consistently contribute the most to the model's predictions.")
 
-        print(f"Global explanations - LIME Feature Importance of Top {max_features} Features:")
+
 
         fig, ax = plt.subplots(figsize=(10, 6))  
         ax.barh(features, importances, color="skyblue")
@@ -178,16 +192,15 @@ class LimePostprocessor():
         plt.close(fig)
     
 
-    def top_features_by_lime_importance(self, explanations, X, top_n_non_binary=3, top_m_all=8, correlation_threshold=0.4):
+    def top_features_by_lime_importance(self, explanations, X, top_n_non_binary=3, correlation_threshold=0.4):
         """
-        Find the top N non-binary features (to display plots) and top M non-binary features (to save plots to pdf)
+        Find the top N non-binary features (to display plots) and all non-binary features (to save plots to pdf)
         based on LIME Feature Importance, ensuring that selected features are not highly correlated with any other.
 
         Parameters:
             explanations: list, LIME explanation objects.
             X: pd.DataFrame, input features (used to compute correlations).
             top_n_non_binary: int, number of top non-binary features to select.
-            top_m_all: int, number of top non-binary features (binary features excluded) to select.
             correlation_threshold: float, maximum allowed correlation between selected features.
 
         Returns:
@@ -203,25 +216,23 @@ class LimePostprocessor():
 
         sorted_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)
 
-        selected_non_binary = []
+        selected_top_non_binary = []
         selected_all_non_binary = []
 
         correlation_matrix = X.corr()
 
         for feature, _ in sorted_features:
             if feature not in binary_features and feature in correlation_matrix.columns:
-                if is_uncorrelated(feature, selected_non_binary, correlation_matrix, correlation_threshold):
-                    selected_non_binary.append(feature)
-                    if len(selected_non_binary) >= top_n_non_binary:
+                if is_uncorrelated(feature, selected_top_non_binary, correlation_matrix, correlation_threshold):
+                    selected_top_non_binary.append(feature)
+                    if len(selected_top_non_binary) >= top_n_non_binary:
                         break
 
         for feature, _ in sorted_features:
             if feature not in binary_features and feature in correlation_matrix.columns:
                 if is_uncorrelated(feature, selected_all_non_binary, correlation_matrix, correlation_threshold):
                     selected_all_non_binary.append(feature)
-                    if len(selected_all_non_binary) >= top_m_all:
-                        break
 
-        print(f"Top {len(selected_all_non_binary)} non-binary features (uncorrelated):", selected_all_non_binary)
+        print(f"Top {len(selected_all_non_binary)} non-binary, uncorrelated features in terms of LIME importance:", selected_all_non_binary)
 
-        return selected_non_binary, selected_all_non_binary
+        return selected_top_non_binary, selected_all_non_binary

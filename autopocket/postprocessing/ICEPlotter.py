@@ -33,7 +33,16 @@ class IndividualConditionalExpectationPlotter:
             else:
                 raise ValueError("sample_size must be a float between 0 and 1.")
 
-
+        print("- Individual Conditional Expectation (ICE) plots show how the predicted outcome changes when a single feature is varied.")
+        print("- Unlike PDPs, ICE plots display individual trajectories for each observation, providing insight into heterogeneity in feature effects.")
+        print("- The x-axis represents the values of the selected feature(s), and the y-axis represents the predicted outcome.")
+        print("- ICE plots are generated only for non-binary features that are not strongly correlated with other features.")
+        print("- This avoids redundancy and ensures clearer interpretations.")
+        if subset_fraction_for_ICE_plot is not None:
+            print(f"- Computational efficiency and plots readability is improved by sampling a fraction of the dataset - in this case plotted lines represents {subset_fraction_for_ICE_plot} observations.")
+        else:
+            print("- All observations are used for ICE plot generation.")
+        print("- These plots are especially useful for identifying interactions and non-linear relationships in model predictions.")
         print(f"ICE plots for all uncorrelated non-binary features will be saved to the PDF.")
         for feature in features_for_displaying_plots:
             fig, ax = plt.subplots(figsize=(8, 6))
