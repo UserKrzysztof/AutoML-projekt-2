@@ -33,6 +33,13 @@ class PartialDependencePlotter:
             2. Save PDPs for `features_for_saving_to_pdf` in batches of 4 plots per page to the PDF.
 
         """
+        print("- Partial Dependence Plots (PDPs) show the average effect of one or more features on the predicted outcome.")
+        print("- The x-axis represents the values of the selected feature(s), and the y-axis represents the predicted outcome.")
+        print("- PDPs help identify patterns such as linearity, thresholds, or non-linear dependencies between features and predictions.")
+        print("- These plots are generated only for non-binary features that are not strongly correlated with other features.")
+        print("- Avoiding correlated features ensures the interpretations are not redundant or misleading.")
+        print("- These plots are useful for understanding how a specific feature influences the model's decisions, holding other features constant.")
+
         print(f"PDP plots for all uncorrelated non-binary features will be saved to the PDF.")
         for feature in features_for_displaying_plots:
             fig, ax = plt.subplots(figsize=(8, 6))

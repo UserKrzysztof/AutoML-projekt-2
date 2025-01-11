@@ -29,8 +29,7 @@ class Postprocessor():
 
     
 
-    
-    def postprocess(self, best_model, X, y, ml_task, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None):
+    def postprocess(self, best_model, X, y, ml_task, generate_shap=True, generate_lime_pdp_ice=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None):
         """
         Perform postprocessing to analyze and explain the performance of the best-trained model.
 
@@ -49,8 +48,11 @@ class Postprocessor():
                 Type of machine learning task. Options are:
                 - "BINARY_CLASSIFICATION"
                 - "REGRESSION"
-            display_plots: bool, optional, default=True
-                Whether to display plots during postprocessing.
+            generate_shap: bool, optional, default=True
+                Whether to generate SHAP explanations in postprocessing.
+            generate_lime_pdp_ice: bool, optional, default=True
+                Whether to generate LIME explanations, Partial Dependence Plots (PDPs) and 
+                Individual Conditional Expectation (ICE) plots in postprocessing.
             features_for_displaying_plots: list, optional, default=None
                 Specific features for which Partial Dependence and ICE plots should be displayed.
                 It might contain only non-binary columns. ICE plots and PDP plots will not be generated for 
@@ -97,39 +99,41 @@ class Postprocessor():
         
         with PdfPages(output_file) as pdf:
             try:
-                ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=pdf)
+                if generate_shap:
+                    ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=pdf)
                 if not isinstance(y, pd.Series):
                     y = pd.Series(y, name="target")
-                explanations = self.lime_processor.explain_top_observations_with_lime(
-                    model=best_model,  
-                    X_train=X_train,
-                    X_test=X_test,
-                    ml_type=ml_task,  
-                    num_features=10,
-                    pdf=pdf
-                )
-                self.lime_processor.lime_summary_plot(
-                    explanations=explanations,
-                    max_features=15,
-                    pdf=pdf
-                )
+                if generate_lime_pdp_ice:
+                    explanations = self.lime_processor.explain_top_observations_with_lime(
+                        model=best_model,  
+                        X_train=X_train,
+                        X_test=X_test,
+                        ml_type=ml_task,  
+                        num_features=10,
+                        pdf=pdf
+                    )
+                    self.lime_processor.lime_summary_plot(
+                        explanations=explanations,
+                        max_features=15,
+                        pdf=pdf
+                    )
 
-                features_for_displaying_plots = validate_features_for_displaying(features_for_displaying_plots, X)
+                    features_for_displaying_plots = validate_features_for_displaying(features_for_displaying_plots, X)
 
-                plot_features_with_explanations(
-                    best_model=best_model,
-                    X=X,
-                    explanations=explanations,
-                    lime_processor=self.lime_processor,
-                    pdp_plotter=self.pdp_plotter,
-                    ice_plotter=self.ice_plotter,
-                    pdf=pdf,
-                    features_for_displaying_plots=features_for_displaying_plots,
-                    subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot
-                )
+                    plot_features_with_explanations(
+                        best_model=best_model,
+                        X=X,
+                        explanations=explanations,
+                        lime_processor=self.lime_processor,
+                        pdp_plotter=self.pdp_plotter,
+                        ice_plotter=self.ice_plotter,
+                        pdf=pdf,
+                        features_for_displaying_plots=features_for_displaying_plots,
+                        subset_fraction_for_ICE_plot=subset_fraction_for_ICE_plot
+                    )
 
             except ValueError as e:
                 print(f"ValueError in postprocess: {e}")
-
-        print(f"All plots have been saved to {output_file}")
+        if generate_shap or generate_lime_pdp_ice:
+            print(f"All plots have been saved to {output_file}")
         
