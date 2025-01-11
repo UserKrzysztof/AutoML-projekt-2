@@ -12,7 +12,7 @@ class AutoPocketor():
         """
         pass
 
-    def doJob(self, path, target, model_file_path=None, generate_plots=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None):
+    def doJob(self, path, target, model_file_path=None, generate_plots=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None, additional_estimators=None):
         """
         Method for performing AutoML tasks.
         """
@@ -22,9 +22,8 @@ class AutoPocketor():
         print("X shape:", X.shape)
         print("Preprocessing done.")
 
-
         print("\nPerforming modelling...")
-        best_model, metric, estimators = Modeller().model(X, y, ml_type) ####
+        best_model, results_dir = Modeller(additional_estimators=additional_estimators).model(X, y, ml_type) ####
         print(f"Chosen model: {best_model.__class__.__name__}")
         print("Modelling done.")
 
@@ -32,5 +31,5 @@ class AutoPocketor():
         
         print("\nPerforming postprocessing...")
         if generate_plots: ####
-            Postprocessor(metric=metric, estimators=estimators).postprocess(best_model, X, y, ml_type, features_for_displaying_plots, subset_fraction_for_ICE_plot)
+            Postprocessor(results_dir=results_dir).postprocess(best_model, X, y, ml_type, features_for_displaying_plots, subset_fraction_for_ICE_plot)
         print("Postprocessing done.")

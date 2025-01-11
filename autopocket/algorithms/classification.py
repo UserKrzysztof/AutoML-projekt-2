@@ -1,12 +1,14 @@
 import numpy as np
 import pandas as pd
 from scipy.stats import randint, uniform
+from sklearn.dummy import DummyClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression, RidgeClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from autopocket.algorithms.base import BaseSearcher, EstimatorWrapper
+from scipy.stats import mode
 
 
 class Classifier(BaseSearcher):
@@ -18,7 +20,7 @@ class Classifier(BaseSearcher):
             fit(X,y) - fits the model
             predict(X) - predicts the target variable
     """
-    def __init__(self):
+    def __init__(self, additional_estimators=None):
         super().__init__(
             "roc_auc",
             [
@@ -26,7 +28,10 @@ class Classifier(BaseSearcher):
                 LogisticRegressionWrapper(),
                 DecisionTreeWrapper(),
                 RidgeClassifierWrapper()
-            ]
+            ],
+            DummyClassifier(strategy='most_frequent'),
+            'most_frequent',
+            additional_estimators
         )
     def get_metric(self):
         return self.metric_

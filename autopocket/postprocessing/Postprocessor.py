@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import shap
 from sklearn.model_selection import train_test_split
-from autopocket.algorithms.base import BaseSearcher
+from autopocket.algorithms.utils import ResultsReader
 from autopocket.postprocessing.ModelsLeaderboard import ModelsLeaderboard
 from autopocket.postprocessing.shap import ShapPLOT
 from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
@@ -16,15 +16,15 @@ from autopocket.postprocessing.utils import validate_features_for_displaying, pl
 
 
 class Postprocessor():
-    def __init__(self, metric, estimators): ####
+    def __init__(self, results_dir): ####
         """
         Porządny init.
         """
         self.pdp_plotter = PartialDependencePlotter()
         self.ice_plotter = IndividualConditionalExpectationPlotter()
         self.lime_processor = LimePostprocessor()
-        self.base_searcher = BaseSearcher(metric=metric, estimators=estimators) #####
-        self.models_leaderboard = ModelsLeaderboard(self.base_searcher) #####
+        self.reader = ResultsReader(results_dir) #####
+        self.models_leaderboard = ModelsLeaderboard(self.reader) #####
         pass
 
     

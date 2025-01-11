@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNet, Lasso, LassoLars, LassoLarsIC, LinearRegression, Ridge
 from sklearn.tree import DecisionTreeRegressor
 from autopocket.algorithms.base import BaseSearcher, EstimatorWrapper
+from sklearn.dummy import DummyRegressor
 
 class Regressor(BaseSearcher):
     """
@@ -15,7 +16,7 @@ class Regressor(BaseSearcher):
             fit(X,y) - fits the model
             predict(X) - predicts the target variable
     """
-    def __init__(self):
+    def __init__(self, additional_estimators=None):
         super().__init__(
             "neg_root_mean_squared_error",
             [
@@ -26,7 +27,10 @@ class Regressor(BaseSearcher):
                 ElasticNetWrapper(),
                 RidgeWrapper(),
                 LassoLarsICWrapper()
-            ]
+            ],
+            DummyRegressor(strategy='mean'),
+            'mean',
+            additional_estimators
         )
     def get_metric(self):
         return self.metric_
