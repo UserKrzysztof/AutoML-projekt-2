@@ -1,1 +1,1 @@
-{"score": -31.064738469067873, "params": {"criterion": "absolute_error", "max_depth": 9, "min_samples_leaf": 24, "min_samples_split": 16}}
+{"score": -31.692534601399053, "params": {"criterion": "absolute_error", "max_depth": 9, "min_samples_leaf": 24, "min_samples_split": 16}}

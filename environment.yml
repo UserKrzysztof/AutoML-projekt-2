@@ -159,6 +159,8 @@ dependencies:
       - cffi==1.17.1
       - charset-normalizer==3.4.0
       - idna==3.10
+      - ipywidgets==8.1.5
+      - jupyterlab-widgets==3.0.13
       - liac-arff==2.5.0
       - lime==0.2.0.1
       - minio==7.2.13
@@ -168,4 +170,5 @@ dependencies:
       - pycryptodome==3.21.0
       - requests==2.32.3
       - urllib3==2.3.0
+      - widgetsnbextension==4.0.13
       - xmltodict==0.14.2
