@@ -12,7 +12,7 @@ class AutoPocketor():
         """
         pass
 
-    def doJob(self, path, target, generate_shap=True, generate_lime_pdp_ice=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None):
+    def doJob(self, path, target, generate_shap=True, generate_lime_pdp_ice=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None, additional_estimators=None):
         """
         Main method for performing AutoML tasks including preprocessing, modeling, and postprocessing.
 
@@ -65,5 +65,5 @@ class AutoPocketor():
         X = pd.DataFrame(X)
         
         print("\nPerforming postprocessing...")
-        Postprocessor(metric=metric, estimators=estimators).postprocess(best_model, X, y, ml_type, generate_shap, generate_lime_pdp_ice, features_for_displaying_plots, subset_fraction_for_ICE_plot)
+        Postprocessor(results_dir=results_dir).postprocess(best_model, X, y, ml_type, generate_shap, generate_lime_pdp_ice, features_for_displaying_plots, subset_fraction_for_ICE_plot)
         print("Postprocessing done.")
