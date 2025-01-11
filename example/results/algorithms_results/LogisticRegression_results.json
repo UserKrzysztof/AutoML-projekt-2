@@ -1,1 +1,0 @@
-{"score": 0.8282429236624289, "params": {"model__solver": "lbfgs", "model__penalty": null, "model__max_iter": 800, "model__l1_ratio": null, "model__fit_intercept": false, "model__class_weight": "balanced", "model__C": 0.1}}
