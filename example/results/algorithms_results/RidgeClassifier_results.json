@@ -1,1 +1,1 @@
-{"score": 0.786762758585156, "params": {"alpha": 0.5913536096806721, "class_weight": "balanced", "fit_intercept": false, "max_iter": 800, "solver": "sparse_cg"}}
+{"score": 0.8310209373374484, "params": {"alpha": 0.9195450794139408, "class_weight": "balanced", "fit_intercept": true, "max_iter": 800, "solver": "sparse_cg"}}

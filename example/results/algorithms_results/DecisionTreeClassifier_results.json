@@ -1,1 +1,1 @@
-{"score": 0.7895007342143906, "params": {"criterion": "entropy", "max_depth": 19, "min_samples_leaf": 44, "min_samples_split": 56}}
+{"score": 0.796042236443042, "params": {"criterion": "entropy", "max_depth": 15, "min_samples_leaf": 58, "min_samples_split": 28}}

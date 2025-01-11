@@ -8,20 +8,33 @@ class PartialDependencePlotter:
         """
         pass
 
-    def generate_pdp(self, model, X, features_non_binary, features_top, pdf=None):
+    def generate_pdp(self, model, X, features_for_displaying_plots, features_for_saving_to_pdf, pdf=None):
         """
-        Generate Partial Dependence Plots for the specified features.
-        Display PDP for top non-binary features and save all plots (4 per page) to the PDF.
+        Generate Partial Dependence Plots (PDPs) for specified features.
+
+        This method creates PDPs to show the average effect of selected features on the model predictions. 
+        PDPs are displayed for the features specified in `features_for_displaying_plots` and saved for all 
+        features listed in `features_for_saving_to_pdf`.
 
         Parameters:
-            model: The trained model to explain.
-            X: pd.DataFrame, input features.
-            features_non_binary: list, top non-binary features for displaying plots.
-            features_top: list, top features (binary and non-binary) for saving to the PDF.
-            pdf: PdfPages object to save plots. If None, no plots are saved.
+            model: object
+                The trained machine learning model to explain.
+            X: pd.DataFrame
+                Input features used in the model.
+            features_for_displaying_plots: list
+                List of features for which the plots will be displayed.
+            features_for_saving_to_pdf: list
+                List of all features for which the plots will be generated and saved to the PDF.
+            pdf: PdfPages or None, optional, default=None
+                A PdfPages object to save plots. If None, plots are not saved.
+
+        Workflow:
+            1. Display PDPs for `features_for_displaying_plots`.
+            2. Save PDPs for `features_for_saving_to_pdf` in batches of 4 plots per page to the PDF.
+
         """
-        print("Displaying Partial Dependence Plots for non-binary features...")
-        for feature in features_non_binary:
+        print(f"PDP plots for all uncorrelated non-binary features will be saved to the PDF.")
+        for feature in features_for_displaying_plots:
             fig, ax = plt.subplots(figsize=(8, 6))
             PartialDependenceDisplay.from_estimator(
                 model,
@@ -35,18 +48,18 @@ class PartialDependencePlotter:
             plt.close(fig)
 
         if pdf:
-            for i in range(0, len(features_top), 4):
-                n_features = len(features_top[i:i + 4]) 
+            for i in range(0, len(features_for_saving_to_pdf), 4):
+                n_features = len(features_for_saving_to_pdf[i:i + 4]) 
 
                 if n_features == 1: 
                     fig, ax = plt.subplots(figsize=(8, 6))
                     PartialDependenceDisplay.from_estimator(
                         model,
                         X,
-                        [features_top[i]],
+                        [features_for_saving_to_pdf[i]],
                         ax=ax
                     )
-                    ax.set_title(f"Partial Dependence Plot for {features_top[i]}")
+                    ax.set_title(f"Partial Dependence Plot for {features_for_saving_to_pdf[i]}")
                     plt.tight_layout()
                     pdf.savefig(fig)
                     plt.close(fig)
@@ -56,7 +69,7 @@ class PartialDependencePlotter:
                     fig, axes = plt.subplots(rows, 2, figsize=(16, 6 * rows))
                     axes = axes.flatten() 
 
-                    for j, feature in enumerate(features_top[i:i + 4]):
+                    for j, feature in enumerate(features_for_saving_to_pdf[i:i + 4]):
                         PartialDependenceDisplay.from_estimator(
                             model,
                             X,
@@ -65,7 +78,7 @@ class PartialDependencePlotter:
                         )
                         axes[j].set_title(f"Partial Dependence Plot for {feature}")
 
-                    for k in range(len(features_top[i:i + 4]), len(axes)):
+                    for k in range(len(features_for_saving_to_pdf[i:i + 4]), len(axes)):
                         axes[k].set_visible(False)
 
                     plt.tight_layout()

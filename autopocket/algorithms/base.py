@@ -26,6 +26,12 @@ class BaseSearcher(BaseEstimator):
         X = X.copy()
         y = y.copy()
 
+        print("Measuring importances")
+        importances = self.__class__.measure_importances(X,y)
+        top_3_features = importances.nlargest(3)
+        print("Top 3 features by importance:")
+        print(top_3_features)
+
         self.best_score_ = -np.inf
         print("Fitting", self.n_estimators_ ,"models")
 
