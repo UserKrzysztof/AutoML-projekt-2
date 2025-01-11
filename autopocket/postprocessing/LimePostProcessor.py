@@ -1,45 +1,12 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from lime.lime_tabular import LimeTabularExplainer
 import warnings 
-from matplotlib.backends.backend_pdf import PdfPages
-import re
+from autopocket.postprocessing.utils import is_uncorrelated
+from autopocket.postprocessing.utils import normalize_feature_name
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="lime")
 
-def normalize_feature_name(feature_name):
-    """
-    Normalize feature names based on the total count of operators found.
-    If two operators (e.g., '<' and '>') are found, take the string between them.
-    If one operator is found, take the string to the left of it.
-    Additionally, count occurrences of '<' and '>'.
-
-    Parameters:
-        feature_name: str, original feature name from LIME.
-
-    Returns:
-        tuple: (normalized_feature_name, total_operator_count)
-    """
-    operators = ["<", ">"]
-
-    operator_counts = {op: feature_name.count(op) for op in operators}
-    total_operator_count = sum(operator_counts.values())
-
-    if total_operator_count >= 2:  
-        start_op = operators[0] if operator_counts[operators[0]] > 0 else operators[1]
-        end_op = operators[1] if operator_counts[operators[1]] > 0 else operators[0]
-
-        pattern = rf"{re.escape(start_op)}(.*?) {re.escape(end_op)}"
-        match = re.search(pattern, feature_name)
-        if match:
-            return match.group(1).strip()
-
-    elif total_operator_count == 1:
-        single_op = operators[0] if operator_counts[operators[0]] > 0 else operators[1]
-        return feature_name.split(single_op)[0].strip()
-
-    return feature_name.strip()
 
 class LimePostprocessor():
     
@@ -78,7 +45,7 @@ class LimePostprocessor():
             top_indices_class_1 = prob_class_1.argsort()[-2:]
             top_observations_class_1 = X_test.iloc[top_indices_class_1]
 
-            print("LIME explanations for the top 2 observations most likely to be class 1:")
+            print("Local explanantions - LIME explanations for the top 2 observations most likely to be class 1 (most influential):")
             for i, index in enumerate(top_indices_class_1):
                 exp = explainer.explain_instance(
                     data_row=top_observations_class_1.iloc[i],
@@ -100,7 +67,7 @@ class LimePostprocessor():
             top_indices_class_0 = prob_class_0.argsort()[-2:]
             top_observations_class_0 = X_test.iloc[top_indices_class_0]
 
-            print("LIME explanations for the top 2 observations most likely to be class 0:")
+            print("Local explanations - LIME explanations for the top 2 observations most likely to be class 0 (most influential):")
             for i, index in enumerate(top_indices_class_0):
                 exp = explainer.explain_instance(
                     data_row=top_observations_class_0.iloc[i],
@@ -125,7 +92,7 @@ class LimePostprocessor():
             top_indices_high = predictions.argsort()[-2:]
             top_observations_high = X_test.iloc[top_indices_high]
 
-            print("LIME explanations for the top 2 highest predictions:")
+            print("Local explanations - LIME explanations for the top 2 highest predictions (in terms of value of the predicted feature):")
             for i, index in enumerate(top_indices_high):
                 exp = explainer.explain_instance(
                     data_row=top_observations_high.iloc[i],
@@ -147,7 +114,7 @@ class LimePostprocessor():
             top_indices_low = predictions.argsort()[:2]
             top_observations_low = X_test.iloc[top_indices_low]
 
-            print("LIME explanations for the top 2 lowest predictions:")
+            print("Local explanations - LIME explanations for the top 2 lowest predictions (in terms of value of the predicted feature):")
             for i, index in enumerate(top_indices_low):
                 exp = explainer.explain_instance(
                     data_row=top_observations_low.iloc[i],
@@ -191,6 +158,8 @@ class LimePostprocessor():
         sorted_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)
         sorted_features = sorted_features[:max_features]
         features, importances = zip(*sorted_features)
+
+        print(f"Global explanations - LIME Feature Importance of Top {max_features} Features:")
 
         fig, ax = plt.subplots(figsize=(10, 6))  
         ax.barh(features, importances, color="skyblue")
@@ -239,29 +208,20 @@ class LimePostprocessor():
 
         correlation_matrix = X.corr()
 
-        def is_uncorrelated(feature, selected_features):
-            """
-            Sprawdza, czy cecha jest nieskorelowana z już wybranymi cechami.
-            """
-            for selected_feature in selected_features:
-                if abs(correlation_matrix.loc[feature, selected_feature]) > correlation_threshold:
-                    return False
-            return True
-
         for feature, _ in sorted_features:
             if feature not in binary_features and feature in correlation_matrix.columns:
-                if is_uncorrelated(feature, selected_non_binary):
+                if is_uncorrelated(feature, selected_non_binary, correlation_matrix, correlation_threshold):
                     selected_non_binary.append(feature)
                     if len(selected_non_binary) >= top_n_non_binary:
                         break
 
         for feature, _ in sorted_features:
             if feature not in binary_features and feature in correlation_matrix.columns:
-                if is_uncorrelated(feature, selected_all_non_binary):
+                if is_uncorrelated(feature, selected_all_non_binary, correlation_matrix, correlation_threshold):
                     selected_all_non_binary.append(feature)
                     if len(selected_all_non_binary) >= top_m_all:
                         break
 
-        print(f"Top {len(selected_all_non_binary)} non-binary features overall (uncorrelated):", selected_all_non_binary)
+        print(f"Top {len(selected_all_non_binary)} non-binary features (uncorrelated):", selected_all_non_binary)
 
         return selected_non_binary, selected_all_non_binary

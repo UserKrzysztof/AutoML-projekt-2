@@ -10,21 +10,32 @@ class IndividualConditionalExpectationPlotter:
         pass
     
 
-
-    def generate_ice(self, model, X, features_non_binary, features_top, pdf=None):
+    def generate_ice(self, model, X, features_for_displaying_plots, features_for_saving_to_pdf, pdf=None, subset_fraction_for_ICE_plot=0.5):
         """
-        Generate Individual Conditional Expectation (ICE) plots for the specified features.
-        Display ICE for top non-binary features and save all plots to the PDF.
+        Generate Individual Conditional Expectation (ICE) plots for features specified by parameter 
+         'features_for_saving_to_pdf'.
+        Display ICE for 'features_for_displaying_plots' and save all plots to the PDF.
 
         Parameters:
             model: The trained model to explain.
             X: pd.DataFrame, input features.
-            features_non_binary: list, top non-binary features for displaying plots.
-            features_top: list, top features (binary and non-binary) for saving to the PDF.
+            features_for_displaying_plots: list, features for which the plots will be displayed.
+            features_for_saving_to_pdf: list, all features for which the plots will be generated and saved to PDF.
             pdf: PdfPages object to save plots. If None, no plots are saved.
+            subset_fraction_for_ICE_plot : float or None, optional. Fraction of rows from X to use for ICE plot generation. If None, use all rows.
         """
-        print("Displaying ICE plots for non-binary features...")
-        for feature in features_non_binary:
+
+        if subset_fraction_for_ICE_plot is not None:
+            if 0 < subset_fraction_for_ICE_plot <= 1:
+                subset_fraction_for_ICE_plot = max(1, int(subset_fraction_for_ICE_plot * len(X)))
+                X = X.sample(subset_fraction_for_ICE_plot, random_state=42)
+                print(f"Using a sample of {subset_fraction_for_ICE_plot} observations from the input data.")
+            else:
+                raise ValueError("sample_size must be a float between 0 and 1.")
+
+
+        print(f"ICE plots for all uncorrelated non-binary features will be saved to the PDF.")
+        for feature in features_for_displaying_plots:
             fig, ax = plt.subplots(figsize=(8, 6))
             PartialDependenceDisplay.from_estimator(
                 model,
@@ -44,14 +55,14 @@ class IndividualConditionalExpectationPlotter:
             plt.close(fig)
 
         if pdf:
-            for i in range(0, len(features_top), 4):
-                n_features = len(features_top[i:i + 4])  
+            for i in range(0, len(features_for_saving_to_pdf), 4):
+                n_features = len(features_for_saving_to_pdf[i:i + 4])  
                 if n_features == 1:
                     fig, ax = plt.subplots(figsize=(8, 6))
                     PartialDependenceDisplay.from_estimator(
                         model,
                         X,
-                        [features_top[i]], 
+                        [features_for_saving_to_pdf[i]], 
                         kind="both",
                         ax=ax
                     )
@@ -60,7 +71,7 @@ class IndividualConditionalExpectationPlotter:
                         delta = 0.1
                         ax.set_ylim([min_val - delta, max_val + delta])
 
-                    ax.set_title(f"ICE Plot for {features_top[i]}")
+                    ax.set_title(f"ICE Plot for {features_for_saving_to_pdf[i]}")
                     plt.tight_layout()
                     pdf.savefig(fig)
                     plt.close(fig)
@@ -70,7 +81,7 @@ class IndividualConditionalExpectationPlotter:
                     fig, axes = plt.subplots(rows, 2, figsize=(16, 6 * rows)) 
                     axes = axes.flatten() if n_features > 1 else [axes]
 
-                    for j, feature in enumerate(features_top[i:i + 4]):
+                    for j, feature in enumerate(features_for_saving_to_pdf[i:i + 4]):
                         PartialDependenceDisplay.from_estimator(
                             model,
                             X,
@@ -85,7 +96,7 @@ class IndividualConditionalExpectationPlotter:
 
                         axes[j].set_title(f"ICE Plot for {feature}")
 
-                    for k in range(len(features_top[i:i + 4]), len(axes)):
+                    for k in range(len(features_for_saving_to_pdf[i:i + 4]), len(axes)):
                         axes[k].set_visible(False)
 
                     plt.tight_layout()
