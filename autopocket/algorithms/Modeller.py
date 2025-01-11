@@ -22,7 +22,8 @@ class Modeller():
         else:
             m = Regressor()
             print("Performing regression")
-
+        metric = m.get_metric() ####
+        estimators = m.get_estimators() ####
         with warnings.catch_warnings():
             warnings.simplefilter('always', LinAlgWarning)
             warnings.simplefilter('always', ConvergenceWarning)
@@ -30,7 +31,7 @@ class Modeller():
 
             m.fit(X, y)
             
-        return m.best_model_
+        return m.best_model_, metric, estimators ####
 
 shown_warnings = set()
 

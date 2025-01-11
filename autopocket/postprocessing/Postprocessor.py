@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import shap
 from sklearn.model_selection import train_test_split
+from autopocket.algorithms.base import BaseSearcher
+from autopocket.postprocessing.ModelsLeaderboard import ModelsLeaderboard
 from autopocket.postprocessing.shap import ShapPLOT
 from autopocket.postprocessing.LimePostProcessor import LimePostprocessor
 
@@ -14,13 +16,15 @@ from autopocket.postprocessing.utils import validate_features_for_displaying, pl
 
 
 class Postprocessor():
-    def __init__(self):
+    def __init__(self, metric, estimators): ####
         """
         Porządny init.
         """
         self.pdp_plotter = PartialDependencePlotter()
         self.ice_plotter = IndividualConditionalExpectationPlotter()
         self.lime_processor = LimePostprocessor()
+        self.base_searcher = BaseSearcher(metric=metric, estimators=estimators) #####
+        self.models_leaderboard = ModelsLeaderboard(self.base_searcher) #####
         pass
 
     
@@ -84,7 +88,13 @@ class Postprocessor():
         model_name = best_model.__class__.__name__
         os.makedirs(os.path.join(os.getcwd(), 'results', 'explanations'), exist_ok=True)
         output_file = os.path.join(os.getcwd(), 'results', 'explanations', f"explanations_{model_name}.pdf")
-
+        
+        try: #####
+            leaderboard = self.models_leaderboard.create_leaderboard()
+            self.models_leaderboard.save_leaderboard_to_csv(leaderboard)
+        except Exception as e:
+            print(f"Error during leaderboard creation: {e}") #####
+        
         with PdfPages(output_file) as pdf:
             try:
                 ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=pdf)

@@ -24,13 +24,13 @@ class AutoPocketor():
 
 
         print("\nPerforming modelling...")
-        best_model = Modeller().model(X, y, ml_type)
+        best_model, metric, estimators = Modeller().model(X, y, ml_type) ####
         print(f"Chosen model: {best_model.__class__.__name__}")
         print("Modelling done.")
 
         X = pd.DataFrame(X)
         
         print("\nPerforming postprocessing...")
-        if generate_plots:
-            Postprocessor().postprocess(best_model, X, y, ml_type, features_for_displaying_plots, subset_fraction_for_ICE_plot)
+        if generate_plots: ####
+            Postprocessor(metric=metric, estimators=estimators).postprocess(best_model, X, y, ml_type, features_for_displaying_plots, subset_fraction_for_ICE_plot)
         print("Postprocessing done.")

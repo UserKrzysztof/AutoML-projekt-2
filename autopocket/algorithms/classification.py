@@ -28,6 +28,11 @@ class Classifier(BaseSearcher):
                 RidgeClassifierWrapper()
             ]
         )
+    def get_metric(self):
+        return self.metric_
+
+    def get_estimators(self):
+        return self.estimators_
 
     @staticmethod
     def measure_importances(X, y):

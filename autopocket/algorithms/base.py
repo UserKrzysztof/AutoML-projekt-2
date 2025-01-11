@@ -97,7 +97,7 @@ class BaseSearcher(BaseEstimator):
         results_dir = self.__class__.results_dir
         results = {}
         for wrapper_name in self.estimators_:
-            with open(os.path.join(results_dir, f'{wrapper_name}_results.json'), 'r') as f:
+            with open(os.path.join(results_dir, f'{wrapper_name.name_}_results.json'), 'r') as f:
                 results[wrapper_name] = json.load(f)
         return results
     

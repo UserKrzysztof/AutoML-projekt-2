@@ -23,7 +23,7 @@ class ShapPLOT:
         - X_train: pandas DataFrame - The training dataset.
 
         Returns:
-        - bool: True if SHAP can be used; False otherwise.
+        - true (always but with potential warnings)
         """
         if best_model.__class__.__name__ in ["CatBoost","Neural Network", "Baseline"]:
             return False
