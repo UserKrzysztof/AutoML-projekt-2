@@ -2,10 +2,10 @@ PRODUCT;AGE;AREA;RESIDENTIAL_PLACE;EDUCATION;MARITAL_STATUS;HOUSEHOLD_MEMBERS;NO
 C;67;County capital;Owner without mortgage;University;divorced;1;0;1229.0;5;16;Missing;Missing;11;True;1;0;0;0;0;0;0;0
 F;36;Urban area;Living with family;Post secondary school;married;3;1;966.456;2;21;Other;between 11-20;10;False;0;0;0;0;0;0;0;0
 C;53;County capital;Owner without mortgage;Vocational school;married;2;0;1063.0;3;24;Manufacturing;between 21-50;1;False;0;0;0;0;0;0;0;0
-C;69;County capital;Owner without mortgage;Highschool;married;2;0;1276.0;5;16;Missing;Missing;4;False;0;0;0;0;1;0;0;0
+C;69;County capital;Owner without mortgage; Highschool;married;2;0;1276.0;5;"";Missing;Missing;4;False;0;0;0;0;1;0;0;0
 C;59;Rural area;Owner without mortgage;Highschool;married;2;0;663.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
-C;47;County capital;Owner without mortgage;Highschool;single;1;0;1646.66;7;10;Wholesale and retail trade;between 501-1.000;13;False;0;0;0;0;0;0;0;0
-F;41;Urban area;Living with family;University;married;4;2;2857.0;6;7;Public administration and defence;between 101-250;2;False;1;0;0;0;0;0;0;0
+C;47 ;County capital;Owner without mortgage;Highschool;single;1;0;1646.66;7;10;Wholesale and retail trade;between 501-1.000;13;False;0;0;0;0;0;0;0;0
+F;41;Urban area;Living with family;University;Married;4;2;2857.0;6;7;Public administration and defence;between 101-250;2;False;1;0;0;0;0;0;0;0
 C;67;Rural area;Owner without mortgage;Middle school;widow;1;0;500.0;5;16;Missing;Missing;1;Yes;1;0;0;0;0;0;0;0
 C;41;Urban area;Owner without mortgage;Other;married;2;0;766.0;2;23;Manufacturing;between 21-50;6;False;0;0;0;0;0;0;0;0
 C;35;County capital;Owner without mortgage;University;married;2;0;1616.935;2;16;Manufacturing;between 101-250;11;FALSE;1;0;0;0;1;0;0;0
@@ -52,7 +52,7 @@ B;48;Rural area;Owner without mortgage;Vocational school;married;3;1;689.0;3;14;
 F;30;County capital;Living with family;University;single;1;0;2648.4975;6;6;Other;between 101-250;2;False;0;0;0;0;0;0;0;0
 B;26;Urban area;Living with family;University;single;1;0;1123.5;3;4;Manufacturing;between 101-250;1;True;1;0;0;0;0;0;0;0
 C;65;Rural area;Owner without mortgage;Post secondary school;married;2;0;1113.0;5;16;Missing;Missing;4;False;1;0;0;0;1;0;0;0
-B;35;County capital;Living with family;University;married;3;1;1998.66;3;42;Human health and social work activities;> 1.000;1;False;0;0;0;0;0;0;0;0
+B;35;County capital;Living with family;University;married;3;1;1998.66;3;"";Human health and social work activities;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;30;Urban area;Living with family;University;single;1;0;1512.5;3;11;Other;between 251-500;1;False;0;0;0;0;0;0;0;0
 C;47;County capital;Owner with mortgage;Post-graduate;married;4;2;22827.66;5;5;Manufacturing;between 501-1.000;11;False;0;0;0;0;1;0;0;0
 B;23;Urban area;Living with family;Post secondary school;married;2;0;638.0;2;8;Manufacturing;between 101-250;2;False;0;0;0;0;0;0;0;0
@@ -66,7 +66,7 @@ B;62;Urban area;Owner without mortgage;Post secondary school;married;2;0;1793.0;
 E;56;County capital;Owner without mortgage;Vocational school;married;2;0;1099.0;38;38;Manufacturing;between 51-100;2;True;1;0;0;0;0;0;0;0
 C;63;County capital;Living with family;Post secondary school;single;1;0;1161.0;5;16;Missing;Missing;8;True;1;0;0;0;1;0;0;0
 C;39;Rural area;Living with family;Vocational school;married;2;0;702.0;8;46;Missing;between 0-10;1;False;0;0;0;0;0;0;0;0
-D;36;County capital;Owner without mortgage;University;married;2;0;2293.0;6;16;Manufacturing;between 251-500;11;False;1;0;0;0;1;0;0;0
+D;36;County capital;Owner without mortgage;University;married;2;0;2293.0;6;"";Manufacturing;between 251-500;11;False;1;0;0;0;1;0;0;0
 C;52;Rural area;Owner without mortgage;Post secondary school;single;1;0;1476.0;4;16;Agriculture, hunting and forestry;between 21-50;1;False;0;0;0;0;0;0;0;0
 E;60;Urban area;Owner without mortgage;University;married;2;0;1316.0;5;16;Missing;Missing;13;True;1;0;0;0;0;0;0;0
 C;57;Rural area;Owner without mortgage;Highschool;married;2;0;947.0;20;20;Water supply;between 51-100;14;False;0;0;0;0;1;0;0;0
@@ -80,7 +80,7 @@ C;36;County capital;Living with family;University;single;1;0;3139.0;16;24;Transp
 C;37;County capital;Owner without mortgage;College;married;3;1;2616.5;9;17;Manufacturing;> 1.000;12;False;0;0;0;0;0;0;0;0
 B;33;Urban area;Owner without mortgage;Highschool;married;2;0;1350.0;2;20;Construction;between 0-10;11;True;1;0;0;0;0;0;0;0
 C;64;Rural area;Owner without mortgage;Highschool;married;2;0;990.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
-C;43;Rural area;Owner without mortgage;Vocational school;married;2;0;2008.25;3;3;Electricity and gas;between 251-500;1;True;1;0;0;0;0;0;0;0
+C;43;Rural area;Owner without mortgage;Vocational school ;married;2;0;2008.25;3;3;Electricity and gas;between 251-500;1;True;1;0;0;0;0;0;0;0
 F;29;County capital;Living with family;Highschool;single;1;0;1923.0;7;23;Wholesale and retail trade;between 0-10;2;no;0;0;0;0;0;0;0;0
 F;28;County capital;Living with family;University;single;1;0;3295.0;2;5;Professional, scientific and technical activities;between 0-10;8;False;0;0;0;0;0;0;0;0
 C;64;Urban area;Owner without mortgage;Highschool;married;2;0;1788.0;5;16;Missing;Missing;2;False;0;0;0;0;0;0;0;0
@@ -332,7 +332,7 @@ C;63;Rural area;Owner without mortgage;Middle school;married;2;0;572.0;5;16;Miss
 F;28;Rural area;Living with family;University;married;2;0;1505.66;3;19;Wholesale and retail trade;> 1.000;2;False;0;0;0;0;0;0;0;0
 C;25;County capital;Owner without mortgage;Post-graduate;single;1;1;1362.8;6;16;Missing;> 1.000;2;True;1;0;1;0;0;0;0;0
 B;26;County capital;Living with family;College;single;1;0;1325.0;2;25;Transportation and storage;> 1.000;1;True;1;0;0;0;0;0;0;0
-F;34;County capital;Living with family;Highschool;married;2;0;1250.245;12;21;Manufacturing;between 501-1.000;11;True;1;0;0;0;1;0;0;0
+F;34;County capital;Living with family;Highschool;married;2;0;1250,245;12;21;Manufacturing;between 501-1.000;11;True;1;0;0;0;1;0;0;0
 C;65;County capital;Owner without mortgage;Middle school;single;1;0;1003.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;1
 B;43;Rural area;Living with family;Highschool;married;2;0;636.0;5;20;Manufacturing;between 101-250;2;False;0;0;0;0;0;0;0;0
 B;46;Rural area;Living with family;Highschool;married;1;0;1190.8975;6;16;Manufacturing;between 101-250;1;False;0;0;0;0;0;0;0;0
@@ -374,7 +374,7 @@ C;67;County capital;Owner without mortgage;Highschool;widow;1;0;774.0;5;16;Missi
 B;37;Urban area;Rental;Post secondary school;single;2;1;872.11;7;10;Manufacturing;between 251-500;2;False;0;0;0;0;0;0;0;0
 C;27;Rural area;Owner without mortgage;University;single;1;0;1520.91;4;23;Wholesale and retail trade;> 1.000;1;True;1;0;0;0;0;0;0;0
 F;30;County capital;Owner without mortgage;Post-graduate;single;1;0;2174.5;4;21;Financial and insurance activities;> 1.000;2;False;0;0;0;0;0;0;0;0
-F;36;County capital;Living with family;University;married;3;1;1565.0;10;24;Missing;between 21-50;12;False;0;0;0;0;0;0;0;0
+F; 36 ;County capital;Living with family;University;married;3;1;1565.0;10;24;Missing;between 21-50;12;False;0;0;0;0;0;0;0;0
 C;36;Rural area;Owner without mortgage;Highschool;married;3;1;854.0;3;3;Manufacturing;between 251-500;10;False;0;0;0;0;0;0;0;0
 F;39;Rural area;Living with family;Highschool;married;3;1;1704.0;5;9;Real estate activities;between 101-250;2;False;0;0;0;0;0;0;0;0
 B;26;Urban area;Owner without mortgage;University;single;1;0;1030.0;2;12;Manufacturing;between 101-250;1;True;1;0;1;0;0;0;0;0
@@ -435,7 +435,7 @@ B;45;County capital;Owner without mortgage;Missing;married;2;1;3000.0;1;5;Manufa
 F;27;Urban area;Living with family;University;single;1;0;1982.5;4;21;Information and communication;> 1.000;1;True;1;0;0;0;0;0;0;0
 C;38;Urban area;Owner without mortgage;Highschool;married;2;0;631.0;12;21;Wholesale and retail trade;between 21-50;1;False;1;0;0;0;0;0;0;0
 C;23;Rural area;Owner without mortgage;Post secondary school;single;1;0;1222.3;1;12;Manufacturing;between 501-1.000;1;True;1;0;0;0;0;0;0;0
-C;67;County capital;Owner without mortgage;Highschool;married;2;0;834.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
+C;67;"";Owner without mortgage;Highschool;married;2;0;834.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;60;County capital;Owner without mortgage;University;single;1;0;772.0;5;16;Missing;Missing;12;False;1;0;0;0;0;0;0;0
 F;27;County capital;Living with family;University;single;1;0;1849.0;7;10;Wholesale and retail trade;> 1.000;2;False;0;0;0;0;0;0;0;0
 E;64;County capital;Owner without mortgage;University;married;2;0;2426.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
@@ -503,7 +503,7 @@ B;26;Rural area;Living with family;University;single;1;0;1547.0;5;11;Transportat
 C;48;Rural area;Living with family;Highschool;single;1;0;636.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 F;31;Rural area;Living with family;Post secondary school;single;1;0;2689.245;4;21;Professional, scientific and technical activities;between 11-20;2;False;0;0;0;0;0;0;0;0
 C;50;County capital;Owner without mortgage;University;single;1;0;1357.67;5;68;Other;between 101-250;8;False;0;0;0;0;0;0;0;0
-B;29;County capital;Owner without mortgage;University;single;1;0;689.67;5;12;Information and communication;between 21-50;2;False;0;0;0;0;0;0;0;0
+B;29;County capital;Owner without mortgage;University;single;1;0;689.67;5;"";Information and communication;between 21-50;2;False;0;0;0;0;0;0;0;0
 C;55;Urban area;Owner without mortgage;Post secondary school;married;2;0;705.708;4;24;Construction;between 51-100;10;False;0;0;0;0;1;0;0;0
 E;60;Rural area;Owner without mortgage;Vocational school;married;2;0;1079.575;10;17;Real estate activities;between 251-500;1;True;1;0;1;0;0;0;0;0
 C;29;Rural area;Living with family;University;married;2;0;1256.5125;2;10;Manufacturing;between 501-1.000;9;False;0;0;0;0;1;0;0;0
@@ -522,7 +522,7 @@ B;29;County capital;Living with family;University;married;2;0;2664.0;2;10;Constr
 C;40;Rural area;Living with family;Other;single;1;1;636.0;3;22;Public administration and defence;between 21-50;12;False;0;0;0;0;1;0;0;0
 E;48;Rural area;Owner without mortgage;Post secondary school;married;2;0;1664.41;3;3;Electricity and gas;> 1.000;1;True;1;0;0;0;0;0;0;0
 F;32;County capital;Living with family;University;single;1;0;5051.0;1;24;Missing;> 1.000;2;False;0;0;0;0;0;0;0;0
-C;40;Rural area;Owner without mortgage;University;married;2;0;967.0;14;18;Human health and social work activities;> 1.000;12;False;0;0;0;0;0;0;0;0
+C;40;Rural area;Owner without mortgage;University;married;2;0;967,0;14;18;Human health and social work activities;> 1.000;12;False;0;0;0;0;0;0;0;0
 B;27;Rural area;Living with family;Post secondary school;single;1;0;774.66;2;24;Manufacturing;between 501-1.000;2;True;1;0;1;0;0;0;0;0
 E;66;County capital;Owner without mortgage;Missing;married;2;0;1044.0;5;16;Missing;Missing;14;True;1;0;0;0;0;0;0;0
 B;44;Rural area;Owner without mortgage;University;married;2;0;673.2;4;104;Education;between 101-250;12;False;0;0;0;0;0;0;0;0
@@ -847,7 +847,7 @@ C;36;Rural area;Owner without mortgage;Highschool;married;2;0;2692.83;18;18;Mini
 C;64;Rural area;Living with family;Other;widow;1;0;500.0;5;16;Missing;Missing;7;True;1;0;0;0;0;0;0;0
 F;36;County capital;Owner with mortgage;University;married;3;1;2885.0025;7;7;Wholesale and retail trade;between 11-20;12;False;0;0;0;0;1;0;0;0
 F;31;County capital;Living with family;Post-graduate;married;3;1;2550.0;3;6;Manufacturing;between 251-500;9;False;0;0;0;0;0;0;0;0
-F;25;County capital;Living with family;Highschool;single;1;0;1309.0;2;13;Missing;between 101-250;9;False;0;0;0;0;0;0;0;0
+F;25;County capital;Living with family;Highschool;single;1;0;1309.0;2;"";Missing;between 101-250;9;False;0;0;0;0;0;0;0;0
 C;57;Rural area;Owner without mortgage;Highschool;married;2;0;1283.0;17;17;Manufacturing;between 501-1.000;12;False;0;0;0;0;1;0;0;0
 C;37;Urban area;Owner without mortgage;Highschool;married;2;0;1359.2125;1;18;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;57;Urban area;Owner without mortgage;University;married;2;0;1412.0;32;32;Missing;between 251-500;3;False;1;0;0;0;0;0;0;0
@@ -995,7 +995,7 @@ E;55;Urban area;Owner without mortgage;Highschool;married;2;0;2210.34;10;10;Manu
 F;42;County capital;Living with family;College;married;2;0;1242.9975;14;24;Manufacturing;between 251-500;2;False;0;0;0;0;0;0;0;0
 C;29;Urban area;Owner without mortgage;Highschool;single;1;0;1699.36;6;19;Manufacturing;> 1.000;1;True;1;0;1;0;0;0;0;0
 C;64;Urban area;Owner without mortgage;Highschool;married;2;0;959.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
-C;55;Rural area;Owner without mortgage;Vocational school;married;2;0;866.845;2;14;Manufacturing;> 1.000;9;False;0;0;0;0;0;0;0;0
+C;55;Rural area;Owner without mortgage; Vocational school;married;2;0;866.845;2;14;Manufacturing;> 1.000;9;False;0;0;0;0;0;0;0;0
 C;33;Rural area;Owner without mortgage;Highschool;married;4;2;1284.0;5;9;Manufacturing;between 251-500;2;False;0;0;0;0;0;0;0;0
 C;61;Rural area;Owner without mortgage;University;married;2;0;2936.0;18;18;Mining and quarrying;> 1.000;1;False;0;0;0;0;0;0;0;0
 E;55;County capital;Owner without mortgage;University;married;2;0;2316.66;2;4;Manufacturing;between 51-100;12;True;1;0;0;0;0;0;0;0
@@ -1069,7 +1069,7 @@ B;30;Rural area;Owner without mortgage;University;single;1;0;1030.75;4;19;Educat
 F;30;County capital;Living with family;University;single;1;0;1976.25;4;7;Professional, scientific and technical activities;between 251-500;11;False;0;0;0;0;0;0;0;0
 C;48;Rural area;Owner without mortgage;Vocational school;married;3;1;1139.0;12;14;Construction;between 101-250;5;False;1;0;0;0;0;0;0;0
 F;48;County capital;Owner with mortgage;University;married;2;0;2664.0;22;22;Public administration and defence;between 251-500;2;False;0;0;0;0;0;0;0;0
-C;27;County capital;Owner with mortgage;Post-graduate;single;1;0;1444.33;2;14;Other;between 251-500;2;False;1;0;0;0;0;0;0;0
+C;27;County capital;Owner with mortgage;Post-graduate ;single;1;0;1444.33;2;14;Other;between 251-500;2;False;1;0;0;0;0;0;0;0
 F;27;Rural area;Living with family;University;married;2;0;1185.4975;3;21;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;21;Urban area;Living with family;University;single;1;0;984.5;2;15;Manufacturing;> 1.000;1;True;1;0;0;0;0;0;0;1
 F;35;Rural area;Living with family;University;single;1;0;1409.0;12;15;Other;between 251-500;2;False;0;0;0;0;0;0;0;0
@@ -1289,12 +1289,12 @@ C;35;Rural area;Living with family;Post secondary school;married;2;0;2075.25;14;
 B;33;County capital;Owner with mortgage;Post-graduate;married;3;1;6145.33;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 C;47;County capital;Owner without mortgage;Highschool;widow;1;0;815.0;3;21;Wholesale and retail trade;between 21-50;1;True;1;0;0;0;0;0;0;0
 C;67;Rural area;Living with family;Vocational school;married;2;0;835.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
-C;51;Rural area;Owner with mortgage;University;single;1;0;2864.0;3;3;Mining and quarrying;> 1.000;1;False;0;0;0;0;0;0;0;0
+C;51;"";Owner with mortgage;University;single;1;0;2864.0;3;3;Mining and quarrying;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;48;County capital;Owner without mortgage;Other;married;2;0;2501.495;11;11;Public administration and defence;> 1.000;16;False;0;0;0;0;1;0;0;0
 C;52;County capital;Owner without mortgage;University;divorced;1;0;2666.66;12;19;Manufacturing;between 251-500;10;False;0;0;0;0;1;0;0;0
 F;24;County capital;Living with family;University;single;1;0;1185.0;3;24;Transportation and storage;> 1.000;8;False;0;0;0;0;0;0;0;0
 C;42;County capital;Owner without mortgage;Missing;married;2;0;2578.0;12;25;Public administration and defence;between 0-10;13;False;0;0;0;0;0;0;0;1
-E;65;County capital;Owner without mortgage;Highschool;married;2;0;680.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
+E;65;County capital;Owner without mortgage;Highschool;Married;2;0;680.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 F;42;Rural area;Owner with mortgage;University;single;1;0;1315.0;9;9;Public administration and defence;> 1.000;2;False;0;0;0;0;0;0;0;0
 F;29;County capital;Living with family;Post-graduate;married;2;0;1424.0;7;12;Professional, scientific and technical activities;between 0-10;2;False;0;0;0;0;0;0;0;0
 C;38;Rural area;Owner without mortgage;Missing;married;2;0;2335.4975;3;9;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
@@ -1308,7 +1308,7 @@ F;27;County capital;Living with family;University;single;1;0;2758.935;3;7;Wholes
 F;46;County capital;Owner without mortgage;Post-graduate;divorced;1;0;3280.0;15;16;Public administration and defence;between 251-500;13;True;1;0;0;0;0;0;0;0
 B;37;County capital;Living with family;University;married;3;1;2228.0;11;16;Other;between 0-10;11;False;0;0;0;0;1;0;0;0
 C;61;Rural area;Owner without mortgage;University;married;2;0;1108.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
-F;29;County capital;Living with family;University;single;1;0;2825.0;3;6;Information and communication;between 51-100;1;True;1;0;0;0;0;0;0;0
+F;29;County capital;Living with family;University;Single;1;0;2825.0;3;6;Information and communication;between 51-100;1;True;1;0;0;0;0;0;0;0
 F;31;County capital;Living with family;University;single;1;0;2605.68;6;24;Transportation and storage;> 1.000;11;False;0;0;0;0;0;0;0;0
 B;55;Urban area;Owner without mortgage;Missing;widow;1;0;637.0;3;15;Education;between 51-100;11;False;0;0;0;0;0;0;0;1
 C;33;Rural area;Living with family;Other;married;2;0;1116.0276;2;17;Manufacturing;> 1.000;1;True;1;0;1;0;0;0;0;0
@@ -1374,7 +1374,7 @@ F;27;County capital;Living with family;Highschool;married;2;0;1062.0;3;12;Wholes
 C;60;County capital;Owner without mortgage;Missing;single;1;0;658.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;1
 F;36;County capital;Living with family;University;married;2;0;1664.0;11;43;Public administration and defence;between 251-500;2;False;0;0;0;0;0;0;0;0
 F;27;County capital;Living with family;University;single;1;0;1400.0;2;3;Professional, scientific and technical activities;between 21-50;2;False;0;0;0;0;0;0;0;0
-B;39;County capital;Living with family;University;single;1;0;2224.5;14;25;Other;> 1.000;1;True;1;0;0;0;0;0;0;0
+B;39;County capital;Living with family;University;single;1;0;2224.5;14;"";Other;> 1.000;1;True;1;0;0;0;0;0;0;0
 C;61;Urban area;Owner with mortgage;University;married;2;0;2360.0;5;16;Missing;Missing;14;True;1;0;0;0;0;0;0;0
 F;29;Urban area;Living with family;University;married;2;0;1978.0;3;15;Construction;between 21-50;10;False;0;0;0;0;0;0;0;0
 F;30;County capital;Living with family;University;married;2;0;2220.67;2;3;Professional, scientific and technical activities;between 21-50;2;False;0;0;0;0;0;0;0;0
@@ -1784,7 +1784,7 @@ F;35;County capital;Living with family;Post-graduate;married;2;0;2657.0;11;19;Ot
 C;53;County capital;Owner without mortgage;Highschool;divorced;1;0;2748.0;4;4;Other;between 21-50;11;False;0;0;0;0;1;0;0;0
 F;34;Rural area;Owner without mortgage;University;married;2;0;1515.0;5;6;Water supply;between 251-500;1;True;1;0;0;0;0;0;0;0
 F;29;County capital;Living with family;University;single;1;0;2500.0;8;11;Information and communication;between 21-50;9;True;1;0;0;0;0;0;0;0
-B;25;County capital;Living with family;University;single;1;0;947.0;2;23;Wholesale and retail trade;between 101-250;2;False;0;0;0;0;0;0;0;0
+B;25;County capital;Living with family;University;single;1;0;947,0;2;23;Wholesale and retail trade;between 101-250;2;False;0;0;0;0;0;0;0;0
 E;67;Urban area;Owner without mortgage;Vocational school;married;2;0;647.0;5;16;Missing;Missing;2;True;1;0;0;0;0;0;0;0
 F;37;County capital;Living with family;Post-graduate;married;3;1;4086.75;9;9;Professional, scientific and technical activities;between 251-500;11;False;0;0;0;0;0;0;0;0
 F;34;County capital;Living with family;University;married;3;1;1843.33;1;9;Manufacturing;between 21-50;14;False;1;0;0;0;0;0;0;0
@@ -1834,7 +1834,7 @@ C;68;County capital;Owner without mortgage;University;married;2;0;2589.0;5;16;Mi
 C;66;Urban area;Owner without mortgage;Other;married;2;0;879.0;5;16;Missing;Missing;2;True;1;0;0;0;0;0;0;0
 E;37;County capital;Owner without mortgage;University;single;2;1;1413.0;1;4;Financial and insurance activities;between 251-500;1;True;1;0;1;0;0;0;0;0
 F;33;Rural area;Living with family;University;married;2;0;1940.0;5;9;Transportation and storage;between 21-50;2;False;0;0;0;0;0;0;0;0
-C;64;Rural area;Owner without mortgage;Highschool;married;2;0;985.0;5;16;Missing;Missing;13;False;0;0;0;0;0;0;0;0
+C;64;Rural area;Owner without mortgage;Highschool;married;2;0;985,0;5;16;Missing;Missing;13;False;0;0;0;0;0;0;0;0
 F;33;County capital;Owner with mortgage;Highschool;married;3;1;2169.15;11;32;Public administration and defence;between 101-250;10;True;1;0;1;0;0;0;0;0
 F;56;County capital;Owner without mortgage;Vocational school;married;2;0;1569.91;24;24;Manufacturing;between 0-10;12;True;1;0;0;0;1;0;0;0
 C;58;County capital;Owner without mortgage;Post secondary school;married;2;0;1000.0;5;16;Missing;Missing;13;True;1;0;0;0;0;0;0;0
@@ -1963,7 +1963,7 @@ E;48;Rural area;Owner without mortgage;Vocational school;married;2;0;2886.0;16;3
 C;67;Urban area;Owner without mortgage;University;divorced;1;0;1488.0;5;16;Missing;Missing;12;False;0;0;0;0;1;0;0;0
 F;57;County capital;Owner without mortgage;Highschool;married;2;0;1023.0;15;15;Manufacturing;between 501-1.000;1;True;1;0;0;0;0;0;0;0
 C;55;County capital;Owner without mortgage;University;married;2;0;5828.0;11;47;Public administration and defence;between 51-100;11;True;1;0;0;0;0;0;0;0
-C;40;Rural area;Owner without mortgage;Highschool;married;3;1;1183.25;6;15;Manufacturing;> 1.000;1;False;1;0;0;0;0;0;0;0
+C;40 ;Rural area;Owner without mortgage;Highschool;married;3;1;1183.25;6;15;Manufacturing;> 1.000;1;False;1;0;0;0;0;0;0;0
 B;24;Urban area;Living with family;University;single;1;0;726.25;1;9;Missing;between 251-500;1;False;0;0;0;0;0;0;0;0
 F;47;Missing;Living with family;Post secondary school;single;1;0;4167.432;9;20;Human health and social work activities;between 501-1.000;2;False;0;0;0;0;0;0;0;0
 C;21;County capital;Owner without mortgage;Highschool;married;2;0;1259.46;2;16;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
@@ -2000,7 +2000,7 @@ F;36;County capital;Owner without mortgage;Post-graduate;single;2;1;4000.0;1;9;O
 F;29;Urban area;Living with family;Highschool;married;2;0;1318.0;2;8;Wholesale and retail trade;> 1.000;2;True;1;0;0;0;0;0;0;0
 B;27;Urban area;Living with family;Post secondary school;single;1;0;1044.915;2;15;Manufacturing;> 1.000;2;False;0;0;0;0;0;0;0;1
 C;40;Rural area;Living with family;Highschool;married;2;0;2332.2475;6;17;Agriculture, hunting and forestry;between 101-250;12;False;0;0;0;0;0;0;0;0
-F;30;Rural area;Living with family;University;married;2;0;2525.0;10;24;Manufacturing;between 21-50;2;False;0;0;0;0;0;0;0;0
+F;30;Rural area;Living with family;University;married;2;0;2525.0;10;"";Manufacturing;between 21-50;2;False;0;0;0;0;0;0;0;0
 C;31;Urban area;Living with family;Highschool;married;2;0;1518.75;10;21;Manufacturing;between 251-500;12;True;1;0;0;0;0;0;0;0
 B;22;County capital;Owner without mortgage;University;single;1;0;1344.0;2;10;Other;> 1.000;2;True;1;0;1;0;0;0;0;0
 F;26;County capital;Living with family;University;married;2;0;2366.33;3;21;Construction;between 101-250;3;True;1;0;0;0;0;0;0;0
@@ -2082,7 +2082,7 @@ C;66;Urban area;Owner without mortgage;Vocational school;married;1;0;816.0;5;16;
 F;44;County capital;Living with family;Vocational school;married;3;1;3322.405;3;8;Transportation and storage;between 251-500;10;False;0;0;0;0;0;0;0;0
 B;40;County capital;Owner without mortgage;Post secondary school;widow;1;0;886.0;9;13;Manufacturing;between 51-100;7;True;1;0;0;0;0;0;0;0
 E;39;County capital;Living with family;Post secondary school;single;1;1;996.0;2;17;Transportation and storage;between 101-250;2;True;1;0;1;0;0;0;0;0
-F;28;Rural area;Living with family;University;single;1;0;2164.5125;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
+F;28;Rural area;Living with family;University ;single;1;0;2164.5125;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 B;46;County capital;Owner with mortgage;University;married;2;0;4367.75;6;11;Public administration and defence;> 1.000;11;True;1;0;0;0;1;0;0;0
 C;40;Urban area;Owner without mortgage;University;married;2;0;5016.0;6;10;Public administration and defence;between 501-1.000;11;False;0;0;0;0;0;0;0;0
 F;34;Rural area;Living with family;University;married;2;0;2159.42;10;11;Manufacturing;> 1.000;12;False;0;0;0;0;0;0;0;0
@@ -2667,7 +2667,7 @@ C;30;County capital;Owner without mortgage;University;single;1;0;1481.0;4;18;Man
 C;34;County capital;Owner without mortgage;University;married;3;1;2352.0;9;23;Wholesale and retail trade;> 1.000;12;True;1;0;0;0;0;0;0;0
 F;26;County capital;Living with family;University;single;1;0;2430.935;4;18;Mining and quarrying;> 1.000;1;True;1;0;0;0;0;0;0;0
 B;39;County capital;Owner without mortgage;University;single;1;0;6100.9;15;15;Public administration and defence;between 251-500;8;False;0;0;0;0;0;0;0;0
-F;34;County capital;Living with family;Highschool;single;1;0;1822.91;5;13;Other;> 1.000;2;False;0;0;0;0;0;0;0;0
+F;34;County capital;Living with family;Highschool;single;1;0;1822,91;5;13;Other;> 1.000;2;False;0;0;0;0;0;0;0;0
 B;60;Urban area;Owner without mortgage;Missing;married;3;1;2085.0;9;115;Public administration and defence;between 501-1.000;14;True;1;0;0;0;0;0;0;0
 C;62;County capital;Owner without mortgage;Post secondary school;married;2;0;740.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 E;54;Urban area;Owner without mortgage;University;single;1;0;2862.0;13;14;Water supply;> 1.000;1;True;1;0;1;0;0;0;0;0
@@ -2695,7 +2695,7 @@ C;61;Rural area;Owner without mortgage;Highschool;widow;1;0;1412.0;2;21;Other;be
 C;48;County capital;Owner without mortgage;Post-graduate;married;2;0;1198.0;2;15;Human health and social work activities;> 1.000;11;True;1;0;0;0;0;0;0;0
 C;29;Urban area;Owner without mortgage;Post-graduate;married;2;0;1016.0;3;8;Professional, scientific and technical activities;between 0-10;8;False;0;0;0;0;0;0;0;0
 C;40;Rural area;Other;Post secondary school;married;2;0;1223.75;2;24;Manufacturing;between 101-250;1;True;1;0;1;0;0;0;0;0
-B;61;County capital;Owner without mortgage;University;widow;1;0;528.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
+B;61;County capital;Owner without mortgage;University;widow;1;0;528.0;5;"";Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;45;Rural area;Owner without mortgage;Post-graduate;married;2;0;1410.0;25;56;Education;between 21-50;1;True;1;0;0;0;0;0;0;0
 C;32;County capital;Living with family;University;single;1;0;844.55;6;60;Missing;between 251-500;1;True;1;0;0;0;0;0;0;0
 C;52;County capital;Owner without mortgage;Highschool;married;2;0;1071.255;9;19;Manufacturing;between 251-500;1;False;0;0;0;0;0;0;0;0
@@ -2846,14 +2846,14 @@ C;64;Urban area;Owner without mortgage;University;married;2;0;2261.0;5;16;Missin
 B;45;County capital;Living with family;Missing;single;1;0;1596.0;6;11;Wholesale and retail trade;between 0-10;12;False;0;0;0;0;0;0;0;0
 C;52;County capital;Owner without mortgage;Post secondary school;married;2;0;1380.0;12;24;Construction;between 101-250;2;False;1;0;0;0;0;0;0;0
 B;31;County capital;Owner without mortgage;University;single;1;0;1166.0;10;21;Manufacturing;between 21-50;2;False;0;0;0;0;0;0;0;0
-C;42;County capital;Owner without mortgage;University;married;2;0;1700.0;9;21;Information and communication;> 1.000;1;False;0;0;0;0;0;0;0;0
+C;42;County capital;Owner without mortgage;University;Married;2;0;1700.0;9;21;Information and communication;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;32;County capital;Owner without mortgage;University;divorced;2;1;5630.7025;2;24;Wholesale and retail trade;between 51-100;1;False;0;0;0;0;0;0;0;1
 C;53;Rural area;Owner without mortgage;Vocational school;married;2;0;1131.0;7;14;Missing;> 1.000;2;False;0;0;0;0;0;0;0;0
 C;65;Urban area;Owner with mortgage;Post-graduate;married;2;0;3043.0;5;16;Missing;Missing;12;False;0;0;0;0;1;0;0;0
 C;53;Urban area;Owner without mortgage;Highschool;single;1;0;1857.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 E;37;Rural area;Owner without mortgage;Other;married;2;0;1230.0;2;8;Manufacturing;between 21-50;1;True;1;0;1;0;0;0;0;0
 C;28;Rural area;Living with family;University;single;1;0;1343.34;5;9;Other;between 101-250;8;False;0;0;0;0;0;0;0;1
-C;40;County capital;Owner with mortgage;Other;married;2;0;2216.33;18;19;Public administration and defence;between 501-1.000;12;False;0;0;0;0;1;0;0;0
+C;40;"";Owner with mortgage;Other;married;2;0;2216.33;18;19;Public administration and defence;between 501-1.000;12;False;0;0;0;0;1;0;0;0
 F;26;County capital;Living with family;Post-graduate;married;2;0;3005.0;6;21;Wholesale and retail trade;> 1.000;8;False;0;0;0;0;0;0;0;0
 B;56;County capital;Owner without mortgage;Highschool;married;2;0;1000.25;8;19;Manufacturing;between 251-500;18;False;0;0;0;0;0;0;0;0
 C;43;County capital;Owner without mortgage;University;divorced;2;1;2349.0;21;24;Public administration and defence;between 251-500;11;True;1;0;0;0;1;0;0;0
@@ -2944,10 +2944,10 @@ B;64;Rural area;Owner without mortgage;Highschool;divorced;1;0;1244.0;5;16;Missi
 C;42;County capital;Living with family;Post-graduate;married;2;0;1264.0;8;12;Public administration and defence;between 501-1.000;10;True;1;0;0;0;1;0;0;0
 F;53;Rural area;Owner without mortgage;University;married;2;0;809.0;24;26;Public administration and defence;between 11-20;2;False;0;0;0;0;0;0;0;0
 B;53;Rural area;Living with family;Highschool;married;2;0;1458.0;5;16;Missing;Missing;2;False;0;0;0;0;0;0;0;1
-C;43;County capital;Owner without mortgage;Post-graduate;married;1;0;4773.0;21;21;Public administration and defence;between 251-500;11;True;1;0;0;0;1;0;0;0
+C;43;County capital;Owner without mortgage;Post-graduate;Married;1;0;4773.0;21;21;Public administration and defence;between 251-500;11;True;1;0;0;0;1;0;0;0
 C;64;County capital;Living with family;Missing;single;1;0;1099.0;5;16;Missing;Missing;15;False;0;0;0;0;1;0;0;0
 C;37;Rural area;Owner without mortgage;Highschool;married;2;0;2741.5;11;18;Mining and quarrying;> 1.000;1;True;1;0;1;0;0;0;0;0
-C;66;Rural area;Owner without mortgage;Highschool;widow;1;0;601.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
+C;66;Rural area;Owner without mortgage;Highschool;Widow;1;0;601.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 C;65;County capital;Owner without mortgage;Vocational school;married;2;0;736.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 E;44;County capital;Owner without mortgage;Highschool;single;1;0;1187.8275;19;24;Water supply;between 501-1.000;2;True;1;0;0;0;0;0;0;0
 F;32;County capital;Living with family;University;single;1;0;1262.26;2;6;Education;between 21-50;2;False;0;0;0;0;0;0;0;0
@@ -2982,7 +2982,7 @@ F;34;County capital;Living with family;University;married;2;0;1786.5;2;12;Other;
 C;40;Urban area;Living with family;College;single;1;0;1074.0;3;10;Missing;between 101-250;11;False;0;0;0;0;0;0;0;1
 E;46;County capital;Owner without mortgage;University;married;3;1;968.0;9;14;Other;between 21-50;1;True;1;0;1;0;0;0;0;0
 C;49;Urban area;Owner without mortgage;Vocational school;widow;1;0;1515.75;7;18;Manufacturing;> 1.000;9;False;0;0;0;0;1;0;0;0
-F;45;County capital;Living with family;Missing;single;1;0;1104.3275;2;12;Other;between 501-1.000;2;False;0;0;0;0;0;0;0;0
+F;45;County capital;Living with family; Missing;single;1;0;1104.3275;2;12;Other;between 501-1.000;2;False;0;0;0;0;0;0;0;0
 C;24;Rural area;Living with family;Highschool;married;3;1;1364.7525;3;23;Manufacturing;between 101-250;1;True;1;0;0;0;0;0;0;1
 F;36;Urban area;Owner with mortgage;University;married;2;0;2968.0;17;22;Public administration and defence;> 1.000;1;True;1;0;1;0;0;0;0;0
 C;50;Urban area;Owner without mortgage;Other;married;2;0;2776.0;19;20;Public administration and defence;> 1.000;12;True;1;0;0;0;1;0;0;0
@@ -2996,10 +2996,10 @@ A;57;County capital;Owner without mortgage;University;single;1;0;3413.0;9;25;Pub
 E;67;Urban area;Owner without mortgage;Other;married;2;0;1310.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
 C;25;Urban area;Living with family;Post secondary school;single;1;0;1124.0;5;15;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
 F;27;Rural area;Living with family;Missing;single;1;0;2500.0;3;5;Transportation and storage;> 1.000;2;False;0;0;0;0;0;0;0;0
-C;50;County capital;Living with family;Highschool;divorced;1;0;1610.75;3;24;Manufacturing;between 101-250;13;True;1;0;0;0;0;0;0;0
+C;50;County capital;Living with family;Highschool;Divorced;1;0;1610.75;3;24;Manufacturing;between 101-250;13;True;1;0;0;0;0;0;0;0
 C;47;Urban area;Owner without mortgage;Post secondary school;married;2;0;2254.9975;20;25;Public administration and defence;between 251-500;13;False;0;0;0;0;1;0;0;0
 C;29;County capital;Living with family;University;single;1;0;2239.0;6;11;Public administration and defence;between 501-1.000;9;False;0;0;0;0;0;0;0;0
-B;51;Urban area;Living with family;Highschool;married;2;0;734.0;27;27;Human health and social work activities;between 251-500;14;True;1;0;0;0;1;0;0;0
+B;51;Urban area;Living with family;Highschool ;married;2;0;734.0;27;27;Human health and social work activities;between 251-500;14;True;1;0;0;0;1;0;0;0
 E;24;Rural area;Living with family;Post secondary school;single;1;1;1679.0;3;3;Electricity and gas;between 501-1.000;1;True;1;0;1;0;0;0;0;0
 C;59;County capital;Owner without mortgage;Post secondary school;single;1;0;1877.0;30;30;Electricity and gas;between 501-1.000;1;False;0;0;0;0;0;0;0;0
 B;36;County capital;Owner without mortgage;University;married;2;0;1212.25;3;12;Other;> 1.000;1;False;0;0;0;0;0;0;0;0
@@ -3194,7 +3194,7 @@ E;52;County capital;Owner without mortgage;Highschool;single;1;0;1488.3275;22;24
 B;32;Rural area;Living with family;Post secondary school;single;2;0;874.0;8;12;Wholesale and retail trade;between 21-50;1;False;0;0;0;0;0;0;0;0
 B;48;County capital;Owner without mortgage;Missing;married;2;0;670.0;14;14;Missing;between 101-250;14;False;0;0;0;0;1;0;0;0
 C;65;Urban area;Owner without mortgage;Highschool;widow;1;0;813.0;5;16;Missing;Missing;9;True;1;0;1;0;1;0;0;0
-B;54;Rural area;Owner without mortgage;Highschool;married;2;0;1326.4;5;9;Transportation and storage;between 101-250;2;False;0;0;0;0;0;0;0;0
+B;54;Rural area;Owner without mortgage;Highschool ;married;2;0;1326.4;5;9;Transportation and storage;between 101-250;2;False;0;0;0;0;0;0;0;0
 B;33;Rural area;Living with family;University;married;2;0;2379.75;3;10;Information and communication;> 1.000;2;False;0;0;0;0;0;0;0;0
 F;32;County capital;Owner with mortgage;University;divorced;1;0;3070.66;5;16;Missing;Missing;15;True;1;0;0;0;0;0;0;0
 C;44;Urban area;Owner without mortgage;Post-graduate;divorced;1;0;1745.0;9;111;Education;between 51-100;2;False;1;0;0;0;0;0;0;0
@@ -3411,7 +3411,7 @@ C;48;Rural area;Owner without mortgage;Middle school;married;2;0;876.92;5;16;Mis
 B;22;Rural area;Living with family;Post secondary school;single;1;0;952.75;2;2;Manufacturing;between 501-1.000;1;False;1;0;0;0;0;0;0;1
 F;40;County capital;Living with family;University;divorced;2;1;4001.0;2;7;Other;between 0-10;2;False;0;0;0;0;0;0;0;0
 B;25;County capital;Living with family;College;single;1;0;1421.35;2;12;Other;> 1.000;2;False;0;0;0;0;0;0;0;0
-F;27;County capital;Living with family;University;married;2;0;1692.0;3;40;Water supply;between 501-1.000;1;True;1;0;1;0;0;0;0;0
+F;27;County capital;Living with family;University;married;2;0;1692.0;3;"";Water supply;between 501-1.000;1;True;1;0;1;0;0;0;0;0
 C;48;Urban area;Owner without mortgage;Highschool;married;2;0;711.804;7;15;Manufacturing;between 101-250;8;False;0;0;0;0;1;0;0;0
 B;51;County capital;Owner with mortgage;University;married;2;0;8789.0;20;16;Public administration and defence;> 1.000;2;False;0;0;0;0;0;0;0;0
 C;45;Urban area;Owner without mortgage;Highschool;married;2;0;2035.0;3;3;Electricity and gas;> 1.000;10;True;1;0;0;0;1;0;0;0
@@ -3523,7 +3523,7 @@ C;55;County capital;Owner without mortgage;University;married;2;0;2893.225;11;21
 B;66;County capital;Owner without mortgage;Highschool;married;2;0;1099.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 C;45;County capital;Owner without mortgage;University;married;2;0;4091.0;22;16;Public administration and defence;between 501-1.000;13;False;1;0;0;0;1;0;0;0
 E;29;Rural area;Owner without mortgage;Highschool;married;3;1;1802.455;9;48;Manufacturing;between 501-1.000;2;True;1;0;1;0;0;0;0;0
-F;30;Rural area;Owner without mortgage;Post-graduate;married;2;0;1548.4;5;16;Missing;Missing;7;True;1;0;0;0;0;0;0;0
+F;30;Rural area;Owner without mortgage;Post-graduate;married;2;0;1548,4;5;16;Missing;Missing;7;True;1;0;0;0;0;0;0;0
 C;65;County capital;Owner without mortgage;Post secondary school;married;2;0;750.0;5;16;Missing;Missing;9;True;1;0;0;0;1;0;0;0
 E;56;County capital;Owner without mortgage;Post secondary school;single;4;0;2037.0;14;24;Water supply;between 501-1.000;1;True;1;0;0;0;0;0;0;0
 F;31;Urban area;Living with family;University;single;1;0;2525.0;8;17;Wholesale and retail trade;between 21-50;2;False;0;0;0;0;0;0;0;0
@@ -3548,7 +3548,7 @@ F;40;County capital;Owner without mortgage;Post-graduate;married;3;1;4208.0;14;1
 F;30;Urban area;Living with family;Highschool;single;1;0;907.495;3;24;Wholesale and retail trade;> 1.000;4;False;0;0;0;0;0;0;0;0
 F;32;Urban area;Living with family;University;married;3;1;1935.0;2;2;Manufacturing;between 21-50;9;False;0;0;0;0;0;0;0;0
 C;61;Urban area;Living with family;Missing;single;1;0;723.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
-B;44;Rural area;Living with family;Vocational school;single;2;1;1418.5;2;23;Manufacturing;> 1.000;2;False;0;0;0;0;0;0;0;0
+B;44;Rural area;Living with family; Vocational school;single;2;1;1418.5;2;23;Manufacturing;> 1.000;2;False;0;0;0;0;0;0;0;0
 F;32;Urban area;Living with family;University;single;1;0;3685.0;2;18;Wholesale and retail trade;between 251-500;5;False;0;0;0;0;0;0;0;0
 E;65;County capital;Owner without mortgage;Vocational school;married;2;0;1564.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
 F;30;County capital;Living with family;University;single;1;0;2936.0;2;17;Missing;between 51-100;9;False;0;0;0;0;0;0;0;0
@@ -3608,7 +3608,7 @@ E;24;County capital;Living with family;Vocational school;married;1;0;1376.0;4;9;
 F;38;County capital;Living with family;Highschool;married;2;0;925.0;8;21;Wholesale and retail trade;between 51-100;13;False;0;0;0;0;0;0;0;0
 F;33;County capital;Owner with mortgage;University;married;2;0;5661.5;6;7;Wholesale and retail trade;between 21-50;1;True;1;0;0;0;0;0;0;0
 C;33;County capital;Living with family;Other;married;3;1;2434.75;10;17;Public administration and defence;between 251-500;10;True;1;0;0;0;1;0;0;0
-C;52;Urban area;Living with family;College;single;1;0;984.9975;1;15;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
+C; 52;Urban area;Living with family;College;single;1;0;984.9975;1;15;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;63;Urban area;Owner without mortgage;University;married;2;0;1158.0;5;16;Missing;Missing;14;False;0;0;0;0;1;0;0;0
 C;68;County capital;Owner without mortgage;Highschool;widow;1;0;1421.0;5;16;Missing;Missing;8;False;0;0;0;0;1;0;0;0
 F;33;County capital;Owner with mortgage;University;married;2;0;5484.25;12;12;Manufacturing;> 1.000;2;False;0;0;0;0;0;0;0;0
@@ -3726,7 +3726,7 @@ F;39;Urban area;Owner without mortgage;University;married;4;2;1653.33;15;16;Manu
 C;56;Rural area;Owner without mortgage;Vocational school;married;2;0;1352.0;8;14;Manufacturing;between 21-50;13;False;0;0;0;0;1;0;0;0
 C;47;County capital;Owner without mortgage;University;married;2;0;7069.0;22;24;Manufacturing;between 501-1.000;12;True;1;0;0;0;1;0;0;0
 C;22;County capital;Living with family;Post secondary school;single;1;0;1147.0;3;12;Wholesale and retail trade;> 1.000;1;False;0;0;0;0;0;0;0;0
-C;64;Rural area;Living with family;Post secondary school;single;1;0;868.0;5;16;Missing;Missing;6;True;1;0;0;0;0;0;0;0
+C;64;Rural area;Living with family;Post secondary school;Single;1;0;868.0;5;16;Missing;Missing;6;True;1;0;0;0;0;0;0;0
 F;52;Urban area;Owner without mortgage;University;divorced;1;0;1838.0;12;12;Financial and insurance activities;between 0-10;10;False;0;0;0;0;1;0;0;0
 F;25;Urban area;Living with family;Missing;single;1;0;2609.655;3;10;Other;> 1.000;1;True;1;0;0;0;0;0;0;0
 C;48;County capital;Living with family;University;single;1;0;2091.9525;12;95;Manufacturing;between 251-500;1;False;1;0;0;0;0;0;0;0
@@ -3734,7 +3734,7 @@ C;62;Rural area;Owner without mortgage;Other;married;2;0;744.0;5;16;Missing;Miss
 B;43;Urban area;Owner without mortgage;Highschool;married;3;1;1013.0;6;14;Manufacturing;between 51-100;14;False;0;0;0;0;0;0;0;0
 B;56;Urban area;Owner without mortgage;Post-graduate;single;1;0;1250.0;7;11;Human health and social work activities;between 501-1.000;9;False;0;0;0;0;1;0;0;0
 F;33;County capital;Living with family;University;single;1;0;2683.825;2;5;Other;between 501-1.000;1;False;1;0;0;0;0;0;0;0
-F;30;County capital;Living with family;University;single;1;0;1453.0;7;7;Wholesale and retail trade;between 101-250;2;False;0;0;0;0;0;0;0;0
+F;30;"";Living with family;University;single;1;0;1453.0;7;7;Wholesale and retail trade;between 101-250;2;False;0;0;0;0;0;0;0;0
 E;37;County capital;Owner without mortgage;Highschool;married;3;1;1989.33;10;25;Manufacturing;> 1.000;10;True;1;0;0;0;0;0;0;0
 F;60;County capital;Owner without mortgage;Post secondary school;married;2;0;6752.0;19;20;Wholesale and retail trade;between 21-50;13;False;0;0;0;0;1;0;0;0
 C;42;County capital;Owner without mortgage;Highschool;married;2;0;1490.0;2;22;Wholesale and retail trade;between 251-500;11;False;0;0;0;0;0;0;0;0
@@ -3781,7 +3781,7 @@ C;30;County capital;Owner without mortgage;Post-graduate;single;1;0;2475.33;2;25
 C;65;Rural area;Owner without mortgage;Highschool;married;2;0;955.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
 C;42;Urban area;Owner with mortgage;University;married;3;1;4364.3075;15;63;Other;between 21-50;1;True;1;0;0;0;0;0;0;0
 E;31;Urban area;Living with family;University;single;1;0;6302.0;4;8;Information and communication;between 101-250;1;True;1;0;0;0;0;0;0;0
-F;37;Urban area;Owner with mortgage;University;married;3;1;2544.41;5;16;Missing;Missing;13;False;0;0;0;0;1;0;0;0
+F;37;Urban area;Owner with mortgage;University;married;3;1;2544.41;5;"";Missing;Missing;13;False;0;0;0;0;1;0;0;0
 C;33;County capital;Owner without mortgage;University;married;3;1;4542.25;9;11;Manufacturing;between 501-1.000;3;False;1;0;0;0;1;0;0;0
 F;29;County capital;Living with family;University;single;1;0;3199.33;5;15;Missing;> 1.000;8;False;0;0;0;0;1;0;0;0
 F;33;County capital;Living with family;Highschool;single;1;0;1490.8275;12;18;Manufacturing;between 51-100;11;False;0;0;0;0;1;0;0;0
@@ -3901,7 +3901,7 @@ F;50;County capital;Owner without mortgage;Highschool;married;2;0;1773.255;18;18
 C;27;Rural area;Owner without mortgage;Post-graduate;married;2;1;1266.15;2;11;Manufacturing;between 21-50;2;False;0;0;0;0;0;0;0;0
 C;66;Rural area;Owner without mortgage;Highschool;married;2;0;926.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
 C;68;County capital;Living with family;Vocational school;divorced;1;0;943.0;5;16;Missing;Missing;1;False;0;0;0;0;0;0;0;0
-F;31;Rural area;Living with family;Missing;married;2;0;1144.0;11;22;Missing;between 21-50;12;False;0;0;0;0;1;0;0;0
+F;31;Rural area;Living with family;Missing ;married;2;0;1144.0;11;22;Missing;between 21-50;12;False;0;0;0;0;1;0;0;0
 C;28;County capital;Living with family;Highschool;single;1;0;1218.0;2;3;Other;> 1.000;1;False;0;0;0;0;0;0;0;0
 B;30;County capital;Living with family;University;single;1;0;3400.015;2;9;Wholesale and retail trade;between 0-10;6;False;0;0;0;0;0;0;0;0
 B;28;Urban area;Living with family;University;married;2;0;792.0;3;22;Education;between 21-50;9;True;1;0;0;0;0;0;0;0
@@ -4049,7 +4049,7 @@ C;28;County capital;Living with family;University;single;1;0;1866.0;6;21;Public 
 F;29;County capital;Living with family;Post-graduate;single;1;0;1195.0;3;33;Human health and social work activities;between 501-1.000;1;True;1;0;0;0;0;0;0;0
 B;42;Urban area;Owner with mortgage;University;married;2;0;2702.0;21;21;Public administration and defence;between 501-1.000;4;True;1;0;0;0;0;0;0;0
 B;32;County capital;Living with family;Post-graduate;single;1;0;8391.25;3;24;Information and communication;> 1.000;6;False;0;0;0;0;0;0;0;0
-C;66;Rural area;Owner without mortgage;Post secondary school;widow;1;0;820.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
+C;66;Rural area;Owner without mortgage;Post secondary school ;widow;1;0;820.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;32;County capital;Owner without mortgage;Post-graduate;single;1;0;2695.5;2;9;Manufacturing;between 0-10;2;False;0;0;0;0;0;0;0;0
 F;37;County capital;Living with family;Post secondary school;married;2;0;1587.4;5;16;Missing;Missing;12;False;0;0;0;0;0;0;0;0
 F;34;County capital;Living with family;University;married;3;1;3803.16;9;13;Information and communication;> 1.000;2;False;0;0;0;0;0;0;0;0
@@ -4096,7 +4096,7 @@ E;49;County capital;Owner without mortgage;University;married;2;0;2823.72;2;2;Mi
 C;57;Rural area;Owner without mortgage;University;married;2;0;2491.0;3;22;Public administration and defence;between 21-50;14;False;0;0;0;0;1;0;0;0
 E;41;County capital;Owner without mortgage;Highschool;married;4;2;3803.196;14;14;Mining and quarrying;> 1.000;1;True;1;0;1;0;0;0;0;0
 E;56;Rural area;Owner without mortgage;University;married;2;0;2919.625;18;18;Mining and quarrying;> 1.000;1;True;1;0;0;0;0;0;0;0
-F;28;Urban area;Living with family;University;single;1;0;3854.11;1;8;Wholesale and retail trade;between 21-50;7;False;0;0;0;0;0;0;0;0
+F;28;Urban area;Living with family;University;single;1;0;3854,11;1;8;Wholesale and retail trade;between 21-50;7;False;0;0;0;0;0;0;0;0
 B;47;County capital;Owner without mortgage;University;married;2;0;2169.355;1;56;Education;between 21-50;12;True;1;0;0;0;0;0;0;0
 C;68;Urban area;Owner without mortgage;Vocational school;single;1;0;972.0;5;16;Missing;Missing;2;True;1;0;1;0;0;0;0;0
 F;29;Urban area;Owner with mortgage;University;married;3;1;1290.75;5;5;Public administration and defence;between 251-500;9;True;1;0;0;0;0;0;0;0
@@ -4380,7 +4380,7 @@ E;34;County capital;Owner with mortgage;University;married;2;0;4674.675;4;21;Pro
 C;35;County capital;Living with family;University;divorced;1;0;3200.0;6;10;Information and communication;between 51-100;11;False;0;0;0;0;0;0;0;0
 F;32;Rural area;Living with family;Post secondary school;married;2;0;1489.01;2;24;Manufacturing;between 501-1.000;12;False;1;0;0;0;0;0;0;0
 F;37;Urban area;Owner without mortgage;Highschool;married;3;1;2100.965;3;13;Construction;between 21-50;1;False;0;0;0;0;0;0;0;0
-E;32;County capital;Living with family;University;married;1;0;3881.0;2;17;Manufacturing;between 501-1.000;1;True;1;0;0;0;0;0;0;0
+E;32;County capital;Living with family;University;married;1;0;3881.0;2;"";Manufacturing;between 501-1.000;1;True;1;0;0;0;0;0;0;0
 F;29;County capital;Living with family;University;married;3;1;1827.0;9;16;Public administration and defence;between 501-1.000;8;True;1;0;0;0;1;0;0;0
 E;24;Urban area;Owner without mortgage;College;single;3;2;762.0;1;15;Wholesale and retail trade;between 51-100;1;True;1;0;1;0;0;0;0;0
 F;30;County capital;Owner without mortgage;Post-graduate;married;2;0;4523.0;3;9;Information and communication;between 11-20;9;False;0;0;0;0;0;0;0;0
@@ -4400,7 +4400,7 @@ B;47;Urban area;Owner without mortgage;Post secondary school;married;2;0;1471.33
 F;32;Rural area;Living with family;University;single;1;0;1568.75;8;22;Missing;between 21-50;1;False;0;0;0;0;0;0;0;0
 F;35;County capital;Owner with mortgage;Post secondary school;married;2;0;1934.5;3;11;Manufacturing;between 21-50;3;True;1;0;0;0;0;0;0;0
 C;67;Rural area;Owner without mortgage;Primary school;single;1;0;731.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
-C;26;County capital;Living with family;College;single;1;0;2000.0;4;4;Professional, scientific and technical activities;between 11-20;6;False;0;0;0;0;0;0;0;1
+C;26;"";Living with family;College;single;1;0;2000.0;4;4;Professional, scientific and technical activities;between 11-20;6;False;0;0;0;0;0;0;0;1
 F;43;County capital;Other;University;married;3;1;889.0;7;13;Wholesale and retail trade;between 101-250;2;True;1;0;0;0;0;0;0;0
 C;58;County capital;Owner without mortgage;Post secondary school;single;1;0;793.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;27;Rural area;Living with family;Highschool;single;1;0;667.0;6;22;Public administration and defence;between 21-50;2;False;0;0;0;0;0;0;0;0
@@ -4420,19 +4420,19 @@ C;53;County capital;Owner without mortgage;College;single;1;0;809.0;2;23;Constru
 F;26;County capital;Living with family;University;single;1;0;3209.0;4;23;Information and communication;> 1.000;1;True;1;0;0;0;0;0;0;0
 B;24;Rural area;Living with family;University;single;1;0;1115.0;3;14;Wholesale and retail trade;> 1.000;1;False;0;0;0;0;0;0;0;0
 C;40;Urban area;Owner without mortgage;Highschool;married;2;0;3276.165;3;5;Transportation and storage;between 101-250;10;True;1;0;0;0;1;0;0;0
-F;36;County capital;Living with family;University;married;3;1;1710.1;3;3;Information and communication;between 11-20;6;False;0;0;0;0;0;0;0;0
+F;36;"";Living with family;University;married;3;1;1710.1;3;3;Information and communication;between 11-20;6;False;0;0;0;0;0;0;0;0
 B;41;County capital;Owner without mortgage;Other;married;2;0;1692.67;15;35;Human health and social work activities;> 1.000;1;True;1;0;0;0;0;0;0;0
 F;29;Rural area;Living with family;University;single;1;0;11909.898;2;11;Other;between 251-500;10;True;1;0;0;0;0;0;0;0
 C;42;Urban area;Owner without mortgage;Highschool;divorced;1;0;508.0;5;16;Missing;Missing;9;False;0;0;0;0;0;0;0;0
 E;63;Rural area;Owner without mortgage;Missing;married;2;0;1043.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;52;Rural area;Owner without mortgage;Highschool;married;2;0;1797.33;3;3;Mining and quarrying;> 1.000;12;True;1;0;0;0;1;0;0;0
-F;28;County capital;Living with family;University;single;1;0;7057.0;3;18;Wholesale and retail trade;between 21-50;2;False;0;0;0;0;0;0;0;0
+F;28 ;County capital;Living with family;University;single;1;0;7057.0;3;18;Wholesale and retail trade;between 21-50;2;False;0;0;0;0;0;0;0;0
 B;41;Urban area;Owner without mortgage;University;married;3;1;2690.0;22;26;Public administration and defence;between 251-500;13;False;0;0;0;0;0;0;0;0
 F;35;Rural area;Living with family;University;divorced;1;0;2624.67;7;12;Water supply;between 101-250;4;False;0;0;0;0;0;0;0;0
 C;41;County capital;Owner without mortgage;University;married;3;1;2564.0;15;24;Wholesale and retail trade;between 101-250;1;False;0;0;0;0;0;0;0;0
 C;60;Rural area;Owner without mortgage;Highschool;single;1;0;954.0;5;16;Missing;Missing;5;False;1;0;0;0;0;0;0;0
 E;53;County capital;Owner without mortgage;Missing;married;2;0;2591.0;7;24;Water supply;between 501-1.000;1;True;1;0;0;0;0;0;0;0
-F;26;Urban area;Living with family;University;single;1;0;4200.66;3;18;Information and communication;between 501-1.000;2;True;1;0;0;0;0;0;0;0
+F;26;Urban area;Living with family;University;single;1;0;4200,66;3;18;Information and communication;between 501-1.000;2;True;1;0;0;0;0;0;0;0
 B;61;Urban area;Owner without mortgage;Highschool;married;2;0;847.0;5;16;Missing;Missing;13;True;1;0;0;0;0;0;0;0
 F;38;County capital;Living with family;Highschool;married;4;2;4078.62;3;15;Electricity and gas;> 1.000;9;False;0;0;0;0;0;0;0;0
 B;35;County capital;Owner without mortgage;Highschool;married;3;1;601.0;9;17;Manufacturing;between 21-50;2;False;0;0;0;0;0;0;0;0
@@ -4479,7 +4479,7 @@ C;57;County capital;Owner without mortgage;College;married;2;0;1281.0;2;13;Whole
 C;63;County capital;Owner without mortgage;Missing;single;1;0;556.0;5;16;Missing;Missing;8;False;1;0;0;0;0;0;0;0
 C;26;Rural area;Living with family;University;single;1;0;1296.35;3;10;Manufacturing;> 1.000;7;False;0;0;0;0;0;0;0;1
 C;65;Rural area;Owner without mortgage;Highschool;divorced;1;0;1070.0;5;16;Missing;Missing;10;1;1;0;0;0;0;0;0;0
-C;30;County capital;Owner without mortgage;Post-graduate;single;1;0;1609.0;3;21;Information and communication;between 51-100;5;False;0;0;0;0;0;0;0;0
+C;30;County capital;Owner without mortgage;Post-graduate ;single;1;0;1609.0;3;21;Information and communication;between 51-100;5;False;0;0;0;0;0;0;0;0
 C;46;County capital;Owner without mortgage;University;married;2;0;2723.0;8;25;Public administration and defence;between 251-500;1;True;1;0;0;0;0;0;0;0
 C;61;Urban area;Owner without mortgage;Middle school;widow;1;0;781.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
 F;30;County capital;Living with family;University;married;2;0;2739.33;2;18;Manufacturing;> 1.000;2;False;0;0;0;0;0;0;0;0
@@ -4546,7 +4546,7 @@ C;47;County capital;Owner without mortgage;University;single;1;0;1537.0;25;26;Tr
 B;63;County capital;Owner without mortgage;University;married;2;0;1290.0;39;39;Education;between 101-250;12;False;0;0;0;0;1;0;0;0
 B;59;County capital;Owner without mortgage;Post-graduate;single;1;0;882.0;5;16;Missing;Missing;2;False;0;0;0;0;0;0;0;0
 C;54;County capital;Owner without mortgage;Highschool;divorced;1;0;687.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
-F;47;County capital;Living with family;Other;married;3;1;1062.33;3;23;Manufacturing;between 101-250;2;False;0;0;0;0;0;0;0;0
+F;47;County capital;Living with family;Other;married;3;1;1062.33;3;"";Manufacturing;between 101-250;2;False;0;0;0;0;0;0;0;0
 B;31;Rural area;Owner with mortgage;Highschool;married;3;1;2363.6075;7;13;Manufacturing;> 1.000;1;False;1;0;0;0;0;0;0;0
 C;57;Rural area;Owner without mortgage;Highschool;divorced;1;0;1396.0;5;16;Missing;Missing;12;False;1;0;0;0;1;0;0;0
 F;32;County capital;Living with family;University;single;1;0;4000.0;2;4;Professional, scientific and technical activities;between 0-10;9;False;0;0;0;0;0;0;0;0
@@ -4713,7 +4713,7 @@ B;30;County capital;Living with family;Highschool;married;3;1;1888.33;2;11;Manuf
 F;30;County capital;Living with family;University;married;2;0;3382.841;1;16;Missing;between 0-10;11;True;1;0;0;0;0;0;0;0
 C;27;Urban area;Living with family;University;married;2;0;6209.0205;3;4;Information and communication;between 0-10;1;True;1;0;0;0;0;0;0;0
 C;51;Rural area;Owner without mortgage;University;married;2;0;2804.0;5;7;Wholesale and retail trade;between 0-10;10;True;1;0;0;0;0;0;0;0
-C;22;Rural area;Living with family;Other;single;1;0;1157.45;2;22;Manufacturing;> 1.000;1;True;1;0;1;0;0;0;0;0
+C; 22;Rural area;Living with family;Other;single;1;0;1157.45;2;22;Manufacturing;> 1.000;1;True;1;0;1;0;0;0;0;0
 F;28;Urban area;Living with family;Post-graduate;single;1;0;1939.0025;3;8;Wholesale and retail trade;between 251-500;2;True;1;0;0;0;0;0;0;0
 C;45;Rural area;Living with family;University;divorced;1;0;1253.0;5;10;Transportation and storage;between 21-50;11;False;0;0;0;0;0;0;0;1
 C;37;County capital;Owner without mortgage;University;married;2;0;2153.0;13;25;Other;> 1.000;13;False;0;0;0;0;1;0;0;0
@@ -4782,7 +4782,7 @@ F;52;County capital;Owner without mortgage;Post secondary school;married;2;0;168
 B;47;Urban area;Owner without mortgage;Highschool;divorced;2;1;2527.0;5;5;Mining and quarrying;between 501-1.000;11;True;1;0;0;0;0;0;0;0
 E;28;Urban area;Living with family;University;married;1;0;769.0;1;26;Public administration and defence;between 501-1.000;1;True;1;0;1;0;0;0;0;0
 B;61;County capital;Owner without mortgage;University;married;2;0;1713.0;12;22;Public administration and defence;between 251-500;1;False;0;0;0;0;0;0;0;0
-F;42;County capital;Owner without mortgage;University;married;3;1;2279.0;21;23;Construction;between 101-250;12;False;0;0;0;0;1;0;0;0
+F;42;County capital;Owner without mortgage;University;Married;3;1;2279.0;21;23;Construction;between 101-250;12;False;0;0;0;0;1;0;0;0
 C;22;County capital;Living with family;Other;single;1;0;1345.0;2;52;Human health and social work activities;between 101-250;1;False;0;0;0;0;0;0;0;1
 F;35;County capital;Owner with mortgage;Highschool;married;2;0;2006.9975;14;15;Missing;> 1.000;12;False;0;0;0;0;1;0;0;0
 F;28;County capital;Living with family;University;single;1;0;3508.33;5;24;Information and communication;between 101-250;2;False;0;0;0;0;0;0;0;0
@@ -4861,7 +4861,7 @@ C;24;Rural area;Living with family;Highschool;single;1;0;1350.5;3;24;Manufacturi
 B;62;Urban area;Owner without mortgage;Highschool;single;1;0;1121.0;5;16;Missing;Missing;12;True;1;0;0;0;1;0;0;0
 E;47;County capital;Owner without mortgage;University;married;2;0;2213.995;23;26;Public administration and defence;between 251-500;10;True;1;0;1;0;0;0;0;0
 C;66;Rural area;Owner without mortgage;Highschool;divorced;1;0;930.0;5;16;Missing;Missing;11;True;1;0;0;0;1;0;0;0
-B;53;Rural area;Owner without mortgage;Vocational school;married;2;0;1131.0;7;14;Missing;> 1.000;2;False;0;0;0;0;0;0;0;0
+B;53;Rural area;Owner without mortgage; Vocational school;married;2;0;1131.0;7;14;Missing;> 1.000;2;False;0;0;0;0;0;0;0;0
 B;42;County capital;Living with family;University;single;1;0;1010.745;2;5;Other;between 251-500;2;False;0;0;0;0;0;0;0;0
 B;61;County capital;Living with family;Missing;widow;1;0;798.0;5;16;Missing;Missing;9;False;0;0;0;0;0;0;0;1
 C;27;County capital;Living with family;Highschool;single;1;0;1469.25;4;13;Other;between 501-1.000;1;True;1;0;1;0;0;0;0;0
@@ -5006,7 +5006,7 @@ B;63;County capital;Owner without mortgage;University;single;1;0;982.0;5;16;Miss
 C;35;County capital;Owner without mortgage;University;married;3;1;8442.5;7;20;Financial and insurance activities;> 1.000;16;False;1;0;0;0;0;0;0;0
 C;47;Rural area;Owner without mortgage;Post secondary school;married;2;0;1137.0;16;16;Manufacturing;between 251-500;12;False;0;0;0;0;0;0;0;0
 F;48;Urban area;Living with family;University;married;3;2;4041.6;7;20;Wholesale and retail trade;between 51-100;10;False;0;0;0;0;1;0;0;0
-E;26;County capital;Living with family;University;married;2;0;1078.0;3;23;Wholesale and retail trade;> 1.000;2;True;1;0;1;0;0;0;0;1
+E;26;"";Living with family;University;married;2;0;1078.0;3;23;Wholesale and retail trade;> 1.000;2;True;1;0;1;0;0;0;0;1
 F;26;Rural area;Living with family;University;single;1;0;1290.0;5;10;Missing;between 101-250;1;False;0;0;0;0;0;0;0;0
 B;56;County capital;Owner without mortgage;University;single;1;0;1218.0;3;3;Missing;between 21-50;1;False;1;0;0;0;0;0;0;1
 C;26;County capital;Owner with mortgage;Post-graduate;married;2;0;2251.0;2;8;Financial and insurance activities;between 11-20;1;True;1;0;0;0;0;0;0;0
@@ -5073,7 +5073,7 @@ C;62;Rural area;Owner without mortgage;Highschool;married;2;0;839.0;5;16;Missing
 F;25;Urban area;Living with family;Other;single;1;0;2705.245;2;10;Other;between 51-100;1;True;1;0;0;0;0;0;0;0
 F;31;County capital;Living with family;Highschool;divorced;1;1;3769.28;3;10;Transportation and storage;between 51-100;11;True;1;0;0;0;1;0;0;0
 C;59;County capital;Owner without mortgage;Highschool;single;1;0;1236.0;9;22;Manufacturing;between 501-1.000;13;False;0;0;0;0;0;0;0;0
-F;25;Rural area;Owner with mortgage;Highschool;single;1;0;858.25;4;16;Wholesale and retail trade;> 1.000;2;False;0;0;0;0;0;0;0;0
+F;25;Rural area;Owner with mortgage;Highschool;single;1;0;858.25;4;"";Wholesale and retail trade;> 1.000;2;False;0;0;0;0;0;0;0;0
 F;43;County capital;Owner without mortgage;University;married;2;0;880.28;2;20;Construction;between 11-20;10;False;0;0;0;0;0;0;0;0
 B;48;Rural area;Owner without mortgage;Other;married;2;0;1243.0;23;24;Water supply;between 501-1.000;1;True;1;0;1;0;0;0;0;0
 C;33;Urban area;Living with family;Highschool;single;1;0;835.0;2;7;Manufacturing;between 51-100;9;False;0;0;0;0;0;0;0;0
@@ -5241,7 +5241,7 @@ C;26;County capital;Living with family;University;single;1;0;1037.0625;3;6;Manuf
 F;31;County capital;Living with family;University;single;1;0;1403.0;3;6;Professional, scientific and technical activities;between 0-10;2;False;0;0;0;0;0;0;0;0
 B;33;County capital;Living with family;University;married;2;0;757.95;7;9;Other;> 1.000;2;False;0;0;0;0;0;0;0;0
 C;41;County capital;Living with family;Post secondary school;single;1;0;2929.835;2;13;Transportation and storage;between 101-250;2;False;0;0;0;0;0;0;0;0
-B;61;County capital;Living with family;Post secondary school;married;2;0;974.0;5;16;Missing;Missing;9;False;1;0;0;0;0;0;0;0
+B;61;County capital;Living with family;Post secondary school;married;2;0;974,0;5;16;Missing;Missing;9;False;1;0;0;0;0;0;0;0
 E;62;County capital;Owner without mortgage;Post-graduate;divorced;1;0;2614.0;5;16;Missing;Missing;11;True;1;0;0;0;0;0;0;0
 B;39;County capital;Owner without mortgage;University;married;3;1;1816.0;8;11;Public administration and defence;between 501-1.000;8;True;1;0;0;0;0;0;0;0
 C;22;County capital;Living with family;University;single;1;0;649.0;1;7;Other;> 1.000;1;True;1;0;0;0;0;0;0;0
@@ -5436,7 +5436,7 @@ C;45;Urban area;Owner without mortgage;Post secondary school;divorced;1;0;1356.2
 C;54;Urban area;Owner without mortgage;Post secondary school;married;2;0;1569.0;5;16;Missing;Missing;7;False;0;0;0;0;0;0;0;0
 F;47;Urban area;Living with family;Highschool;married;4;2;2876.6;3;21;Transportation and storage;between 251-500;10;False;0;0;0;0;1;0;0;0
 C;53;County capital;Owner without mortgage;University;married;2;0;2702.0;24;25;Public administration and defence;> 1.000;12;False;1;0;0;0;1;0;0;0
-B;49;County capital;Owner without mortgage;Other;divorced;1;0;910.0;5;16;Missing;Missing;10;False;0;0;0;0;1;0;0;0
+B;49 ;County capital;Owner without mortgage;Other;divorced;1;0;910.0;5;16;Missing;Missing;10;False;0;0;0;0;1;0;0;0
 B;43;Rural area;Living with family;Post secondary school;single;1;0;2182.0;21;66;Public administration and defence;between 501-1.000;1;False;1;0;0;0;0;0;0;0
 B;65;Rural area;Owner without mortgage;Post secondary school;divorced;1;0;1314.0;5;16;Missing;Missing;12;False;0;0;0;0;0;0;0;0
 C;33;County capital;Living with family;University;single;1;0;1527.7475;2;6;Other;> 1.000;7;True;1;0;0;0;0;0;0;0
@@ -5457,8 +5457,8 @@ B;57;Rural area;Owner without mortgage;Highschool;widow;1;0;936.0;4;10;Manufactu
 E;44;County capital;Owner without mortgage;Missing;single;2;0;1178.0;1;24;Water supply;between 501-1.000;1;True;1;0;0;0;0;0;0;0
 F;38;County capital;Living with family;University;married;3;1;2494.0;2;21;Transportation and storage;between 11-20;2;False;0;0;0;0;0;0;0;0
 C;50;County capital;Owner without mortgage;University;married;2;0;1877.0;17;25;Public administration and defence;between 251-500;14;True;1;0;0;0;0;0;0;0
-B;27;Rural area;Living with family;Highschool;single;1;0;811.0;3;10;Other;between 101-250;1;False;0;0;0;0;0;0;0;0
-C;52;County capital;Owner without mortgage;University;married;2;0;4329.0;6;14;Transportation and storage;> 1.000;11;True;1;0;0;0;1;0;0;0
+B;27;Rural area;Living with family;Highschool;single;1;0;811.0;3;"";Other;between 101-250;1;False;0;0;0;0;0;0;0;0
+C;52;County capital;Owner without mortgage; University ;married;2;0;4329.0;6;14;Transportation and storage;> 1.000;11;True;1;0;0;0;1;0;0;0
 C;66;County capital;Owner without mortgage;College;married;2;0;799.0;5;16;Missing;Missing;1;True;1;0;0;0;0;0;0;0
 C;28;County capital;Living with family;University;married;2;0;1455.0;3;13;Manufacturing;between 501-1.000;1;False;0;0;0;0;0;0;0;0
 C;67;County capital;Owner without mortgage;Highschool;married;2;0;691.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
@@ -5567,7 +5567,7 @@ F;39;County capital;Living with family;University;married;2;0;2065.5;2;14;Manufa
 C;47;County capital;Owner without mortgage;University;divorced;2;0;1461.67;11;11;Human health and social work activities;between 501-1.000;11;True;1;0;0;0;0;0;0;0
 C;62;Rural area;Owner without mortgage;Other;married;2;0;1869.0;5;16;Missing;Missing;10;False;1;0;0;0;1;0;0;0
 F;46;County capital;Owner without mortgage;Highschool;married;2;0;3636.0;21;24;Transportation and storage;> 1.000;2;False;0;0;0;0;0;0;0;0
-F;57;County capital;Living with family;Highschool;married;2;0;5115.3;2;2;Manufacturing;between 51-100;1;True;1;0;0;0;0;0;0;0
+F;57;County capital;Living with family;Highschool;Married;2;0;5115.3;2;2;Manufacturing;between 51-100;1;True;1;0;0;0;0;0;0;0
 C;32;County capital;Living with family;Other;single;1;0;2669.0;7;8;Wholesale and retail trade;between 0-10;10;False;0;0;0;0;0;0;0;0
 C;25;Rural area;Living with family;College;single;1;0;789.0;3;16;Manufacturing;> 1.000;1;False;0;0;0;0;0;0;0;0
 B;30;Rural area;Living with family;Post secondary school;single;1;0;1127.0;1;19;Construction;between 101-250;1;True;1;0;1;0;0;0;0;0
@@ -5702,7 +5702,7 @@ B;35;Rural area;Living with family;College;single;1;0;895.0;3;6;Missing;between 
 E;32;Rural area;Living with family;Highschool;married;2;1;935.0;8;14;Wholesale and retail trade;between 21-50;1;True;1;0;0;0;0;0;0;0
 C;36;County capital;Owner without mortgage;University;single;1;0;3070.655;12;12;Manufacturing;between 501-1.000;1;False;0;0;0;0;0;0;0;0
 F;28;Urban area;Living with family;University;married;2;0;2593.33;2;24;Financial and insurance activities;> 1.000;2;False;0;0;0;0;0;0;0;0
-C;42;Rural area;Owner with mortgage;University;married;2;0;4477.0;7;16;Professional, scientific and technical activities;between 101-250;7;False;0;0;0;0;0;0;0;0
+C;42;"";Owner with mortgage;University;married;2;0;4477.0;7;16;Professional, scientific and technical activities;between 101-250;7;False;0;0;0;0;0;0;0;0
 B;30;Urban area;Living with family;Post-graduate;single;3;2;2406.22;3;18;Transportation and storage;between 21-50;10;False;0;0;0;0;0;0;0;1
 C;61;Urban area;Owner without mortgage;Highschool;married;2;0;617.0;5;16;Missing;Missing;10;True;1;0;0;0;0;0;0;0
 C;22;Rural area;Owner without mortgage;College;single;1;0;943.0;2;16;Wholesale and retail trade;> 1.000;2;False;0;0;0;0;0;0;0;0
@@ -5731,7 +5731,7 @@ B;34;Rural area;Living with family;Post-graduate;single;1;0;1559.0;9;25;Other;be
 F;40;County capital;Owner without mortgage;University;married;3;1;2643.0;5;18;Information and communication;between 501-1.000;2;False;0;0;0;0;0;0;0;0
 C;44;County capital;Owner without mortgage;Post secondary school;single;1;0;2488.5;13;13;Missing;between 501-1.000;11;False;0;0;0;0;1;0;0;0
 B;24;County capital;Owner without mortgage;University;single;1;0;1765.01;2;25;Financial and insurance activities;> 1.000;1;False;1;0;0;0;0;0;0;0
-B;58;County capital;Owner without mortgage;Other;married;2;0;1376.0;5;16;Missing;Missing;13;False;1;0;0;0;0;0;0;0
+B;58;County capital;Owner without mortgage;Other;married;2;0;1376,0;5;16;Missing;Missing;13;False;1;0;0;0;0;0;0;0
 F;27;Urban area;Living with family;University;single;1;0;2086.0;2;13;Manufacturing;> 1.000;7;True;1;0;0;0;0;0;0;0
 C;62;County capital;Owner without mortgage;Vocational school;divorced;1;0;1941.8925;2;11;Manufacturing;between 101-250;1;False;1;0;0;0;0;0;0;1
 B;43;County capital;Owner without mortgage;Post secondary school;married;2;0;1520.66;7;22;Wholesale and retail trade;between 501-1.000;9;False;0;0;0;0;1;0;0;0
@@ -5855,6 +5855,6 @@ C;26;County capital;Living with family;College;single;1;0;2225.0;3;15;Wholesale 
 C;35;Rural area;Living with family;University;single;1;0;2092.0;5;22;Manufacturing;between 101-250;1;False;1;0;0;0;0;0;0;0
 C;60;Rural area;Owner without mortgage;Middle school;widow;1;0;501.0;5;16;Missing;Missing;1;False;1;0;0;0;0;0;0;0
 C;63;County capital;Owner without mortgage;Post-graduate;married;2;0;1103.0;5;16;Missing;Missing;14;False;0;0;0;0;0;0;0;0
-C;64;Urban area;Owner without mortgage;Post secondary school;widow;1;0;1300.0;5;16;Missing;Missing;8;False;0;0;0;0;0;0;0;0
+C;64;Urban area;Owner without mortgage;Post secondary school;widow;1;0;1300.0;5;"";Missing;Missing;8;False;0;0;0;0;0;0;0;0
 F;33;County capital;Living with family;University;single;1;0;1206.0;9;21;Construction;between 101-250;2;False;0;0;0;0;0;0;0;0
 F;34;Urban area;Living with family;University;single;1;0;1424.0;6;6;Other;between 0-10;2;False;0;0;0;0;0;0;0;0
