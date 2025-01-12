@@ -88,6 +88,6 @@ class DataCleaner:
         X = self.dataImputer.impute(X, num_strategy, cat_strategy, fill_value)
 
         # 8. Remove common patterns
-        # X = self.patternRemover.remove_pattern(X)
+        X = self.patternRemover.remove_pattern(X)
 
         return X
