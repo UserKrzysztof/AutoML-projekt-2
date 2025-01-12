@@ -3,7 +3,7 @@ from codecs import open
 
 setup(
     name="autopocket",
-    version="0.5.0",
+    version="0.7.0",
     description="Automated Machine Learning project for financial data analysis.",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",

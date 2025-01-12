@@ -12,7 +12,15 @@ class AutoPocketor():
         """
         pass
 
-    def doJob(self, path, target, generate_shap=True, generate_lime_pdp_ice=True, features_for_displaying_plots=None, subset_fraction_for_ICE_plot=None, additional_estimators=None):
+    def doJob(self,
+              path,
+              target,
+              generate_shap=True,
+              generate_lime_pdp_ice=True,
+              features_for_displaying_plots=None,
+              subset_fraction_for_ICE_plot=None,
+              additional_estimators=None
+              ):
         """
         Main method for performing AutoML tasks including preprocessing, modeling, and postprocessing.
 

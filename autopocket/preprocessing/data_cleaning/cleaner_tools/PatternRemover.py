@@ -105,9 +105,10 @@ class PatternRemover:
         if column.empty:
             return ''
 
-        prefix = column.iloc[0]
+        prefix = str(column.iloc[0])
 
         for item in column:
+            item = str(item)
             temp_prefix = ''
             for i in range(min(len(prefix), len(item))):
                 if prefix[i] == item[i]:
