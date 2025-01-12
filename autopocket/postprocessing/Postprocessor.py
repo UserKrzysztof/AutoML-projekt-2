@@ -1,5 +1,7 @@
 import os
 import warnings
+from time import strftime, gmtime
+
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import shap
@@ -88,8 +90,9 @@ class Postprocessor():
         else:
             X_train, X_test, _, y_test = train_test_split(X, y, test_size=0.3)
         model_name = best_model.__class__.__name__
-        os.makedirs(os.path.join(os.getcwd(), 'results', 'explanations'), exist_ok=True)
-        output_file = os.path.join(os.getcwd(), 'results', 'explanations', f"explanations_{model_name}.pdf")
+        now = strftime("%Y%m%d_%H%M%S", gmtime())
+        os.makedirs(os.path.join(os.getcwd(), 'results', f'explanations_{now}'), exist_ok=True)
+        output_file = os.path.join(os.getcwd(), 'results', f'explanations_{now}', f"explanations_{model_name}.pdf")
         
         try: #####
             leaderboard = self.models_leaderboard.create_leaderboard()
