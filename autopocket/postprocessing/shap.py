@@ -127,10 +127,18 @@ class ShapPLOT:
         """
         try:
             fig = plt.gcf()
+            
             shap.summary_plot(
                 shap_values, X_test_lim, show=False
             )
             plt.title(f"{best_model.__class__.__name__} SHAP summary plot")
+            print(f"Global explanations - Shap Feature Importance of each feature in the dataset.")
+            print("- Each dot represents one observation.")
+            print("- The color of the dot indicates the feature value (red: high, blue: low).")
+            print("- If the dot is on the right side of middle line, it means that it contributes to the higher prediction value.")
+            print("- If the dot is on the left side of middle line, it means that it contributes to the lower prediction value.")
+            print("- for example, if there is a blue cloud on the right side of the middle line, it means that low values of the feature\
+                  \ncontribute to the higher prediction value.")
             plt.show()
             fig.tight_layout()  
             
@@ -177,6 +185,14 @@ class ShapPLOT:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             fig = plt.figure(figsize=(14, 7))
+            print(f"SHAP Dependence Plots - Relationship between feature values and their impact on predictions.")
+            print("- X-axis: Feature values.")
+            print("- Y-axis (left): SHAP values, showing the feature's contribution to the prediction.")
+            print("- Y-axis (right): Other feature values (With the highest ranked importance pair).")
+            print("- Points on the top indicate contribution to higher prediction values.")
+            print("- Points on the bottom indicate contribution to lower prediction values.")
+            print("- The color represents the value of another interacting feature.")
+            print("- Patterns in the plots (e.g., slopes or clusters) show how the feature influences predictions.")
             plots_counter = np.min([9, X_test_lim.shape[1]])
             cols_cnt = 3
             rows_cnt = 3
@@ -184,7 +200,7 @@ class ShapPLOT:
                 rows_cnt = 1
             elif plots_counter < 7:
                 rows_cnt = 2
-                    
+                 
             for i in range(plots_counter):
                 ax = fig.add_subplot(rows_cnt, cols_cnt, i + 1)
                 shap.dependence_plot(
@@ -218,6 +234,9 @@ class ShapPLOT:
         - model_file_path: string - Path to save SHAP outputs.
         - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
         """
+        
+        
+        
         if not ShapPLOT.is_available(best_model, X_train):
             return
         
@@ -233,6 +252,8 @@ class ShapPLOT:
             shap_values = shap_values[:,:,1]
             expected_value = expected_value[1]
         
+        print(f"\nSHAP explanations:")
+        
         ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, results_dir, pdf)
         
         ShapPLOT.shap_dependence(shap_values, X_test_lim, pdf) 
@@ -241,9 +262,10 @@ class ShapPLOT:
         
         if ml_task == "BINARY_CLASSIFICATION":
             ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, pdf) 
-            ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, pdf, results_dir)
+            ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, results_dir)
         else:
             ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, pdf)
+            ShapPLOT.forceplot_regression(df_preds, shap_values, expected_value, X_test_lim, results_dir)
 
 
 
@@ -267,6 +289,12 @@ class ShapPLOT:
         - y_test_lim: pandas Series - Limited test dataset target variable.
         - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
         """
+        
+        print("- SHAP Decision Plots - These plots visualize the contribution of each feature to the model's prediction for individual observations.")
+        print("- X-axis: Model output value.")
+        print("- Y-axis: Path of the prediction, starting from the baseline (expected value) to the final prediction.")
+        print("- The vertical position of each step represents the order in which the model uses the features.\n")
+        
         for t in np.unique(y_test_lim):
             fig = plt.gcf()
             shap.decision_plot(
@@ -276,6 +304,7 @@ class ShapPLOT:
                 show=False,
             )
             plt.title(f"SHAP decision plot for class {t} - worst decisions")
+            print("This plot shows top 10 observations with highest residual values.")
             plt.show()
             fig.tight_layout(pad=2.0)
             if pdf:
@@ -290,6 +319,8 @@ class ShapPLOT:
                 show=False,
             )
             plt.title(f"SHAP decision plot for class {t} - best decisions")
+            print("This plot shows top 10 observations with lowest residual values.")
+
             plt.show()
             fig.tight_layout(pad=2.0)
             if pdf:
@@ -314,6 +345,11 @@ class ShapPLOT:
         - x_test_lim: pandas DataFrame - Limited test dataset features.
         - pdf: matplotlib.backends.backend_pdf.PdfPages - PDF file to save plots (optional).
         """
+        print("- SHAP Decision Plots - These plots visualize the contribution of each feature to the model's prediction for individual observations.")
+        print("- X-axis: Model output value.")
+        print("- Y-axis: Path of the prediction, starting from the baseline (expected value) to the final prediction.")
+        print("- The vertical position of each step represents the order in which the model uses the features.\n")
+        
         fig = plt.gcf()
         shap.decision_plot(
             expected_value,
@@ -322,6 +358,7 @@ class ShapPLOT:
             show=False,
         )
         plt.title("Decision plot - worst decisions")
+        print("This plot shows top 10 observations with highest residual values.")
         plt.show()
         fig.tight_layout(pad=2.0)
         
@@ -337,6 +374,7 @@ class ShapPLOT:
             show=False,
         )
         plt.title("Decision plot - best decisions")
+        print("This plot shows top 10 observations with lowest residual values.")
         plt.show()
         fig.tight_layout(pad=2.0)
         if pdf:
@@ -349,7 +387,6 @@ class ShapPLOT:
         shap_values,
         expected_value,
         x_test_lim,
-        pdf,
         results_dir,
     ):
         """
@@ -362,13 +399,17 @@ class ShapPLOT:
         - x_test_lim: pandas DataFrame - Limited test dataset features.
         - model_file_path: string - Path to save the plots.
         """
+        print("- SHAP Force Plot - This plot visualizes how each feature contributes to a specific prediction by a model.")
+        print("- X-axis: The feature names and values, representing the impact of each feature on the model's output.")        
+        print("- The color intensity indicates the magnitude and direction of each feature’s effect on the final prediction (red for positive, blue for negative).")
+        print("- The baseline is represented by the initial model output, and the steps show how each feature either increases or decreases the prediction.")
         prob_class_1 = best_model.predict_proba(x_test_lim)[:, 1]
         prob_class_0 = best_model.predict_proba(x_test_lim)[:, 0]
 
         top_indices_class_1 = prob_class_1.argsort()[-1:]
         top_indices_class_0 = prob_class_0.argsort()[-1:]
         fig = plt.gcf()
-        shap.plots.force(expected_value, shap_values[top_indices_class_1, :], x_test_lim.iloc[top_indices_class_1, :], matplotlib=True, show=False)
+        shap.plots.force(expected_value, shap_values[top_indices_class_1, :], x_test_lim.iloc[top_indices_class_1, :], matplotlib=True, show=False, plot_cmap="CyPU")
         plt.title("Force plot for class 1 - observation with biggest prediction probability")
         #plt.show()
         plt.tight_layout()
@@ -377,9 +418,6 @@ class ShapPLOT:
                 results_dir, f"force_plot_class_1.png"
             )
         )
-        #shap.save_html(os.path.join(
-        #    os.getcwd(), 'results', 'explanations', f"force_plot_class_0.html"
-        #), force_plot)
         plt.show()
         plt.close("all")
 
@@ -387,17 +425,65 @@ class ShapPLOT:
         shap.plots.force(expected_value, shap_values[top_indices_class_0, :], x_test_lim.iloc[top_indices_class_0, :], matplotlib=True, show=False)
         plt.title("Force plot for class 0 - observation with biggest prediction probability")
         plt.tight_layout()
-        #if pdf:
-        #    pdf.savefig(fig)
         plt.savefig(
             os.path.join(
                 results_dir, f"force_plot_class_0.png"
             )
         )
         plt.show()
-        #shap.save_html(os.path.join(
-        #                os.getcwd(), 'results', 'explanations', f"force_plot_class_0.html"
-        #              ), force_plot)
+        plt.close("all")
+    @staticmethod
+    def forceplot_regression(
+        df_preds,
+        shap_values,
+        expected_value,
+        x_test_lim,
+        results_dir,
+    ):
+        """
+        Creates force plots for regression problem to explain predictions.
+
+        Parameters:
+        - shap_values: numpy array - SHAP values for the test dataset.
+        - expected_value: float - SHAP baseline value.
+        - x_test_lim: pandas DataFrame - Limited test dataset features.
+        - model_file_path: string - Path to save the plots.
+        """
+        print("- SHAP Force Plots - These plots visualize how each feature contributes to a specific prediction by a model.")
+        print("- X-axis: The feature names and values, representing the impact of each feature on the model's output.")        
+        print("- The color intensity indicates the magnitude and direction of each feature’s effect on the final prediction (red for positive, blue for negative).")
+        print("- The baseline is represented by the initial model output, and the steps show how each feature either increases or decreases the prediction.")
+        
+        fig = plt.gcf()
+        shap.plots.force(expected_value, 
+                        shap_values[df_preds.lp[-1:], :],
+                        x_test_lim.loc[df_preds.index[-1:]], 
+                         matplotlib=True,
+                         show=False)        
+        plt.title("Force plot for observation with the lowest residual value")
+        plt.tight_layout()
+        plt.savefig(
+            os.path.join(
+                results_dir, f"force_plot_regression_best.png"
+            )
+        )
+        plt.show()
+        plt.close("all")
+
+        fig = plt.gcf()
+        shap.plots.force(expected_value, 
+                        shap_values[df_preds.lp[:1], :],
+                        x_test_lim.loc[df_preds.index[:1]], 
+                         matplotlib=True,
+                         show=False)
+        plt.title("Force plot for observation with the highest residual value")        
+        plt.tight_layout()
+        plt.savefig(
+            os.path.join(
+                results_dir, f"force_plot_regression_worst.png"
+            )
+        )
+        plt.show()
         plt.close("all")
         
         

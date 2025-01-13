@@ -39,7 +39,8 @@ class ModelsLeaderboard:
             
             leaderboard = leaderboard.sort_values(by='score', ascending=False)
             leaderboard.insert(0, 'position', range(1, len(leaderboard) + 1))
-            print(leaderboard)
+            leaderboard = leaderboard.reset_index(drop=True)
+            print(leaderboard.to_string(index=False))
             
             return leaderboard
         except Exception as e:
