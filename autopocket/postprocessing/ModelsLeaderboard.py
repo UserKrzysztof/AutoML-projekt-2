@@ -46,13 +46,13 @@ class ModelsLeaderboard:
             print(f"Error while creating leaderboard: {e}")
             return None
         
-    def save_leaderboard_to_csv(self, leaderboard: pd.DataFrame):
+    def save_leaderboard_to_csv(self, leaderboard: pd.DataFrame, results_dir: str): ####
         """
         Saves the leaderboard to a csv file.
         """
         try:
-            os.makedirs(os.path.join(os.getcwd(), 'results', 'explanations'), exist_ok=True)
-            results_dir = os.path.join(os.getcwd(), 'results', 'explanations')
+            os.makedirs(os.path.join(results_dir), exist_ok=True)
+            results_dir = os.path.join(results_dir)
 
             leaderboard.to_csv(os.path.join(results_dir, 'leaderboard.csv'), index=False)
             

@@ -40,7 +40,7 @@ class BaseSearcher(BaseEstimator):
         self.n_estimators_ = len(self.estimators_)
         self.results_ = {}
         now = strftime("%Y%m%d_%H%M%S", gmtime())
-        self.results_dir = os.path.join(os.getcwd(), 'results', f'algorithms_results_{now}')
+        self.results_dir = os.path.join(os.getcwd(), f'results_{now}', f'algorithms_results_{now}')
         self.dummy_estimator = dummy_estimator
         self.dummy_strategy = dummy_strategy
         self.additional_estimators = additional_estimators

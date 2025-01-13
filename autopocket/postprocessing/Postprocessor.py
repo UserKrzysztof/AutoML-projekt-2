@@ -1,10 +1,7 @@
 import os
-import warnings
 from time import strftime, gmtime
 
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-import shap
 from sklearn.model_selection import train_test_split
 from autopocket.algorithms.utils import ResultsReader
 from autopocket.postprocessing.ModelsLeaderboard import ModelsLeaderboard
@@ -20,14 +17,15 @@ from autopocket.postprocessing.utils import validate_features_for_displaying, pl
 class Postprocessor():
     def __init__(self, results_dir): ####
         """
-        Porządny init.
+        Initialize the Postprocessor class.
         """
         self.pdp_plotter = PartialDependencePlotter()
         self.ice_plotter = IndividualConditionalExpectationPlotter()
         self.lime_processor = LimePostprocessor()
         self.reader = ResultsReader(results_dir) #####
         self.models_leaderboard = ModelsLeaderboard(self.reader) #####
-        pass
+        self.results_dir = results_dir #####
+        self.final_dir = None
 
     
 
@@ -91,19 +89,22 @@ class Postprocessor():
             X_train, X_test, _, y_test = train_test_split(X, y, test_size=0.3)
         model_name = best_model.__class__.__name__
         now = strftime("%Y%m%d_%H%M%S", gmtime())
-        os.makedirs(os.path.join(os.getcwd(), 'results', f'explanations_{now}'), exist_ok=True)
-        output_file = os.path.join(os.getcwd(), 'results', f'explanations_{now}', f"explanations_{model_name}.pdf")
+        results_dir = self.results_dir
+        parent_dir = os.path.dirname(results_dir)
+        self.final_dir = os.path.join(parent_dir, f'explanations_{now}')
+        os.makedirs(os.path.join(parent_dir, f'explanations_{now}'), exist_ok=True)
+        output_file = os.path.join(parent_dir, f'explanations_{now}', f"explanations_{model_name}.pdf")
         
         try: #####
             leaderboard = self.models_leaderboard.create_leaderboard()
-            self.models_leaderboard.save_leaderboard_to_csv(leaderboard)
+            self.models_leaderboard.save_leaderboard_to_csv(leaderboard, self.final_dir)
         except Exception as e:
             print(f"Error during leaderboard creation: {e}") #####
         
         with PdfPages(output_file) as pdf:
             try:
                 if generate_shap:
-                    ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=pdf)
+                    ShapPLOT.explain_with_shap(best_model, X_train, X_test, y_test, ml_task, results_dir=self.final_dir , pdf=pdf)
                 if not isinstance(y, pd.Series):
                     y = pd.Series(y, name="target")
                 if generate_lime_pdp_ice:

@@ -114,7 +114,7 @@ class ShapPLOT:
         return pred_dataframe
     
     @staticmethod
-    def shap_summary_plot(shap_values, X_test_lim, best_model, pdf=None):
+    def shap_summary_plot(shap_values, X_test_lim, best_model, results_dir, pdf=None):
         """
         Generates a SHAP summary plot to visualize feature importance.
 
@@ -158,7 +158,7 @@ class ShapPLOT:
             )
 
             feature_importance.to_csv(
-                os.path.join(os.getcwd(), 'results', 'explanations', f"{best_model.__class__.__name__}_shap_importance.csv"),
+                os.path.join(results_dir, f"{best_model.__class__.__name__}_shap_importance.csv"),
                 index=False,
             )
         except Exception as e:
@@ -205,7 +205,7 @@ class ShapPLOT:
             plt.close("all")
     
     @staticmethod    
-    def explain_with_shap(best_model, X_train, X_test, y_test, ml_task, pdf=None):
+    def explain_with_shap(best_model, X_train, X_test, y_test, ml_task, results_dir, pdf=None):
         """
         Main function to generate SHAP explanations for a given model and dataset.
 
@@ -233,7 +233,7 @@ class ShapPLOT:
             shap_values = shap_values[:,:,1]
             expected_value = expected_value[1]
         
-        ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, pdf)
+        ShapPLOT.shap_summary_plot(shap_values, X_test_lim, best_model, results_dir, pdf)
         
         ShapPLOT.shap_dependence(shap_values, X_test_lim, pdf) 
         
@@ -241,7 +241,7 @@ class ShapPLOT:
         
         if ml_task == "BINARY_CLASSIFICATION":
             ShapPLOT.decisions_binary(df_preds, shap_values, expected_value, X_test_lim, y_test_lim, pdf) 
-            ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, pdf)
+            ShapPLOT.forceplot_binary(best_model, shap_values, expected_value, X_test_lim, pdf, results_dir)
         else:
             ShapPLOT.decisions_regression(df_preds, shap_values, expected_value, X_test_lim, pdf)
 
@@ -350,6 +350,7 @@ class ShapPLOT:
         expected_value,
         x_test_lim,
         pdf,
+        results_dir,
     ):
         """
         Creates force plots for binary classification to explain predictions.
@@ -373,7 +374,7 @@ class ShapPLOT:
         plt.tight_layout()
         plt.savefig(
             os.path.join(
-                os.getcwd(), 'results', 'explanations', f"force_plot_class_1.png"
+                results_dir, f"force_plot_class_1.png"
             )
         )
         #shap.save_html(os.path.join(
@@ -390,7 +391,7 @@ class ShapPLOT:
         #    pdf.savefig(fig)
         plt.savefig(
             os.path.join(
-                os.getcwd(), 'results', 'explanations', f"force_plot_class_0.png"
+                results_dir, f"force_plot_class_0.png"
             )
         )
         plt.show()

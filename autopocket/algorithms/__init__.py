@@ -1,1 +1,1 @@
-from autopocket.algorithms import Modeller
+from autopocket.algorithms.Modeller import Modeller

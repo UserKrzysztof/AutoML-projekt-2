@@ -1,1 +1,1 @@
-from autopocket.postprocessing import Postprocessor
+from autopocket.postprocessing.Postprocessor import Postprocessor
