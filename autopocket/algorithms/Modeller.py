@@ -15,8 +15,34 @@ class Modeller():
 
     def model(self, X, y, ml_type):
         """
-        Porządny model.
+        Creates and trains a machine learning model based on the provided data and type.
+        This function initializes and fits either a classification or regression model depending
+        on the ml_type parameter. It handles warnings during model training and returns the
+        best performing model along with results directory.
+        Parameters:
+        ----------
+        X : array-like of shape (n_samples, n_features)
+            Training data. Features matrix for model training.
+        y : array-like of shape (n_samples,)
+            Target values. Labels for classification or target values for regression.
+        ml_type : str
+            Type of machine learning task. Supported values:
+            - "BINARY_CLASSIFICATION": for binary classification problems
+            - Any other value: for regression problems
+        Returns:
+        -------
+        tuple
+            A tuple containing:
+            - best_model_: The best performing trained model
+            - results_dir: Path to directory containing training results
+        Notes:
+        -----
+        - Uses custom warning handler for LinearAlgebra and Convergence warnings
+        - For classification, initializes a Classifier with additional estimators
+        - For regression, initializes a Regressor with additional estimators
+        - Warnings are caught and handled during model fitting
         """
+
         if ml_type == "BINARY_CLASSIFICATION":  
             m = Classifier(additional_estimators=self.additional_estimators)
             print("Performing binary classification")
@@ -35,6 +61,9 @@ class Modeller():
 shown_warnings = set()
 
 def custom_warning_handler(message, category, filename, lineno, file=None, line=None):
+    """
+        Custom warning handler.
+    """
     if category == UserWarning:
         return
     if category in shown_warnings:

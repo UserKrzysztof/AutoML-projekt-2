@@ -13,23 +13,62 @@ from autopocket.algorithms.utils import ResultsReader
 
 class BaseSearcher(BaseEstimator):
     """
-        Abstract class for model selection
-        Fields:
-            best_model_ - the best model found
-            best_score_ - the best score found
-            best_params_ - the best parameters found
-            metric_ - the metric to optimize
-            estimators_ - list of EstimatorWrappers (models to fit)
-            n_estimators_ - number of models to fit
-            results_ - dictionary with results of the search
-        Methods:
-            fit(X,y) - fits the models and finds the best one
-            predict(X) - predicts the target variable
-            save_results() - saves the results to json files
-            read_results() - reads the results from json files
-            create_model_from_json(wrapper_name) - creates a model from the best parameters found in the search
-            measure_importances(X,y) - abstract method for measuring importances
-            drop_unimportant_features(X, importances) - drops unimportant features from the dataset
+    A base abstract class for implementing model selection and hyperparameter optimization.
+    This class provides a framework for searching the best model among multiple estimators
+    using either GridSearchCV or RandomizedSearchCV. It includes functionality for model
+    evaluation, feature importance analysis, and result persistence.
+    Parameters
+    ----------
+    metric : str
+        The scoring metric to be used for model evaluation (e.g., 'accuracy', 'f1', 'roc_auc').
+    estimators : list
+        List of EstimatorWrapper objects containing the models to be evaluated.
+    dummy_estimator : sklearn.dummy.DummyClassifier or sklearn.dummy.DummyRegressor, optional
+        A dummy estimator for baseline comparison.
+    dummy_strategy : str, optional
+        The strategy to be used by the dummy estimator (e.g., 'stratified', 'most_frequent').
+    additional_estimators : list, optional
+        Additional EstimatorWrapper objects to be evaluated after the main estimators.
+    Attributes
+    ----------
+    best_model_ : sklearn estimator
+        The best performing model found during the search.
+    best_score_ : float
+        The score of the best performing model.
+    best_params_ : dict
+        The parameters of the best performing model.
+    metric_ : str
+        The scoring metric used for evaluation.
+    estimators_ : list
+        List of EstimatorWrapper objects.
+    n_estimators_ : int
+        Number of estimators to evaluate.
+    results_ : dict
+        Dictionary containing the results for each evaluated model.
+    results_dir : str
+        Directory path where the results are saved.
+    Methods
+    -------
+    fit(X, y)
+        Fits multiple models and finds the best performing one.
+    predict(X)
+        Makes predictions using the best model found.
+    save_results()
+        Saves the search results to JSON files.
+    read_results()
+        Reads previously saved results from JSON files.
+    create_model_from_json(wrapper_name)
+        Creates a model instance from saved parameters.
+    measure_importances(X, y)
+        Abstract method for measuring feature importances.
+    drop_unimportant_features(X, importances)
+        Removes features deemed unimportant based on importance scores.
+    get_baseline_prediction(y)
+        Abstract method for computing baseline predictions.
+    Notes
+    -----
+    - The class implements abstract methods that must be overridden in child classes.
+    - Results are automatically saved to a timestamped directory.
     """
     def __init__(self, metric, estimators, dummy_estimator = None, dummy_strategy = None, additional_estimators=None):
         self.best_model_ = None
@@ -47,10 +86,42 @@ class BaseSearcher(BaseEstimator):
     
     def fit(self,X,y):
         """
-            Finds the best model using GridSearchCV or RandomizedSearchCV
-            Parameters:
-                X - input features
-                y - target variable
+        Fits the best model using GridSearchCV or RandomizedSearchCV.
+
+        This method performs the following steps:
+        1. Validates input data
+        2. Fits a dummy estimator (if provided) for baseline comparison
+        3. Fits multiple estimators specified in self.estimators_
+        4. Optionally fits additional estimators if provided
+        5. Saves the results
+
+        Parameters
+        ----------
+        X : array-like of shape (n_samples, n_features)
+            Training data. The input samples array where n_samples is the number of samples
+            and n_features is the number of features.
+        y : array-like of shape (n_samples,)
+            Target values. The target array where n_samples is the number of samples.
+
+        Returns
+        -------
+        self : object
+            Returns the instance of the classifier.
+
+        Notes
+        -----
+        The method keeps track of the best performing model based on the specified metric
+        in self.metric_. The best score is stored in self.best_score_.
+
+        The method will print progress information including:
+        - Dummy estimator performance (if configured)
+        - Number of models being fitted
+        - Additional estimators being fitted (if any)
+
+        Raises
+        ------
+        ValueError
+            If the input validation fails (through check_X_y)
         """
         check_X_y(X,y)
         X = X.copy()
@@ -82,6 +153,20 @@ class BaseSearcher(BaseEstimator):
         return self
     
     def fit_on(self, estimators, n_estimators, X,y):
+        """
+        Helper method for fitting a list of estimators using grid or randomized search.
+
+        Parameters
+        ----------
+        estimators : list of EstimatorWrapper
+            Collection of estimator objects to be fitted.
+        n_estimators : int
+            Number of estimators to process.
+        X : array-like of shape (n_samples, n_features)
+            Training data.
+        y : array-like of shape (n_samples,)
+            Target values.
+        """
         for i,wrapper in enumerate(estimators):
             print(i+1,"/",n_estimators," | Fitting:", wrapper.name_, end=". ")
 
@@ -135,7 +220,22 @@ class BaseSearcher(BaseEstimator):
     
     def save_results(self):
         """
-            Save the results to json files
+        Saves the optimization results for each algorithm wrapper to JSON files.
+
+        The method creates a directory specified by self.results_dir if it doesn't exist,
+        and saves individual JSON files containing scores and parameters for each wrapper.
+
+        The saved JSON structure for each wrapper contains:
+            - score: The performance metric value
+            - params: The optimized hyperparameters
+
+        Files are saved in format: '{wrapper_name}_results.json'
+
+        Returns:
+            None
+
+        Raises:
+            OSError: If there are permission issues with creating directory or saving files
         """
         os.makedirs(self.results_dir, exist_ok=True)
         results_dir = self.results_dir
@@ -197,7 +297,29 @@ class BaseSearcher(BaseEstimator):
 
 class EstimatorWrapper(BaseEstimator):
     """
-        Abstract class for estimators creation
+    A wrapper class for scikit-learn estimators to facilitate hyperparameter tuning and model evaluation.
+    This class serves as an abstract base class for creating estimator wrappers that can handle hyperparameter
+    distributions and perform model fitting and prediction.
+    Attributes:
+    -----------
+    estimator_ : BaseEstimator
+        The scikit-learn estimator instance to be wrapped.
+    param_distributions : dict
+        Dictionary containing parameter distributions for hyperparameter tuning.
+    name_ : str
+        Name of the estimator.
+    n_iter_ : int
+        Number of iterations for hyperparameter tuning.
+    Methods:
+    --------
+    param_distributions_:
+        Getter for the parameter distributions.
+    fit(X, y):
+        Fits the estimator to the provided data.
+    predict(X):
+        Predicts the target variable for the provided data.
+    predict_proba(X, y):
+        Predicts the probabilities of the target variable for the provided data.
     """
     def __init__(self, estimator, param_distributions, name, n_iter):
         super().__init__()
@@ -234,12 +356,25 @@ class EstimatorWrapper(BaseEstimator):
     
 def create_wrapper(estimator, param_distributions, name, n_iter):
     """
-        Creates an EstimatorWrapper
-        Parameters:
-            estimator - the estimator to wrap
-            param_distributions - the parameters distributions for RandomizedSearchCV
-            name - the name of the estimator
-            n_iter - the number of iterations for RandomizedSearchCV
+    Create a wrapper for a machine learning estimator with randomized hyperparameter search capabilities.
+
+    Parameters
+    ----------
+    estimator : estimator object
+        A machine learning estimator implementing 'fit' and 'predict' methods.
+    param_distributions : dict
+        Dictionary with parameters names (string) as keys and distributions 
+        or lists of parameters to try as values for RandomizedSearchCV.
+    name : str
+        Identifier string for the estimator wrapper.
+    n_iter : int
+        Number of parameter settings that are sampled in RandomizedSearchCV.
+        
+    Returns
+    -------
+    EstimatorWrapper
+        A wrapped estimator object with randomized search functionality.
+    
     """
     return EstimatorWrapper(estimator, param_distributions, name, n_iter)
 

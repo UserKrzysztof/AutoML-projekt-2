@@ -9,12 +9,64 @@ from sklearn.dummy import DummyRegressor
 
 class Regressor(BaseSearcher):
     """
-        Class for regression models
-        Inherits from EstimatorWrapper
-        Includes DecisionTreeWrapper, RandomForestWrapper, LinearRegressionWrapper, LassoWrapper, ElasticNetWrapper
-        Methods:
-            fit(X,y) - fits the model
-            predict(X) - predicts the target variable
+    This class extends BaseSearcher and provides functionality for training and evaluating
+    different regression models including Random Forest, Linear Regression, 
+    Decision Tree, Lasso, Ridge and Elastic Net.
+
+    Parameters
+    ----------
+    additional_estimators : list, optional (default=None)
+        Additional regression estimators to be included in the model selection process.
+        Each estimator should be wrapped in an appropriate EstimatorWrapper class.
+
+    Attributes
+    ----------
+    metric_ : str
+        The evaluation metric used for model selection ('neg_root_mean_squared_error').
+    estimators_ : list
+        List of regression estimators available for model selection.
+    dummy_estimator_ : DummyRegressor
+        A simple baseline model that predicts the mean of the target variable.
+    dummy_strategy_ : str
+        Strategy used by the dummy estimator ('mean').
+
+    Methods
+    -------
+    fit(X, y)
+        Fit the regression model to the training data.
+        
+    predict(X)
+        Make predictions using the best selected model.
+
+    get_metric()
+        Return the evaluation metric used for model selection.
+
+    get_estimators()
+        Return the list of available estimators.
+
+    measure_importances(X, y)
+        Calculate feature importance scores using RandomForestRegressor.
+        
+        Parameters
+        ----------
+        X : pandas.DataFrame
+            Feature matrix
+        y : array-like
+            Target variable
+        
+        Returns
+        -------
+        pandas.Series
+            Feature importance scores for each variable, including a random control variable
+
+    Notes
+    -----
+    - Uses negative RMSE as the default metric for model evaluation
+    - Includes a dummy classifier as baseline for comparison
+    - Can be extended with additional estimators through initialization parameter
+    - Measure importances is not in use
+    - Feature importance measurement includes a random control variable
+
     """
     def __init__(self, additional_estimators=None):
         super().__init__(
@@ -47,6 +99,8 @@ class Regressor(BaseSearcher):
         forest.fit(X, y)
         importances = forest.feature_importances_
         return pd.Series(importances, index=feature_names)
+    
+# EstimatorWrapper classes for regression models
 
 class DecisionTreeWrapper(EstimatorWrapper):
     def __init__(self):

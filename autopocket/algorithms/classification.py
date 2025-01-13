@@ -13,12 +13,48 @@ from scipy.stats import mode
 
 class Classifier(BaseSearcher):
     """
-        Class for classification models
-        Inherits from EstimatorWrapper
-        Includes RandomForestWrapper, LogisticRegressionWrapper, DecisionTreeWrpaper
-        Methods:
-            fit(X,y) - fits the model
-            predict(X) - predicts the target variable
+    This class extends BaseSearcher and provides functionality for training and evaluating
+    different classification models including Random Forest, Logistic Regression, 
+    Decision Tree and Ridge Classifier.
+
+    Parameters
+    ----------
+    additional_estimators : list, optional (default=None)
+        Additional estimator objects to be included in the model selection process.
+        Each estimator should implement fit() and predict() methods.
+
+    Attributes
+    ----------
+    metric_ : str
+        The evaluation metric used for model selection (set to 'roc_auc')
+    estimators_ : list
+        List of classifier wrapper objects including:
+        - RandomForestWrapper
+        - LogisticRegressionWrapper 
+        - DecisionTreeWrapper
+        - RidgeClassifierWrapper
+    baseline_estimator : sklearn.dummy.DummyClassifier
+        A baseline model that predicts the most frequent class
+    baseline_strategy : str
+        Strategy used by baseline estimator (set to 'most_frequent')
+
+    Methods
+    -------
+    get_metric()
+        Returns the evaluation metric being used
+    get_estimators()
+        Returns the list of estimator objects
+    
+    measure_importances(X, y) #out of order
+        Calculates feature importance scores using RandomForestClassifier
+        
+    Notes
+    -----
+    - Uses ROC AUC as the default metric for model evaluation
+    - Includes a dummy classifier as baseline for comparison
+    - Can be extended with additional estimators through initialization parameter
+    - Measure importances is not in use
+    - Feature importance measurement includes a random control variable
     """
     def __init__(self, additional_estimators=None):
         super().__init__(
@@ -48,6 +84,8 @@ class Classifier(BaseSearcher):
         forest.fit(X, y)
         importances = forest.feature_importances_
         return pd.Series(importances, index=feature_names)
+    
+# The following classes are used to wrap the scikit-learn estimators and their hyperparameters
     
 class RandomForestWrapper(EstimatorWrapper):
     def __init__(self):
