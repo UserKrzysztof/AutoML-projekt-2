@@ -1,0 +1,5 @@
+position,model_name,score,params
+1,RandomForestClassifier,0.8396308163081544,"{'max_features': 0.3156465989428795, 'max_samples': 0.7265153384229461, 'min_samples_leaf': 32, 'n_estimators': 215}"
+2,RidgeClassifier,0.8310209252607976,"{'alpha': 0.9195450794139408, 'class_weight': 'balanced', 'fit_intercept': True, 'max_iter': 800, 'solver': 'sparse_cg'}"
+3,LogisticRegression,0.828229636931441,"{'model__solver': 'lbfgs', 'model__penalty': None, 'model__max_iter': 800, 'model__l1_ratio': None, 'model__fit_intercept': False, 'model__class_weight': 'balanced', 'model__C': 0.1}"
+4,DecisionTreeClassifier,0.7965337645760342,"{'criterion': 'entropy', 'max_depth': 15, 'min_samples_leaf': 58, 'min_samples_split': 28}"
