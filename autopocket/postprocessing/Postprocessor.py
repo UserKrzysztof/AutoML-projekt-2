@@ -64,12 +64,13 @@ class Postprocessor():
 
         Workflow:
             1. Splits the input data into training and test sets based on the task type.
-            2. Creates SHAP explanations for global and local interpretability.
-            3. Generates LIME explanations for selected instances and aggregates feature importance.
-            4. If `features_for_displaying_plots` is None:
+            2. Creates leaderboard of models based on the metric score.
+            3. Creates SHAP explanations for global and local interpretability.
+            4. Generates LIME explanations for selected instances and aggregates feature importance.
+            5. If `features_for_displaying_plots` is None:
                 - Automatically selects top features for PDP and ICE plots using LIME feature importance.
-            5. Generates Partial Dependence and ICE plots for specified or automatically selected features.
-            6. Saves all results, including plots and explanations, in a structured PDF file.
+            6. Generates Partial Dependence and ICE plots for specified or automatically selected features.
+            7. Saves all results, including plots and explanations, in a structured PDF file.
 
         Outputs:
             - A PDF file saved to `results/explanations/`, containing:

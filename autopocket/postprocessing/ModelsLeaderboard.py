@@ -50,6 +50,12 @@ class ModelsLeaderboard:
     def save_leaderboard_to_csv(self, leaderboard: pd.DataFrame, results_dir: str): ####
         """
         Saves the leaderboard to a csv file.
+        
+        Parameters:
+        leaderboard: pd.DataFrame
+            The leaderboard to save.
+        results_dir: str
+            The directory to save the leaderboard to.
         """
         try:
             os.makedirs(os.path.join(results_dir), exist_ok=True)
