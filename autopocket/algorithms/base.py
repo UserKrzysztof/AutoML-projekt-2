@@ -2,7 +2,7 @@ from abc import abstractmethod
 from time import strftime, gmtime
 import pandas as pd
 from sklearn.base import BaseEstimator
-from sklearn.metrics import get_scorer
+from sklearn.metrics import get_scorer, make_scorer
 from sklearn.utils.validation import check_X_y, check_is_fitted
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
@@ -130,7 +130,7 @@ class BaseSearcher(BaseEstimator):
         if self.dummy_estimator is not None:
             print("Fitting dummy estimator")
             self.dummy_estimator.fit(X,y)
-            scorer = get_scorer(self.metric_)
+            scorer = get_scorer(self.metric_) if type(self.metric_) == str else make_scorer(self.metric_)
             print(f"Dummy score (strategy: {self.dummy_strategy}):", scorer(self.dummy_estimator, X, y), self.metric_)
 
         # Depracted in latest version  
@@ -147,12 +147,12 @@ class BaseSearcher(BaseEstimator):
 
         if self.additional_estimators is not None:
             print(f"Fitting {len(self.additional_estimators)} additional estimator{'s' if len(self.additional_estimators) > 1 else ''}")
-            self.fit_on(self.additional_estimators, len(self.additional_estimators), X,y)
+            self.fit_on(self.additional_estimators, len(self.additional_estimators), X,y, check_best=False)
 
         self.save_results()
         return self
     
-    def fit_on(self, estimators, n_estimators, X,y):
+    def fit_on(self, estimators, n_estimators, X,y, check_best=True):
         """
         Helper method for fitting a list of estimators using grid or randomized search.
 
@@ -166,6 +166,8 @@ class BaseSearcher(BaseEstimator):
             Training data.
         y : array-like of shape (n_samples,)
             Target values.
+        check_best : bool, optional
+            Flag to check if the model is the best performing one.
         """
         for i,wrapper in enumerate(estimators):
             print(i+1,"/",n_estimators," | Fitting:", wrapper.name_, end=". ")
@@ -173,31 +175,34 @@ class BaseSearcher(BaseEstimator):
             if hasattr(wrapper, "big_data"):
                 wrapper.big_data = X.shape[0] > 6000
 
+            scorer = self.metric_ if type(self.metric_) == str else self.metric_.base
+
             if wrapper.n_iter_ is None:
                 rs = GridSearchCV(wrapper.estimator_,
                                     wrapper.param_distributions_,
                                     cv=5,
-                                    scoring=self.metric_
+                                    scoring=scorer
                                     )
             else:
                 rs = RandomizedSearchCV(wrapper.estimator_, 
                                         wrapper.param_distributions_,
                                         cv=5,
-                                        scoring=self.metric_,
+                                        scoring=scorer,
                                         random_state=420,
                                         n_iter=wrapper.n_iter_
                                         )
             rs.fit(X,y)
-            print("Best score:", rs.best_score_, self.metric_)
+            best = rs.best_score_ if type(self.metric_) == str else self.metric_.in_base(rs.best_score_)
+            print("Best score:", best , self.metric_)
 
             self.results_[wrapper.name_] = {
                 "estimator": rs.best_estimator_,
-                "score": rs.best_score_,
+                "score": best,
                 "params": rs.best_params_
             }
 
-            if rs.best_score_ > self.best_score_:
-                self.best_score_ = rs.best_score_
+            if check_best and best > self.best_score_:
+                self.best_score_ = best
                 self.best_model_ = rs.best_estimator_
                 self.best_params_ = rs.best_params_    
 

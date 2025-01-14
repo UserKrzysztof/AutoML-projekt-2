@@ -4,6 +4,7 @@ from scipy.stats import randint, uniform
 from sklearn.dummy import DummyClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression, RidgeClassifier
+from sklearn.metrics import make_scorer, roc_auc_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
@@ -57,8 +58,9 @@ class Classifier(BaseSearcher):
     - Feature importance measurement includes a random control variable
     """
     def __init__(self, additional_estimators=None):
+        gini = GINI()
         super().__init__(
-            "roc_auc",
+            gini,
             [
                 RandomForestWrapper(),
                 LogisticRegressionWrapper(),
@@ -84,7 +86,24 @@ class Classifier(BaseSearcher):
         forest.fit(X, y)
         importances = forest.feature_importances_
         return pd.Series(importances, index=feature_names)
+
+class GINI:
+    def __call__(self, y_true, y_pred):
+        return 2*roc_auc_score(y_true, y_pred)-1
     
+    @property
+    def base(self):
+        return "roc_auc"
+
+    def in_base(self, score):
+        return 2*score-1
+    
+    def __str__(self):
+        return "GINI"
+    
+    def __repr__(self):
+        return "GINI"
+
 # The following classes are used to wrap the scikit-learn estimators and their hyperparameters
     
 class RandomForestWrapper(EstimatorWrapper):
@@ -115,7 +134,7 @@ class LogisticRegressionWrapper(EstimatorWrapper):
             None,
             "LogisticRegression",
             #20
-            5
+            20
         )
 
     @property
@@ -153,7 +172,7 @@ class DecisionTreeWrapper(EstimatorWrapper):
             },
             "DecisionTreeClassifier",
             #100
-            5
+            20
         )
 
 class RidgeClassifierWrapper(EstimatorWrapper):
@@ -169,5 +188,5 @@ class RidgeClassifierWrapper(EstimatorWrapper):
             },
             "RidgeClassifier",
             #100
-            5
+            20
         )
