@@ -1,9 +1,0 @@
-position,model_name,score,params
-1,RandomForestRegressor,-24.33590926242102,"{'max_features': 0.10892907310865414, 'max_samples': 0.9340832396426892, 'min_samples_leaf': 73, 'n_estimators': 226}"
-2,ElasticNet,-24.40193356055126,"{'alpha': 62.972851792698236, 'copy_X': True, 'fit_intercept': False, 'l1_ratio': 0.1487418805121171}"
-3,Lasso,-24.601943425285622,"{'alpha': 31.56459146887941, 'copy_X': True, 'fit_intercept': True}"
-4,LassoLarsIC,-25.25113522042339,"{'copy_X': True, 'criterion': 'bic', 'fit_intercept': True}"
-5,Ridge,-25.271028875786442,"{'alpha': 37.54425692793003, 'copy_X': True, 'fit_intercept': True}"
-6,LinearRegression,-25.279026876554326,"{'copy_X': True, 'fit_intercept': True}"
-7,XGB,-29.338688332045187,"{'learning_rate': 0.3231752959308757, 'max_depth': 5, 'n_estimators': 441}"
-8,DecisionTreeRegressor,-32.28701013459658,"{'criterion': 'absolute_error', 'max_depth': 21, 'min_samples_leaf': 36, 'min_samples_split': 26}"

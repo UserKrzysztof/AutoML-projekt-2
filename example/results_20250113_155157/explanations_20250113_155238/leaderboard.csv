@@ -1,6 +1,0 @@
-position,model_name,score,params
-1,RandomForestClassifier,0.8366622379173595,"{'max_features': 0.3156465989428795, 'max_samples': 0.7265153384229461, 'min_samples_leaf': 32, 'n_estimators': 215}"
-2,XGB,0.8348303162961743,"{'learning_rate': 0.16782295729439706, 'max_depth': 7, 'n_estimators': 163}"
-3,RidgeClassifier,0.8310155970425537,"{'alpha': 0.9195450794139408, 'class_weight': 'balanced', 'fit_intercept': True, 'max_iter': 800, 'solver': 'sparse_cg'}"
-4,LogisticRegression,0.828229636931441,"{'model__solver': 'lbfgs', 'model__penalty': None, 'model__max_iter': 800, 'model__l1_ratio': None, 'model__fit_intercept': False, 'model__class_weight': 'balanced', 'model__C': 0.1}"
-5,DecisionTreeClassifier,0.7966119934956126,"{'criterion': 'entropy', 'max_depth': 15, 'min_samples_leaf': 58, 'min_samples_split': 28}"
